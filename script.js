@@ -54,11 +54,11 @@ if (cyberOrb) {
 
     const coreGeometry = new THREE.IcosahedronGeometry(1.48, 2);
     const coreMaterial = new THREE.MeshStandardMaterial({
-      color: 0x111111,
+      color: 0x101318,
       roughness: 0.38,
       metalness: 0.72,
-      emissive: 0x171717,
-      emissiveIntensity: 0.18
+      emissive: 0x003828,
+      emissiveIntensity: 0.22
     });
     const core = new THREE.Mesh(coreGeometry, coreMaterial);
     group.add(core);
@@ -66,7 +66,7 @@ if (cyberOrb) {
     const wire = new THREE.Mesh(
       new THREE.IcosahedronGeometry(1.55, 2),
       new THREE.MeshBasicMaterial({
-        color: 0xd7ff4f,
+        color: 0x36ffc4,
         wireframe: true,
         transparent: true,
         opacity: 0.62
@@ -75,7 +75,7 @@ if (cyberOrb) {
     group.add(wire);
 
     const ringMaterial = new THREE.MeshBasicMaterial({
-      color: 0x111111,
+      color: 0x36ffc4,
       transparent: true,
       opacity: 0.78,
       side: THREE.DoubleSide
@@ -91,7 +91,7 @@ if (cyberOrb) {
     ringTwo.rotation.y = Math.PI / 5;
     group.add(ringTwo);
 
-    const nodeMaterial = new THREE.MeshBasicMaterial({ color: 0xd7ff4f });
+    const nodeMaterial = new THREE.MeshBasicMaterial({ color: 0x36ffc4 });
     const nodeGeometry = new THREE.SphereGeometry(0.055, 18, 18);
     const nodes = [];
     for (let index = 0; index < 12; index += 1) {
