@@ -50,6 +50,12 @@ h1 { max-width: 920px; font-size: clamp(3.1rem, 7vw, 7rem); font-weight: 900; te
 h1 span { display: block; }
 h2 { max-width: 980px; font-size: clamp(2rem, 4.2vw, 4.6rem); font-weight: 850; }
 h3 { font-size: clamp(1.16rem, 1.7vw, 1.55rem); font-weight: 800; }
+.page-hero h1 {
+  max-width: 920px;
+  font-size: clamp(2.2rem, 4.4vw, 4.15rem);
+  line-height: 1.06;
+  text-transform: none;
+}
 
 .site-header {
   position: sticky;
@@ -151,8 +157,8 @@ h3 { font-size: clamp(1.16rem, 1.7vw, 1.55rem); font-weight: 800; }
   padding: clamp(72px, 8vw, 118px) clamp(18px, 4vw, 50px);
 }
 .page-hero {
-  min-height: 430px;
-  padding: clamp(78px, 9vw, 126px) clamp(18px, 4vw, 50px) clamp(56px, 7vw, 90px);
+  min-height: 390px;
+  padding: clamp(64px, 8vw, 104px) clamp(18px, 4vw, 50px) clamp(48px, 6vw, 78px);
 }
 .hero > *, .page-hero > * { position: relative; z-index: 1; }
 .lead {
@@ -622,6 +628,9 @@ input:focus, select:focus, textarea:focus {
   h1 {
     font-size: clamp(2.35rem, 11.5vw, 3.15rem);
     line-height: 1.08;
+  }
+  .page-hero h1 {
+    font-size: clamp(2rem, 10vw, 2.9rem);
   }
   .eyebrow {
     align-items: flex-start;
