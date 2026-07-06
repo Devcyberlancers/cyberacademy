@@ -1,163 +1,571 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CSIC Program | Cyber Academy</title>
-  <meta name="description" content="Full CSIC curriculum, tools, admissions process, fees, and FAQ for Cyber Academy's 16-week cybersecurity training program in Mysuru.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800;900&family=JetBrains+Mono:wght@450;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Course Catalog | CSIC CYBER ACADEMY</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;800&amp;family=JetBrains+Mono:wght@450;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .cyber-card {
+            background: #1a1c20;
+            border: 1px solid rgba(131, 149, 140, 0.2);
+            position: relative;
+        }
+        .cyber-card::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
+            background: linear-gradient(135deg, rgba(0, 255, 194, 0.1) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: 1;
+        }
+        .cyber-card:hover {
+            border-color: #00ffc2;
+            box-shadow: 0 0 20px rgba(0, 255, 194, 0.05);
+        }
+        .scan-line {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #00ffc2, transparent);
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: scan 4s linear infinite;
+            z-index: 2;
+        }
+        @keyframes scan {
+            0% { transform: translateY(0); opacity: 0; }
+            5% { opacity: 1; }
+            95% { opacity: 1; }
+            100% { transform: translateY(100%); opacity: 0; }
+        }
+        .grid-pattern {
+            background-image: radial-gradient(circle, #1e2024 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .filter-input {
+            background: #0c0e12;
+            border: 1px solid #333539;
+            transition: all 0.2s ease;
+        }
+        .filter-input:focus {
+            border-color: #00ffc2;
+            box-shadow: 0 0 10px rgba(0, 255, 194, 0.1);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#1e2024",
+                        "on-primary": "#003828",
+                        "on-error": "#690005",
+                        "surface-container-high": "#282a2e",
+                        "inverse-surface": "#e2e2e8",
+                        "on-background": "#e2e2e8",
+                        "surface-dim": "#111318",
+                        "error": "#ffb4ab",
+                        "on-tertiary-container": "#8134e2",
+                        "inverse-primary": "#006c50",
+                        "secondary-fixed-dim": "#00daf8",
+                        "secondary-container": "#00e0ff",
+                        "on-primary-container": "#007255",
+                        "secondary-fixed": "#a5eeff",
+                        "on-surface": "#e2e2e8",
+                        "surface-bright": "#37393e",
+                        "on-tertiary-fixed": "#290056",
+                        "tertiary-fixed": "#eddcff",
+                        "tertiary-container": "#ecdaff",
+                        "surface-variant": "#333539",
+                        "primary-container": "#00ffc2",
+                        "primary": "#fbfffa",
+                        "on-surface-variant": "#b9cbc1",
+                        "outline-variant": "#3a4a43",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#d7baff",
+                        "surface-container-lowest": "#0c0e12",
+                        "inverse-on-surface": "#2f3035",
+                        "surface-container-low": "#1a1c20",
+                        "surface": "#111318",
+                        "on-tertiary-fixed-variant": "#6100bd",
+                        "on-primary-fixed-variant": "#00513c",
+                        "on-secondary-fixed-variant": "#004e5a",
+                        "on-tertiary": "#440088",
+                        "error-container": "#93000a",
+                        "outline": "#83958c",
+                        "on-secondary": "#00363f",
+                        "surface-tint": "#00e1ab",
+                        "surface-container-highest": "#333539",
+                        "primary-fixed": "#00ffc2",
+                        "on-secondary-container": "#005f6d",
+                        "tertiary": "#fffdff",
+                        "primary-fixed-dim": "#00e1ab",
+                        "secondary": "#b9f1ff",
+                        "on-primary-fixed": "#002116",
+                        "background": "#111318",
+                        "on-secondary-fixed": "#001f25"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "margin-desktop": "40px",
+                        "gutter": "24px",
+                        "container-max": "1440px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Hanken Grotesk"],
+                        "code-sm": ["JetBrains Mono"],
+                        "body-md": ["Hanken Grotesk"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "800" }],
+                        "code-sm": ["14px", { "lineHeight": "20px", "fontWeight": "450" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+                    }
+                },
+            },
+        }
+    </script>
 </head>
-<body>
-  <header class="site-header">
-    <a class="brand" href="index.html" aria-label="Cyber Academy home">
-      <span class="brand-mark">CA</span>
-      <span><strong>Cyber Academy</strong><small>Training arm of CyberLancers</small></span>
-    </a>
-    <nav class="nav" aria-label="Primary navigation">
-      <a href="index.html">Home</a>
-      <a href="program.html" class="active">CSIC Program</a>
-      <a href="about.html">About & Contact</a>
-    </nav>
-    <a class="nav-cta" href="about.html#apply">Apply Now</a>
-  </header>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant/20 transition-all duration-300">
+<div class="max-w-container-max mx-auto px-margin-desktop flex justify-between items-center h-20">
+<div class="flex items-center gap-12">
+<span class="font-display-lg text-[24px] tracking-tight text-primary-fixed flex items-center gap-2">
+<span class="material-symbols-outlined">security</span>
+                CYBER ACADEMY
+            </span>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-label-caps text-[13px] text-primary-fixed border-b border-primary-fixed pb-1" href="#">COURSES</a>
+<a class="font-label-caps text-[13px] text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">ADMISSIONS</a>
+<a class="font-label-caps text-[13px] text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">LABS</a>
+<a class="font-label-caps text-[13px] text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">TERMINAL</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="hidden lg:flex items-center px-6 py-2 bg-primary-fixed text-on-primary font-label-caps text-label-caps hover:bg-white transition-all">
+                ENROLL_NOW
+            </button>
+<div class="w-10 h-10 border border-outline-variant p-0.5">
+<img class="w-full h-full object-cover" data-alt="Futuristic cybersecurity student portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOip4Kc84Ry2TkrsSvZprgOEogsqfonwLeD-HXgM64lu59BCC_-YQE-Kc4itxar_Cq5mV70gm_0CEhWaqKOHsCfasTkOiOaoyfD0z6YKLNE5Z2JEqQJYjI1rfxMA40xvuU7PkavqD-9JfC7zHzT9-HfabHBk4jBh6ulOifLJsudpawxGcWuBhKtWCqgx688rkRMLtjqp4EMWOgnMFo5dzCNXrKg-BzWDn1vry0Tr82JpBz6KEPmNC5"/>
+</div>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-24 min-h-screen grid-pattern">
+<!-- Hero Header -->
+<section class="max-w-container-max mx-auto px-margin-desktop mb-16">
+<div class="flex flex-col gap-6 max-w-4xl">
+<div class="flex items-center gap-3">
+<span class="w-8 h-[1px] bg-primary-fixed"></span>
+<span class="font-label-caps text-label-caps text-primary-fixed uppercase">Academic Curriculum v2.0.4</span>
+</div>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary leading-tight">Master the Offensive &amp; Defensive Arts</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Elite training designed by field operators to bridge the gap between theory and tactical execution. Deploy your potential.</p>
+</div>
+<!-- Dashboard-style Filters -->
+<div class="mt-16 p-8 bg-surface-container-lowest border border-outline-variant/30 flex flex-wrap gap-8 items-center">
+<div class="flex flex-col gap-2 min-w-[280px]">
+<label class="font-label-caps text-[11px] text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]">terminal</span>
+                    OPERATIONAL_TRACK
+                </label>
+<select class="filter-input text-on-surface font-code-sm px-4 py-2.5 outline-none appearance-none">
+<option>ALL_OPERATIONS</option>
+<option>SECURITY_SPECIALIST</option>
+<option>FORENSIC_ANALYST</option>
+<option>RED_TEAM_OPERATOR</option>
+<option>CLOUD_GUARDIAN</option>
+</select>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-caps text-[11px] text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                    THREAT_LEVEL
+                </label>
+<div class="flex">
+<button class="px-5 py-2.5 border border-outline-variant text-on-surface-variant hover:text-primary-fixed font-label-caps text-[11px] border-r-0 transition-all">ENTRY</button>
+<button class="px-5 py-2.5 border-2 border-primary-fixed text-primary-fixed bg-primary-fixed/5 font-label-caps text-[11px] z-10 transition-all">VETERAN</button>
+<button class="px-5 py-2.5 border border-outline-variant text-on-surface-variant hover:text-primary-fixed font-label-caps text-[11px] border-l-0 transition-all">ELITE</button>
+</div>
+</div>
+<div class="ml-auto flex items-center gap-4">
+<div class="text-right">
+<span class="block font-code-sm text-[10px] text-on-surface-variant uppercase">Query Results</span>
+<span class="font-label-caps text-primary-fixed">12 MODULES FOUND</span>
+</div>
+<div class="w-[1px] h-10 bg-outline-variant/30"></div>
+<button class="p-2 hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined">grid_view</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Course Grid -->
+<section class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Course Card 1 -->
+<div class="cyber-card group flex flex-col">
+<div class="scan-line"></div>
+<div class="h-44 relative overflow-hidden bg-black">
+<img class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-1000" data-alt="Technical data recovery visual" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBk5J1hMoDG3jyzcrOaNFJX2BNrj0H3WsOTV-_PsNyixE62qJii7D7dOUVWxrOPA_meRJ3HbSbBtJLfbtf_4OhkwOQkKqPRIByyZwg2NFUUhX922E0TClCI4g9bbYtVir0CzSi51b_xpkc-rlnt0LfzPt4uMeWsOQzb1s5FrqO1JbTqcXiZwqwibC4d-UPj5hWh1T5aaPv311gh5rXZ06VW3IDWX3jUsmOKPO9qFJDxaGMtMLDVpIY4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#1a1c20] via-transparent to-transparent"></div>
+<div class="absolute top-4 left-4 flex flex-col gap-2">
+<span class="bg-black/80 backdrop-blur-md text-primary-fixed border border-primary-fixed/30 px-3 py-1 font-label-caps text-[9px] tracking-wider">FORENSIC_ANALYST</span>
+<span class="bg-surface-container-highest/80 backdrop-blur-md text-white px-3 py-1 font-label-caps text-[9px]">T_DURATION: 8_WEEKS</span>
+</div>
+</div>
+<div class="p-8 flex-grow flex flex-col gap-6">
+<h3 class="font-display-lg text-headline-md text-primary leading-tight group-hover:text-primary-fixed transition-colors">Advanced Digital Forensics</h3>
+<div class="space-y-3">
+<div class="flex items-center gap-3 py-2 border-b border-outline-variant/10">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed">code</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant flex-grow">W01: Artifact Acquisition</span>
+</div>
+<div class="flex items-center gap-3 py-2 border-b border-outline-variant/10">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed">memory</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant flex-grow">W02: Memory Analysis</span>
+</div>
+</div>
+<div class="mt-auto pt-6 flex justify-between items-end">
+<div>
+<span class="block font-label-caps text-[10px] text-on-surface-variant mb-1">ENROLLMENT_FEE</span>
+<span class="font-display-lg text-2xl text-primary">$2,400</span>
+</div>
+<button class="w-12 h-12 border border-outline-variant flex items-center justify-center group-hover:bg-primary-fixed group-hover:text-on-primary group-hover:border-primary-fixed transition-all">
+<span class="material-symbols-outlined">east</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Course Card 2: Red Team -->
+<div class="cyber-card group flex flex-col border-primary-fixed/40">
+<div class="scan-line"></div>
+<div class="h-44 relative overflow-hidden bg-black">
+<img class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-1000" data-alt="Intense tactical hacking visual" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmPwLJr4b2_PD7rRdsleM5aL7sB7cvHeABEB_RNBPsRDM_h5W-97hnMt-CHTLnZcMa12NPAEnFbJHOU7xzQzFjzA7Z7b_lit1Lo_bavOrFpqZ1AQCKeJzdPaRLQGokW3QsEx1MYTJU2lVYRAsktuu5wEf4GBf3hHtQ4tzSY9bHzawnjpeUOGUP0CZPMZOTNgyRULvKOnwzT_5R5SCxx4X_gSkRd_alQ8Ky61pixEtzCRaorK8x8Caj"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#1a1c20] via-transparent to-transparent"></div>
+<div class="absolute top-4 left-4 flex flex-col gap-2">
+<span class="bg-error-container/80 backdrop-blur-md text-error border border-error/30 px-3 py-1 font-label-caps text-[9px] tracking-wider">RED_TEAM_OPERATOR</span>
+<span class="bg-surface-container-highest/80 backdrop-blur-md text-white px-3 py-1 font-label-caps text-[9px]">T_DURATION: 12_WEEKS</span>
+</div>
+</div>
+<div class="p-8 flex-grow flex flex-col gap-6">
+<div class="flex justify-between items-start">
+<h3 class="font-display-lg text-headline-md text-primary leading-tight group-hover:text-primary-fixed transition-colors">Adversary Emulation &amp; Breach</h3>
+<span class="material-symbols-outlined text-primary-fixed animate-pulse">verified_user</span>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-3 py-2 border-b border-outline-variant/10">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed">radar</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant flex-grow">W01: Offensive Recon</span>
+</div>
+<div class="flex items-center gap-3 py-2 border-b border-outline-variant/10">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed">lock_open</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant flex-grow">W02: Access Vectors</span>
+</div>
+</div>
+<div class="mt-auto pt-6 flex justify-between items-end">
+<div>
+<span class="block font-label-caps text-[10px] text-on-surface-variant mb-1">ENROLLMENT_FEE</span>
+<span class="font-display-lg text-2xl text-primary">$3,850</span>
+</div>
+<button class="px-8 py-3 bg-primary-fixed text-on-primary font-label-caps text-label-caps hover:bg-white transition-all">
+                        JOIN_COHORT
+                    </button>
+</div>
+</div>
+</div>
+<!-- Course Card 3 -->
+<div class="cyber-card group flex flex-col">
+<div class="scan-line"></div>
+<div class="h-44 relative overflow-hidden bg-black">
+<img class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-1000" data-alt="Cloud security visual" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjelQrXD5mh_X3iwOpwZeU8USoVUtIV4aTVSbUonJz40MdLo4FiRU7vUDcenFsmER-HOra7o0LUoz5zBdtfU74nTW0449BrVAq3XvcODpgCzCt9fIk4txduJ5BT1sthsxftLlx52Se025fNlhtk2FHMhEuM0uk--yKIIH2suHR5CAMNo_J-xwDoWJiPxd46iaTzTmG79uV2coHpo4ee5_KsxRsC5B2R_zMON_5RiI1NrOkYxVDSX0T"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#1a1c20] via-transparent to-transparent"></div>
+<div class="absolute top-4 left-4 flex flex-col gap-2">
+<span class="bg-secondary-container/20 backdrop-blur-md text-secondary-fixed border border-secondary-fixed/30 px-3 py-1 font-label-caps text-[9px] tracking-wider">CLOUD_GUARDIAN</span>
+<span class="bg-surface-container-highest/80 backdrop-blur-md text-white px-3 py-1 font-label-caps text-[9px]">T_DURATION: 6_WEEKS</span>
+</div>
+</div>
+<div class="p-8 flex-grow flex flex-col gap-6">
+<h3 class="font-display-lg text-headline-md text-primary leading-tight group-hover:text-primary-fixed transition-colors">Cloud Architecture Security</h3>
+<div class="space-y-3">
+<div class="flex items-center gap-3 py-2 border-b border-outline-variant/10">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed">cloud</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant flex-grow">W01: IAM Hierarchy</span>
+</div>
+<div class="flex items-center gap-3 py-2 border-b border-outline-variant/10">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed">shield</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant flex-grow">W02: Private Clouds</span>
+</div>
+</div>
+<div class="mt-auto pt-6 flex justify-between items-end">
+<div>
+<span class="block font-label-caps text-[10px] text-on-surface-variant mb-1">ENROLLMENT_FEE</span>
+<span class="font-display-lg text-2xl text-primary">$1,900</span>
+</div>
+<button class="w-12 h-12 border border-outline-variant flex items-center justify-center group-hover:bg-primary-fixed group-hover:text-on-primary group-hover:border-primary-fixed transition-all">
+<span class="material-symbols-outlined">east</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Course Card 4 -->
+<div class="cyber-card group flex flex-col">
+<div class="scan-line"></div>
+<div class="h-44 relative overflow-hidden bg-black">
+<img class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-1000" data-alt="SOC operations visual" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkjapJCQ1hBEiw_EVPMWaJ7oksrMeSEWUlkl7uQ4YBS2UKQqNg7x2PMM4Lr2o0jUXQeSEOVhfC_e2aAgC9_cZXMgS7_eAiRJT-az35BCxWC37_2th1XUOzYXzmywhVBNBGZ2VHd7iqLtQ43ziV9WjyQ0WQt_1Dy7D2bK2Dx5XoSFc3VN_QURc4BqPPau5P37a0td-M-r4Bon_jx3FXMPG-LtXGexvd3plRG7qOwx3h6Kd_2VCT5qNN"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#1a1c20] via-transparent to-transparent"></div>
+<div class="absolute top-4 left-4 flex flex-col gap-2">
+<span class="bg-primary-container/20 backdrop-blur-md text-primary-fixed border border-primary-fixed/30 px-3 py-1 font-label-caps text-[9px] tracking-wider">SECURITY_SPECIALIST</span>
+<span class="bg-surface-container-highest/80 backdrop-blur-md text-white px-3 py-1 font-label-caps text-[9px]">T_DURATION: 10_WEEKS</span>
+</div>
+</div>
+<div class="p-8 flex-grow flex flex-col gap-6">
+<h3 class="font-display-lg text-headline-md text-primary leading-tight group-hover:text-primary-fixed transition-colors">SOC Operations &amp; Monitoring</h3>
+<div class="space-y-3">
+<div class="flex items-center gap-3 py-2 border-b border-outline-variant/10">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed">visibility</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant flex-grow">W01: SIEM Integration</span>
+</div>
+<div class="flex items-center gap-3 py-2 border-b border-outline-variant/10">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed">rule</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant flex-grow">W02: Correlation Rules</span>
+</div>
+</div>
+<div class="mt-auto pt-6 flex justify-between items-end">
+<div>
+<span class="block font-label-caps text-[10px] text-on-surface-variant mb-1">ENROLLMENT_FEE</span>
+<span class="font-display-lg text-2xl text-primary">$3,200</span>
+</div>
+<button class="w-12 h-12 border border-outline-variant flex items-center justify-center group-hover:bg-primary-fixed group-hover:text-on-primary group-hover:border-primary-fixed transition-all">
+<span class="material-symbols-outlined">east</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Course Card 5 -->
+<div class="cyber-card group flex flex-col">
+<div class="scan-line"></div>
+<div class="h-44 relative overflow-hidden bg-black">
+<img class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-1000" data-alt="Malware analysis visual" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWbymXpYhWFEPFl89hUSsQH-6VYvjWFE-3RKIn020P972mLIWMwOd9g88Y0cp3UqC7JanxsnTydkW3EhfnGgqdGTMrbmBsaIF7M5-N6zaVj2waxAgcfR9lhC2-sZZj4Sj2RZeLuy69aK-mJKCl6R4jPXODOHPQJZal867GZ4sShm7Tck8u43rnbjEcaeDT2WHdCTLIfDFR_oQBtwStcS4XrlgyfD3ruvSQ132HiYx6whnUBoJejEa8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#1a1c20] via-transparent to-transparent"></div>
+<div class="absolute top-4 left-4 flex flex-col gap-2">
+<span class="bg-error-container/20 backdrop-blur-md text-error border border-error/30 px-3 py-1 font-label-caps text-[9px] tracking-wider">ELITE_OPERATOR</span>
+<span class="bg-surface-container-highest/80 backdrop-blur-md text-white px-3 py-1 font-label-caps text-[9px]">T_DURATION: 8_WEEKS</span>
+</div>
+</div>
+<div class="p-8 flex-grow flex flex-col gap-6">
+<h3 class="font-display-lg text-headline-md text-primary leading-tight group-hover:text-primary-fixed transition-colors">Malware Reverse Engineering</h3>
+<div class="space-y-3">
+<div class="flex items-center gap-3 py-2 border-b border-outline-variant/10">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed">settings_ethernet</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant flex-grow">W01: Static Analysis</span>
+</div>
+<div class="flex items-center gap-3 py-2 border-b border-outline-variant/10">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed">bug_report</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant flex-grow">W02: Dynamic Analysis</span>
+</div>
+</div>
+<div class="mt-auto pt-6 flex justify-between items-end">
+<div>
+<span class="block font-label-caps text-[10px] text-on-surface-variant mb-1">ENROLLMENT_FEE</span>
+<span class="font-display-lg text-2xl text-primary">$4,100</span>
+</div>
+<button class="w-12 h-12 border border-outline-variant flex items-center justify-center group-hover:bg-primary-fixed group-hover:text-on-primary group-hover:border-primary-fixed transition-all">
+<span class="material-symbols-outlined">east</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Custom Track Builder -->
+<div class="bg-primary-fixed p-8 flex flex-col justify-center items-center text-center gap-8 group cursor-pointer relative overflow-hidden">
+<div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_#000_1px,_transparent_1px)] bg-[size:16px_16px]"></div>
+<span class="material-symbols-outlined text-7xl text-black">architecture</span>
+<div class="space-y-3 relative z-10">
+<h3 class="font-display-lg text-headline-md text-black">Bespoke Enterprise Track</h3>
+<p class="font-body-md text-black/80">Tailor a curriculum specifically for your organization's security posture and tech stack.</p>
+</div>
+<button class="px-10 py-4 bg-black text-primary-fixed font-label-caps text-label-caps hover:bg-surface-container-highest transition-all relative z-10">
+                CONSULT_COMMAND
+            </button>
+</div>
+</section>
+<!-- Fee Tiers Comparison -->
+<section class="max-w-container-max mx-auto px-margin-desktop py-32">
+<div class="text-center mb-20">
+<div class="inline-flex items-center gap-2 mb-4">
+<span class="h-[1px] w-12 bg-primary-fixed"></span>
+<span class="font-label-caps text-primary-fixed text-label-caps uppercase">Investment Tiers</span>
+<span class="h-[1px] w-12 bg-primary-fixed"></span>
+</div>
+<h2 class="font-display-lg text-display-lg text-primary">Operational Funding</h2>
+<p class="text-on-surface-variant mt-4 font-body-lg max-w-xl mx-auto">Transparent scaling for individual operators, corporate teams, and government agencies.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Tier 1 -->
+<div class="p-10 border border-outline-variant/30 bg-surface-container-low flex flex-col gap-8 hover:border-outline transition-all group">
+<span class="font-label-caps text-[11px] text-on-surface-variant group-hover:text-primary-fixed">INDIVIDUAL_OPERATOR</span>
+<div class="space-y-2">
+<span class="text-4xl font-display-lg text-primary">Standard</span>
+<p class="text-on-surface-variant text-sm font-code-sm">PAY_PER_MODULE_ACCESS</p>
+</div>
+<ul class="space-y-5 flex-grow">
+<li class="flex gap-4 text-on-surface-variant font-body-md">
+<span class="material-symbols-outlined text-primary-fixed text-[20px]">check_circle</span>
+                        LMS Access (24/7)
+                    </li>
+<li class="flex gap-4 text-on-surface-variant font-body-md">
+<span class="material-symbols-outlined text-primary-fixed text-[20px]">check_circle</span>
+                        Shared Lab Environments
+                    </li>
+<li class="flex gap-4 text-on-surface-variant font-body-md">
+<span class="material-symbols-outlined text-primary-fixed text-[20px]">check_circle</span>
+                        Community Support
+                    </li>
+</ul>
+<div class="pt-8 border-t border-outline-variant/20">
+<span class="text-primary-fixed font-display-lg text-xl tracking-tight">Varies by Module</span>
+</div>
+</div>
+<!-- Tier 2 -->
+<div class="p-10 border-2 border-primary-fixed flex flex-col gap-8 bg-primary-fixed/[0.03] relative">
+<div class="absolute top-0 right-0 bg-primary-fixed text-black font-label-caps text-[10px] px-4 py-1.5 font-bold">MOST_DEPLOYED</div>
+<span class="font-label-caps text-[11px] text-primary-fixed">CERTIFIED_PATHWAY</span>
+<div class="space-y-2">
+<span class="text-4xl font-display-lg text-primary">Professional</span>
+<p class="text-on-surface-variant text-sm font-code-sm">FULL_TRACK_CERTIFICATION</p>
+</div>
+<ul class="space-y-5 flex-grow">
+<li class="flex gap-4 text-on-surface font-body-md">
+<span class="material-symbols-outlined text-primary-fixed text-[20px]">check_circle</span>
+                        Dedicated VPN Access
+                    </li>
+<li class="flex gap-4 text-on-surface font-body-md">
+<span class="material-symbols-outlined text-primary-fixed text-[20px]">check_circle</span>
+                        Live Mentorship Sessions
+                    </li>
+<li class="flex gap-4 text-on-surface font-body-md">
+<span class="material-symbols-outlined text-primary-fixed text-[20px]">check_circle</span>
+                        Exam Fees Included
+                    </li>
+<li class="flex gap-4 text-on-surface font-body-md">
+<span class="material-symbols-outlined text-primary-fixed text-[20px]">check_circle</span>
+                        Career Deployment Support
+                    </li>
+</ul>
+<div class="pt-8 border-t border-outline-variant/20">
+<span class="text-primary-fixed font-display-lg text-xl tracking-tight">From $5,500 / Track</span>
+</div>
+</div>
+<!-- Tier 3 -->
+<div class="p-10 border border-outline-variant/30 bg-surface-container-low flex flex-col gap-8 hover:border-outline transition-all group">
+<span class="font-label-caps text-[11px] text-on-surface-variant group-hover:text-primary-fixed">GOVT_/_CORPORATE</span>
+<div class="space-y-2">
+<span class="text-4xl font-display-lg text-primary">Elite Team</span>
+<p class="text-on-surface-variant text-sm font-code-sm">CUSTOMIZED_TEAM_RANGES</p>
+</div>
+<ul class="space-y-5 flex-grow">
+<li class="flex gap-4 text-on-surface-variant font-body-md">
+<span class="material-symbols-outlined text-primary-fixed text-[20px]">check_circle</span>
+                        Private Range Scenarios
+                    </li>
+<li class="flex gap-4 text-on-surface-variant font-body-md">
+<span class="material-symbols-outlined text-primary-fixed text-[20px]">check_circle</span>
+                        On-Premise Instruction
+                    </li>
+<li class="flex gap-4 text-on-surface-variant font-body-md">
+<span class="material-symbols-outlined text-primary-fixed text-[20px]">check_circle</span>
+                        Threat Intel Focus
+                    </li>
+</ul>
+<div class="pt-8 border-t border-outline-variant/20">
+<span class="text-primary-fixed font-display-lg text-xl tracking-tight">Contact Command</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest w-full py-16 border-t border-outline-variant/20">
+<div class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="flex flex-col gap-6">
+<span class="font-display-lg text-[20px] text-primary-fixed tracking-tight">CYBER ACADEMY</span>
+<p class="font-code-sm text-[12px] text-on-surface-variant leading-relaxed">Advanced offensive and defensive security training for the next generation. Est 2024. All sessions monitored.</p>
+</div>
+<div class="flex flex-col gap-6">
+<h4 class="font-label-caps text-[12px] text-primary tracking-widest uppercase">Protocol</h4>
+<div class="flex flex-col gap-3">
+<a class="font-code-sm text-[12px] text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">Privacy_Protocol</a>
+<a class="font-code-sm text-[12px] text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">Engagement_Terms</a>
+<a class="font-code-sm text-[12px] text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">Code_of_Conduct</a>
+</div>
+</div>
+<div class="flex flex-col gap-6">
+<h4 class="font-label-caps text-[12px] text-primary tracking-widest uppercase">Compliance</h4>
+<div class="flex flex-col gap-3">
+<a class="font-code-sm text-[12px] text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">CSIC_STDS</a>
+<a class="font-code-sm text-[12px] text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">NIST_Mapping</a>
+<a class="font-code-sm text-[12px] text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">ISO_27001</a>
+</div>
+</div>
+<div class="flex flex-col gap-6">
+<h4 class="font-label-caps text-[12px] text-primary tracking-widest uppercase">Connectivity</h4>
+<div class="flex gap-5">
+<span class="material-symbols-outlined text-primary-fixed cursor-pointer hover:scale-110 transition-transform">terminal</span>
+<span class="material-symbols-outlined text-primary-fixed cursor-pointer hover:scale-110 transition-transform">podcasts</span>
+<span class="material-symbols-outlined text-primary-fixed cursor-pointer hover:scale-110 transition-transform">hub</span>
+<span class="material-symbols-outlined text-primary-fixed cursor-pointer hover:scale-110 transition-transform">data_object</span>
+</div>
+<div class="mt-2">
+<span class="font-code-sm text-[10px] text-primary-fixed bg-primary-fixed/10 px-2 py-1">SERVER_STATUS: UP</span>
+</div>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-desktop mt-16 pt-8 border-t border-outline-variant/10">
+<p class="font-code-sm text-[10px] text-on-surface-variant text-center tracking-[0.2em] uppercase">© 2024 CYBER ACADEMY // SECURED INTERFACE // ALL RIGHTS RESERVED</p>
+</div>
+</footer>
+<script>
+    // Simple filter button active state logic
+    const filterSelect = document.querySelector('select');
+    filterSelect.addEventListener('change', (e) => {
+        console.log('Filtering modules by:', e.target.value);
+    });
 
-  <main>
-    <section class="page-hero dark-band">
-      <div class="reveal">
-        <p class="eyebrow">Cybersecurity Industry Certification Program</p>
-        <h1>16 weeks of practical blue-team cybersecurity training.</h1>
-        <p class="lead">CSIC is an offline, hands-on program in Mysuru covering SOC operations, SIEM, threat hunting, digital forensics, incident response, and analyst communication.</p>
-        <div class="hero-actions">
-          <a class="btn primary" href="#curriculum">View Curriculum</a>
-          <a class="btn ghost" href="assets/csic-brochure.pdf" download>Download Brochure</a>
-        </div>
-      </div>
-    </section>
-
-    <nav class="program-tabs" aria-label="Program sections">
-      <a href="#summary">Summary</a>
-      <a href="#curriculum">Curriculum</a>
-      <a href="#mentors">Mentors</a>
-      <a href="#fees">Fees</a>
-      <a href="#faq">FAQs</a>
-      <a href="about.html#apply">Apply</a>
-    </nav>
-
-    <section class="section stat-strip reveal" id="summary">
-      <div><strong>4 months</strong><span>16-week program</span></div>
-      <div><strong>80%</strong><span>Practical learning</span></div>
-      <div><strong>298</strong><span>Theory hours</span></div>
-      <div><strong>342</strong><span>Practical hours</span></div>
-    </section>
-
-    <section class="section" id="curriculum">
-      <div class="section-head reveal">
-        <p class="eyebrow">Week-by-week syllabus</p>
-        <h2>Four modules, 640 total learning hours.</h2>
-        <p>Hours are shown as theory + practical. Replace week titles here with the final training-document titles if your source sheet uses different wording.</p>
-      </div>
-      <div class="curriculum">
-        <article class="curriculum-module reveal">
-          <h3>Module 1: Security Foundations</h3>
-          <ol>
-            <li><span>Week 1</span>Cybersecurity orientation, networking fundamentals, lab setup <b>18 + 22 hrs</b></li>
-            <li><span>Week 2</span>Linux, Windows, command-line workflows, scripting basics <b>19 + 21 hrs</b></li>
-            <li><span>Week 3</span>Security concepts, identity, access, endpoint fundamentals <b>18 + 22 hrs</b></li>
-            <li><span>Week 4</span>Reconnaissance awareness, vulnerability basics, secure operations <b>19 + 21 hrs</b></li>
-          </ol>
-        </article>
-        <article class="curriculum-module reveal">
-          <h3>Module 2: SOC and SIEM Operations</h3>
-          <ol start="5">
-            <li><span>Week 5</span>SOC processes, alert triage, escalation, analyst documentation <b>18 + 22 hrs</b></li>
-            <li><span>Week 6</span>Wazuh monitoring, endpoint telemetry, rule tuning <b>19 + 21 hrs</b></li>
-            <li><span>Week 7</span>Splunk searches, dashboards, correlation, reporting <b>18 + 22 hrs</b></li>
-            <li><span>Week 8</span>IBM QRadar workflows, offenses, log source analysis <b>19 + 21 hrs</b></li>
-          </ol>
-        </article>
-        <article class="curriculum-module reveal">
-          <h3>Module 3: Threat Hunting and DFIR</h3>
-          <ol start="9">
-            <li><span>Week 9</span>Threat intelligence, MISP, indicators, intelligence handling <b>18 + 22 hrs</b></li>
-            <li><span>Week 10</span>Network security monitoring, Zeek, packet and log analysis <b>19 + 21 hrs</b></li>
-            <li><span>Week 11</span>Digital forensics fundamentals, evidence handling, timelines <b>18 + 22 hrs</b></li>
-            <li><span>Week 12</span>Memory forensics with Volatility and investigation reports <b>19 + 21 hrs</b></li>
-          </ol>
-        </article>
-        <article class="curriculum-module reveal">
-          <h3>Module 4: Incident Response and Career Readiness</h3>
-          <ol start="13">
-            <li><span>Week 13</span>Incident response lifecycle, containment, eradication, recovery <b>18 + 22 hrs</b></li>
-            <li><span>Week 14</span>Threat hunting labs, Nmap, Python/Bash automation <b>19 + 21 hrs</b></li>
-            <li><span>Week 15</span>Integrated SOC scenarios and capstone investigation <b>18 + 22 hrs</b></li>
-            <li><span>Week 16</span>Final assessment, interview prep, portfolio and placement readiness <b>20 + 20 hrs</b></li>
-          </ol>
-        </article>
-      </div>
-    </section>
-
-    <section class="section soft" id="mentors">
-      <div class="section-head reveal">
-        <p class="eyebrow">Mentor exposure</p>
-        <h2>Learn from practitioners connected to major security teams.</h2>
-        <p>The program highlights industry mentor exposure from AT&amp;T, IBM, Morgan Stanley, DSCI, and Target.</p>
-      </div>
-      <div class="logo-row reveal">
-        <span>AT&amp;T</span><span>IBM</span><span>Morgan Stanley</span><span>DSCI</span><span>Target</span>
-      </div>
-    </section>
-
-    <section class="section" id="fees">
-      <div class="section-head reveal">
-        <p class="eyebrow">Admissions and fees</p>
-        <h2>Clear selection process and tiered program options.</h2>
-      </div>
-      <div class="admission-grid">
-        <article class="steps reveal">
-          <h3>Admissions funnel</h3>
-          <ol>
-            <li>Submit the application form.</li>
-            <li>Complete the Rs. 500 entrance test.</li>
-            <li>Attend the selection interview.</li>
-            <li>Receive the final offer and onboarding details.</li>
-          </ol>
-        </article>
-        <div class="pricing reveal">
-          <article><h3>Foundation</h3><p class="price">Rs. 59,000</p><small>Tier name and inclusions to confirm.</small></article>
-          <article><h3>Professional</h3><p class="price">Rs. 1,19,000</p><small>Tier name and inclusions to confirm.</small></article>
-          <article><h3>Career</h3><p class="price">Rs. 2,00,000</p><small>Tier name, GST note, and inclusions to confirm.</small></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section faq" id="faq">
-      <div class="section-head reveal">
-        <p class="eyebrow">FAQ</p>
-        <h2>Common questions.</h2>
-      </div>
-      <details class="reveal"><summary>Is CSIC a red-team hacking course?</summary><p>No. CSIC is positioned around defensive cybersecurity: SOC, SIEM, threat hunting, forensics, and incident response.</p></details>
-      <details class="reveal"><summary>Is the program online or offline?</summary><p>The current program is listed as offline in Mysuru.</p></details>
-      <details class="reveal"><summary>Are the fees final?</summary><p>The published tiers are Rs. 59,000, Rs. 1,19,000, and Rs. 2,00,000. GST treatment and tier inclusions still need final confirmation.</p></details>
-    </section>
-
-    <section class="section dark-cta">
-      <div class="cta-copy reveal">
-        <p class="eyebrow">Next batch</p>
-        <h2>Batch start date to be announced.</h2>
-        <p>Share the confirmed start date and the page can be updated instantly.</p>
-      </div>
-      <a class="btn light" href="about.html#apply">Apply Now</a>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div><strong>Cyber Academy</strong><p>Training arm of CyberLancers. Offline cybersecurity training in Mysuru.</p></div>
-    <div><a href="index.html">Home</a><a href="about.html#contact">Contact</a><a href="assets/csic-brochure.pdf" download>Brochure</a></div>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
-</html>
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            navLinks.forEach(l => {
+                l.classList.remove('text-primary-fixed', 'border-b', 'border-primary-fixed', 'pb-1');
+                l.classList.add('text-on-surface-variant');
+            });
+            link.classList.remove('text-on-surface-variant');
+            link.classList.add('text-primary-fixed', 'border-b', 'border-primary-fixed', 'pb-1');
+        });
+    });
+</script>
+</body></html>
