@@ -52,17 +52,17 @@ scene.add(fillLight);
 
 // Shared fragment material ref
 const fragmentsMaterial = new THREE.MeshStandardMaterial({
-  color: 0xe2e8f0, // Clean light slate default fragments
-  roughness: 0.9,
-  metalness: 0.1,
+  color: 0x1a1a2e, // Dark navy fragments visible on white background
+  roughness: 0.85,
+  metalness: 0.2,
   side: THREE.DoubleSide,
 });
 
 // Wireframe inner torus material
 const wireMaterial = new THREE.ShaderMaterial({
   uniforms: {
-    color1: { value: new THREE.Color(0xdde5e9) }, // Default Light background color (very light grey/teal)
-    color2: { value: new THREE.Color(0x050505) }  // Default Light wireframe color (dark charcoal/black)
+    color1: { value: new THREE.Color(0x0a0a0a) }, // Dark base between wires
+    color2: { value: new THREE.Color(0x1a1a2e) }  // Dark navy wireframe lines
   },
   vertexShader: /* glsl */ `
     attribute vec3 barycentric;
@@ -239,10 +239,10 @@ document.addEventListener('DOMContentLoaded', () => {
       scene.background.set(0xffffff);
       logoImg.style.filter = 'none';
       
-      // Update WebGL colors to Light (White background, Black wireframe)
-      wireMaterial.uniforms.color1.value.set(0xf1f5f9);
-      wireMaterial.uniforms.color2.value.set(0x050505);
-      fragmentsMaterial.color.set(0xe2e8f0);
+      // Update WebGL colors to Light (White background, Dark navy torus)
+      wireMaterial.uniforms.color1.value.set(0x0a0a0a);
+      wireMaterial.uniforms.color2.value.set(0x1a1a2e);
+      fragmentsMaterial.color.set(0x1a1a2e);
     }
   });
 
