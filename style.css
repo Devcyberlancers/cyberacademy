@@ -330,14 +330,14 @@ section {
 }
 
 .company-logos img {
-  filter: grayscale(1) invert(1) brightness(0.85); /* Clean white logos for dark backdrop */
-  opacity: 0.65;
+  filter: none;
+  opacity: 0.85;
   transition: all 0.3s ease;
 }
 
 .company-logos img:hover {
-  filter: grayscale(0) invert(0) brightness(1);
   opacity: 1;
+  transform: scale(1.08);
 }
 
 /* Registration Form */
