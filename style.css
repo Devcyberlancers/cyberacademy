@@ -5,9 +5,14 @@
   --text: #0b0f19;
   --text-muted: #4b5563;
   --border: #e2e8f0;
-  --accent: #ff4d00;          /* Glowing Orange remains accent */
+  --accent: #ff4d00;
   --accent-light: #fff5f0;
   --accent-dim: rgba(255, 77, 0, 0.15);
+  --card-bg: #ffffff;
+  --card-border: #e2e8f0;
+  --input-bg: #f8fafc;
+  --footer-bg: #f1f5f9;
+  --section-bar-bg: rgba(248, 250, 252, 0.8);
   --font-sans: 'Space Grotesk', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
@@ -19,6 +24,11 @@
   --text-muted: rgba(238, 232, 222, 0.45);
   --border: rgba(255, 77, 0, 0.2);
   --accent-light: rgba(255, 77, 0, 0.05);
+  --card-bg: rgba(12, 12, 14, 0.7);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --input-bg: #0a0a0c;
+  --footer-bg: #000000;
+  --section-bar-bg: rgba(12, 12, 14, 0.5);
 }
 
 * {
@@ -85,7 +95,7 @@ header, section, footer, .hiring-bar {
 
 /* Header */
 header {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid var(--card-border);
   padding: 1.8rem 0;
 }
 
@@ -262,11 +272,12 @@ section {
 }
 
 .card {
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--card-border);
   border-radius: 8px;
   padding: 3.5rem 3rem;
-  background: rgba(12, 12, 14, 0.7);
+  background: var(--card-bg);
   backdrop-filter: blur(12px);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -324,9 +335,9 @@ section {
 /* Hiring Partners */
 .hiring-bar {
   padding: 5rem 0;
-  background: rgba(12, 12, 14, 0.5);
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  background: var(--section-bar-bg);
+  border-top: 1px solid var(--card-border);
+  border-bottom: 1px solid var(--card-border);
 }
 
 .company-logos img {
@@ -342,11 +353,12 @@ section {
 
 /* Registration Form */
 .registration-box {
-  background: rgba(12, 12, 14, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: 8px;
   padding: 4.5rem;
   backdrop-filter: blur(12px);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
 .form-group {
@@ -367,9 +379,9 @@ section {
 .form-control {
   width: 100%;
   padding: 1.2rem 1.4rem;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--card-border);
   border-radius: 4px;
-  background: #000000;
+  background: var(--input-bg);
   color: var(--text);
   font-family: var(--font-sans);
   font-size: 1.05rem;
@@ -411,7 +423,7 @@ section {
 /* FAQs */
 .faq-item {
   margin-bottom: 3rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid var(--card-border);
   padding-bottom: 2.5rem;
 }
 
@@ -430,9 +442,9 @@ section {
 
 /* Footer */
 footer {
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  border-top: 1px solid var(--card-border);
   padding: 7rem 0 5rem;
-  background: #000000;
+  background: var(--footer-bg);
   color: var(--text-muted);
   font-size: 0.95rem;
 }
@@ -447,11 +459,11 @@ footer {
 .video-card {
   position: relative;
   aspect-ratio: 9/16;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--card-border);
   border-radius: 12px;
   overflow: hidden;
   cursor: pointer;
-  background: #000000;
+  background: var(--bg-subtle);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
