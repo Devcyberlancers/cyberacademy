@@ -13,15 +13,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (elementTop < triggerBottom) {
         el.classList.add('reveal-active');
-      } else {
-        // Optional: remove to re-trigger animation when scrolling back up
-        // el.classList.remove('reveal-active');
       }
     });
   };
 
-  // Run on load to capture elements already in viewport
   checkReveal();
-
   window.addEventListener('scroll', checkReveal);
 });
+
+// Fullscreen Video Modal Controllers
+function openVideo(videoSrc) {
+  const modal = document.getElementById('videoModal');
+  const video = document.getElementById('modalVideo');
+  
+  if (modal && video) {
+    video.src = videoSrc;
+    video.load();
+    modal.classList.add('is-active');
+    video.play();
+  }
+}
+
+function closeVideo() {
+  const modal = document.getElementById('videoModal');
+  const video = document.getElementById('modalVideo');
+  
+  if (modal && video) {
+    video.pause();
+    modal.classList.remove('is-active');
+    video.src = "";
+  }
+}

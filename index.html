@@ -282,46 +282,62 @@
         <p>Hear from operators who completed training modules at Cyber Lancers.</p>
       </div>
       
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-        <div class="scroll-reveal delay-1">
-          <!-- Testimonial Video 1 -->
-          <div class="video-placeholder" style="border: 2px solid var(--border); box-shadow: 0 5px 0 0 var(--border);">
-            <video width="100%" height="100%" controls style="display: block; border-radius: 18px; object-fit: cover;">
-              <source src="assets/VID-20260528-WA0000.mp4" type="video/mp4"/>
-              Your browser does not support the video tag.
-            </video>
+      <div class="video-grid">
+        <!-- Video 1 -->
+        <div class="video-card scroll-reveal delay-1" onclick="openVideo('assets/VID-20260528-WA0000.mp4')">
+          <video muted playsinline loop>
+            <source src="assets/VID-20260528-WA0000.mp4#t=0.5" type="video/mp4"/>
+          </video>
+          <div class="video-play-btn">
+            <span class="material-symbols-outlined" style="font-size: 2.2rem; color: var(--text);">play_arrow</span>
           </div>
         </div>
-        <div class="scroll-reveal delay-2">
-          <!-- Testimonial Video 2 -->
-          <div class="video-placeholder" style="border: 2px solid var(--border); box-shadow: 0 5px 0 0 var(--border);">
-            <video width="100%" height="100%" controls style="display: block; border-radius: 18px; object-fit: cover;">
-              <source src="assets/VID-20260528-WA0001.mp4" type="video/mp4"/>
-              Your browser does not support the video tag.
-            </video>
+
+        <!-- Video 2 -->
+        <div class="video-card scroll-reveal delay-2" onclick="openVideo('assets/VID-20260528-WA0001.mp4')">
+          <video muted playsinline loop>
+            <source src="assets/VID-20260528-WA0001.mp4#t=0.5" type="video/mp4"/>
+          </video>
+          <div class="video-play-btn">
+            <span class="material-symbols-outlined" style="font-size: 2.2rem; color: var(--text);">play_arrow</span>
           </div>
         </div>
-        <div class="scroll-reveal delay-3">
-          <!-- Testimonial Video 3 -->
-          <div class="video-placeholder" style="border: 2px solid var(--border); box-shadow: 0 5px 0 0 var(--border);">
-            <video width="100%" height="100%" controls style="display: block; border-radius: 18px; object-fit: cover;">
-              <source src="assets/VID-20260528-WA0002.mp4" type="video/mp4"/>
-              Your browser does not support the video tag.
-            </video>
+
+        <!-- Video 3 -->
+        <div class="video-card scroll-reveal delay-3" onclick="openVideo('assets/VID-20260528-WA0002.mp4')">
+          <video muted playsinline loop>
+            <source src="assets/VID-20260528-WA0002.mp4#t=0.5" type="video/mp4"/>
+          </video>
+          <div class="video-play-btn">
+            <span class="material-symbols-outlined" style="font-size: 2.2rem; color: var(--text);">play_arrow</span>
           </div>
         </div>
-        <div class="scroll-reveal delay-3">
-          <!-- Testimonial Video 4 -->
-          <div class="video-placeholder" style="border: 2px solid var(--border); box-shadow: 0 5px 0 0 var(--border);">
-            <video width="100%" height="100%" controls style="display: block; border-radius: 18px; object-fit: cover;">
-              <source src="assets/VID-20260528-WA0003.mp4" type="video/mp4"/>
-              Your browser does not support the video tag.
-            </video>
+
+        <!-- Video 4 -->
+        <div class="video-card scroll-reveal delay-3" onclick="openVideo('assets/VID-20260528-WA0003.mp4')">
+          <video muted playsinline loop>
+            <source src="assets/VID-20260528-WA0003.mp4#t=0.5" type="video/mp4"/>
+          </video>
+          <div class="video-play-btn">
+            <span class="material-symbols-outlined" style="font-size: 2.2rem; color: var(--text);">play_arrow</span>
           </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Fullscreen Video Popup Modal -->
+  <div id="videoModal" class="video-modal">
+    <div class="video-modal-close" onclick="closeVideo()">
+      <span class="material-symbols-outlined" style="font-size: 1.5rem; color: var(--text);">close</span>
+    </div>
+    <div class="video-modal-content">
+      <video id="modalVideo" controls autoplay loop playsinline>
+        <source src="" type="video/mp4"/>
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
 
   <!-- ==========================================
        FAQS
