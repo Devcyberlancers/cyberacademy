@@ -1,6 +1,26 @@
-/*
- * Cyber Lancers Academy - NextGenNow Canopy-inspired Narrative Layout
- */
+/* WebGL Fixed Background Canvas */
+.webgl {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Ensure layout overlays on top of WebGL */
+header, section, footer, .hiring-bar {
+  position: relative;
+  z-index: 10;
+  background: transparent !important; /* Allow WebGL canvas to show through */
+}
+
+/* Ensure interactive boxes have a solid background */
+.card, .registration-box, .faq-item, .video-placeholder {
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(4px);
+}
 
 :root {
   --bg: #ffffff;

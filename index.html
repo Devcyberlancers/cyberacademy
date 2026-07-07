@@ -11,8 +11,20 @@
   
   <!-- Main Stylesheet -->
   <link href="style.css" rel="stylesheet" type="text/css"/>
+
+  <!-- Three.js Importmap Setup -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js",
+        "jsm/": "https://cdn.jsdelivr.net/npm/three@0.182.0/examples/jsm/"
+      }
+    }
+  </script>
 </head>
 <body>
+  <!-- WebGL Background Canvas -->
+  <canvas class="webgl"></canvas>
 
   <!-- ==========================================
        HEADER
@@ -518,7 +530,7 @@
   </footer>
 
   <!-- Main Animation Script -->
-  <script src="script.js"></script>
+  <script type="module" src="script.js"></script>
 
 </body>
 </html>
