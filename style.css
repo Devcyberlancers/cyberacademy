@@ -26,8 +26,8 @@ body {
   background-color: var(--bg);
   color: var(--text);
   font-family: var(--font-sans);
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: 19px;          /* Increased base font-size */
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
@@ -183,10 +183,10 @@ section {
 }
 
 .hero .section-subtitle {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: var(--text-muted);
   margin-bottom: 2.5rem;
-  max-width: 550px;
+  max-width: 650px;
 }
 
 /* Grid & Cards */
@@ -317,7 +317,7 @@ section {
   display: block;
   font-weight: 700;
   margin-bottom: 0.6rem;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
 }
 
 .form-control {
@@ -328,7 +328,7 @@ section {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-sans);
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   transition: all 0.2s ease;
 }
 
@@ -355,7 +355,7 @@ section {
   align-items: center;
   gap: 0.6rem;
   cursor: pointer;
-  font-size: 0.95rem;
+  font-size: 1.05rem;
 }
 
 .radio-option input[type="radio"] {
@@ -375,14 +375,14 @@ section {
 }
 
 .faq-item h4 {
-  font-size: 1.2rem;
+  font-size: 1.35rem;
   font-weight: 700;
   margin-bottom: 0.75rem;
   color: var(--text);
 }
 
 .faq-item p {
-  font-size: 0.95rem;
+  font-size: 1.1rem;
   color: var(--text-muted);
   line-height: 1.6;
 }
