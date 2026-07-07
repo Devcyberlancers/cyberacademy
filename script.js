@@ -8,7 +8,7 @@ import { FXAAShader } from "jsm/shaders/FXAAShader.js";
 
 // Scene
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x050505); // Set background to pitch black
+scene.background = new THREE.Color(0xffffff); // Default Light mode (white)
 
 const scrollGroup = new THREE.Group();
 scene.add(scrollGroup);
@@ -33,7 +33,7 @@ composer.addPass(new RenderPass(scene, camera));
 
 const bloomPass = new UnrealBloomPass(
   new THREE.Vector2(window.innerWidth, window.innerHeight),
-  0.8, 0.4, 0.65, // Increased bloom strength for orange wireframe glow
+  0.6, 0.35, 0.7,
 );
 composer.addPass(bloomPass);
 
@@ -42,13 +42,56 @@ fxaaPass.uniforms["resolution"].value.set(1 / window.innerWidth, 1 / window.inne
 composer.addPass(fxaaPass);
 
 // Lights
-scene.add(new THREE.AmbientLight(0xffffff, 0.35));
-const dirLight = new THREE.DirectionalLight(0xfff4e0, 2.8);
+scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+const dirLight = new THREE.DirectionalLight(0xfff4e0, 2.5);
 dirLight.position.set(3, 4, 5);
 scene.add(dirLight);
-const fillLight = new THREE.DirectionalLight(0xff4d00, 1.2); // Directional orange light
+const fillLight = new THREE.DirectionalLight(0xff4d00, 1.0); // Orange highlight source
 fillLight.position.set(-4, -2, -3);
 scene.add(fillLight);
+
+// Theme Switcher Controller
+document.addEventListener('DOMContentLoaded', () => {
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  const themeIcon = themeToggleBtn.querySelector('.material-symbols-outlined');
+  const logoImg = document.querySelector('.logo');
+  
+  // Default values
+  document.documentElement.setAttribute('data-theme', 'light');
+
+  themeToggleBtn.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    
+    if (newTheme === 'dark') {
+      themeIcon.textContent = 'light_mode';
+      scene.background.set(0x050505);
+      logoImg.style.filter = 'brightness(0) invert(1) contrast(1.2)';
+    } else {
+      themeIcon.textContent = 'dark_mode';
+      scene.background.set(0xffffff);
+      logoImg.style.filter = 'none';
+    }
+  });
+
+  const revealElements = document.querySelectorAll('.scroll-reveal');
+
+  const checkReveal = () => {
+    const triggerBottom = window.innerHeight * 0.85;
+
+    revealElements.forEach(el => {
+      const elementTop = el.getBoundingClientRect().top;
+
+      if (elementTop < triggerBottom) {
+        el.classList.add('reveal-active');
+      }
+    });
+  };
+
+  checkReveal();
+  window.addEventListener('scroll', checkReveal);
+});
 
 // Wireframe inner torus
 function addBarycentricCoords(geo) {
@@ -267,7 +310,7 @@ const tick = () => {
 };
 tick();
 
-// WebGL scroll sync (shifts visual coordinates slightly on scroll)
+// WebGL scroll sync
 window.addEventListener("scroll", () => {
   const scrollRatio = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
   scrollGroup.position.x = -scrollRatio * 1.5;
@@ -282,26 +325,6 @@ window.addEventListener("resize", () => {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   composer.setSize(window.innerWidth, window.innerHeight);
   fxaaPass.uniforms["resolution"].value.set(1 / window.innerWidth, 1 / window.innerHeight);
-});
-
-// Scroll Reveal Animations
-document.addEventListener('DOMContentLoaded', () => {
-  const revealElements = document.querySelectorAll('.scroll-reveal');
-
-  const checkReveal = () => {
-    const triggerBottom = window.innerHeight * 0.85;
-
-    revealElements.forEach(el => {
-      const elementTop = el.getBoundingClientRect().top;
-
-      if (elementTop < triggerBottom) {
-        el.classList.add('reveal-active');
-      }
-    });
-  };
-
-  checkReveal();
-  window.addEventListener('scroll', checkReveal);
 });
 
 // Fullscreen Video Modal Controllers
