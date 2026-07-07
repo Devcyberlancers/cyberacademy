@@ -8,7 +8,7 @@ import { FXAAShader } from "jsm/shaders/FXAAShader.js";
 
 // Scene
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0xffffff); // Clean white background matching theme
+scene.background = new THREE.Color(0x050505); // Set background to pitch black
 
 const scrollGroup = new THREE.Group();
 scene.add(scrollGroup);
@@ -33,7 +33,7 @@ composer.addPass(new RenderPass(scene, camera));
 
 const bloomPass = new UnrealBloomPass(
   new THREE.Vector2(window.innerWidth, window.innerHeight),
-  0.4, 0.3, 0.8,
+  0.8, 0.4, 0.65, // Increased bloom strength for orange wireframe glow
 );
 composer.addPass(bloomPass);
 
@@ -42,11 +42,11 @@ fxaaPass.uniforms["resolution"].value.set(1 / window.innerWidth, 1 / window.inne
 composer.addPass(fxaaPass);
 
 // Lights
-scene.add(new THREE.AmbientLight(0xffffff, 0.7));
-const dirLight = new THREE.DirectionalLight(0xccfffa, 2.5); // Custom light matching the theme accent color
+scene.add(new THREE.AmbientLight(0xffffff, 0.35));
+const dirLight = new THREE.DirectionalLight(0xfff4e0, 2.8);
 dirLight.position.set(3, 4, 5);
 scene.add(dirLight);
-const fillLight = new THREE.DirectionalLight(0x0f766e, 0.8);
+const fillLight = new THREE.DirectionalLight(0xff4d00, 1.2); // Directional orange light
 fillLight.position.set(-4, -2, -3);
 scene.add(fillLight);
 
@@ -82,7 +82,8 @@ const wireMaterial = new THREE.ShaderMaterial({
     }
     void main() {
       float wf = wireMask(vBary, 1.6);
-      vec3 col = mix(vec3(0.95, 0.98, 0.98), vec3(0.05, 0.46, 0.43), wf); // Cyan-Teal Wireframe
+      vec3 col = mix(vec3(0.07, 0.01, 0.0), vec3(1.0, 0.28, 0.04), wf); // Glowing orange wireframe
+      col = mix(col, vec3(1.0, 0.8, 0.3) * 2.2, wf * 0.55);
       gl_FragColor = vec4(col, 1.0);
     }
   `,
@@ -139,11 +140,11 @@ const fragments = (() => {
     cellMap.get(k).t.push(t);
   }
 
-  // Matte white clay fragments matching light tech theme
+  // Dark stone fragments
   const mat = new THREE.MeshStandardMaterial({
-    color: 0xf8fafc,
-    roughness: 0.8,
-    metalness: 0.1,
+    color: 0x111111,
+    roughness: 0.9,
+    metalness: 0.15,
     side: THREE.DoubleSide,
   });
 
