@@ -1,20 +1,24 @@
-/*
- * Cyber Lancers Academy - The Future is Fracture Dark Theme
- */
-
+/* Theme Variables (Light by default, Dark option) */
 :root {
-  --bg: #050505;              /* Pitch Black */
-  --bg-subtle: #0c0c0e;       /* Off-Black / Dark Carbon */
-  --text: #eee8de;            /* Off-white */
-  --text-muted: rgba(238, 232, 222, 0.45);
-  --border: rgba(255, 77, 0, 0.2); /* Subtle orange borders */
-  --border-dark: #ff4d00;     /* Highlight Orange */
-  --accent: #ff4d00;          /* Future Fracture Orange */
-  --accent-light: rgba(255, 77, 0, 0.05); /* Low Glow Orange */
+  --bg: #ffffff;
+  --bg-subtle: #f8fafc;
+  --text: #0b0f19;
+  --text-muted: #4b5563;
+  --border: #e2e8f0;
+  --accent: #ff4d00;          /* Glowing Orange remains accent */
+  --accent-light: #fff5f0;
   --accent-dim: rgba(255, 77, 0, 0.15);
-  
-  --font-sans: 'Space Grotesk', 'Courier New', Courier, monospace, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Courier New', Courier, monospace;
+  --font-sans: 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+[data-theme="dark"] {
+  --bg: #050505;
+  --bg-subtle: #0c0c0e;
+  --text: #eee8de;
+  --text-muted: rgba(238, 232, 222, 0.45);
+  --border: rgba(255, 77, 0, 0.2);
+  --accent-light: rgba(255, 77, 0, 0.05);
 }
 
 * {
@@ -31,6 +35,27 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 /* Custom WebGL fixed background canvas */
@@ -589,4 +614,10 @@ footer {
   .video-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Terminal cursor blink */
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }

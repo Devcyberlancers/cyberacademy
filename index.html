@@ -43,6 +43,9 @@
           <a href="#eligibility">Eligibility</a>
           <a href="#testimonials">Testimonials</a>
           <a href="#faq">FAQs</a>
+          <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle Theme">
+            <span class="material-symbols-outlined" style="font-size: 1.3rem;">dark_mode</span>
+          </button>
           <a href="#registration" class="btn btn-secondary" style="padding: 0.5rem 1.25rem;">Register Now</a>
         </nav>
       </div>
@@ -86,7 +89,30 @@
           <!-- Official Shield Logo Image Container -->
           <div style="width: 100%; max-width: 320px; border: 2px solid var(--border); border-radius: 30px; padding: 3rem 2rem; background: var(--accent-light); box-shadow: 0 5px 0 0 var(--border); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem;">
             <img src="assets/logo-shield.png" alt="Cyber Lancers Shield Logo" style="height: 140px; width: auto; display: block;"/>
-            <div style="font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: 0.05em;">THE FRONTLINE OF DIGITAL SECURITY</div>
+            <!-- Live Code Terminal Animation -->
+            <div id="codeTerminal" style="
+              width: 100%;
+              font-family: var(--font-mono);
+              font-size: 0.65rem;
+              line-height: 1.7;
+              color: #00ff41;
+              background: #0a0a0f;
+              border-radius: 10px;
+              padding: 0.8rem 1rem;
+              text-align: left;
+              overflow: hidden;
+              height: 90px;
+              position: relative;
+            ">
+              <div style="display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.5rem;">
+                <span style="width: 7px; height: 7px; border-radius: 50%; background: #ff5f57; display: inline-block;"></span>
+                <span style="width: 7px; height: 7px; border-radius: 50%; background: #febc2e; display: inline-block;"></span>
+                <span style="width: 7px; height: 7px; border-radius: 50%; background: #28c840; display: inline-block;"></span>
+                <span style="font-size: 0.55rem; color: #555; margin-left: 0.4rem;">cyber@lancers:~</span>
+              </div>
+              <div id="codeLines" style="overflow: hidden;"></div>
+              <span id="termCursor" style="display: inline-block; width: 6px; height: 12px; background: #00ff41; animation: blink-cursor 0.7s step-end infinite; vertical-align: middle;"></span>
+            </div>
           </div>
         </div>
       </div>
@@ -532,6 +558,76 @@
 
   <!-- Main Animation Script -->
   <script type="module" src="script.js"></script>
+
+  <!-- Terminal Code Animation -->
+  <script>
+  (function() {
+    const codeLines = document.getElementById('codeLines');
+    if (!codeLines) return;
+
+    const commands = [
+      { cmd: '$ nmap -sV 192.168.1.0/24', out: '<span style="color:#888">Scanning 256 hosts...</span>' },
+      { cmd: '$ sudo wireshark -i eth0', out: '<span style="color:#00bfff">Capturing packets ▸▸▸</span>' },
+      { cmd: '$ hydra -l admin -P pass.txt ssh://target', out: '<span style="color:#ff5f57">[FOUND] admin:cyber2026</span>' },
+      { cmd: '$ sqlmap -u "http://target/id=1"', out: '<span style="color:#febc2e">Injecting payload...</span>' },
+      { cmd: '$ python3 exploit.py --target 10.0.0.5', out: '<span style="color:#28c840">[+] Shell obtained ✓</span>' },
+      { cmd: '$ hashcat -m 0 hash.txt rockyou.txt', out: '<span style="color:#ff79c6">Cracking... 12,400 H/s</span>' },
+      { cmd: '$ aircrack-ng capture.cap -w wordlist', out: '<span style="color:#bd93f9">KEY FOUND! [e4:f2:a8]</span>' },
+      { cmd: '$ msfconsole -q -x "use exploit/multi"', out: '<span style="color:#ff4d00">msf6 > session opened</span>' },
+      { cmd: '$ john --wordlist=pass.txt shadow.db', out: '<span style="color:#50fa7b">3 passwords cracked</span>' },
+      { cmd: '$ gobuster dir -u http://target -w list', out: '<span style="color:#8be9fd">/admin (Status: 200)</span>' },
+    ];
+
+    let cmdIndex = 0;
+    const MAX_LINES = 3;
+
+    function typeText(el, text, speed, callback) {
+      let i = 0;
+      const interval = setInterval(() => {
+        el.textContent += text[i];
+        i++;
+        if (i >= text.length) {
+          clearInterval(interval);
+          if (callback) callback();
+        }
+      }, speed);
+    }
+
+    function runNextCommand() {
+      const entry = commands[cmdIndex % commands.length];
+      cmdIndex++;
+
+      // Create command line
+      const cmdLine = document.createElement('div');
+      cmdLine.style.color = '#00ff41';
+      codeLines.appendChild(cmdLine);
+
+      typeText(cmdLine, entry.cmd, 35, () => {
+        // After typing command, show output after brief pause
+        setTimeout(() => {
+          const outLine = document.createElement('div');
+          outLine.innerHTML = entry.out;
+          outLine.style.opacity = '0';
+          outLine.style.transition = 'opacity 0.3s';
+          codeLines.appendChild(outLine);
+
+          requestAnimationFrame(() => { outLine.style.opacity = '1'; });
+
+          // Trim old lines to keep it compact
+          while (codeLines.children.length > MAX_LINES * 2) {
+            codeLines.removeChild(codeLines.firstChild);
+          }
+
+          // Next command after a pause
+          setTimeout(runNextCommand, 1200);
+        }, 400);
+      });
+    }
+
+    // Start after small delay
+    setTimeout(runNextCommand, 800);
+  })();
+  </script>
 
 </body>
 </html>
