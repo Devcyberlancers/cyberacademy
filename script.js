@@ -25,15 +25,16 @@ const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector(".webg
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.0;
+renderer.toneMappingExposure = 1.2;
 
 // Post-processing
 const composer = new EffectComposer(renderer);
 composer.addPass(new RenderPass(scene, camera));
 
+// Bloom — start low for light mode (dark torus must not wash out)
 const bloomPass = new UnrealBloomPass(
   new THREE.Vector2(window.innerWidth, window.innerHeight),
-  0.6, 0.35, 0.7,
+  0.15, 0.3, 0.85,  // strength 0.15 (subtle), radius, threshold
 );
 composer.addPass(bloomPass);
 
@@ -41,28 +42,36 @@ const fxaaPass = new ShaderPass(FXAAShader);
 fxaaPass.uniforms["resolution"].value.set(1 / window.innerWidth, 1 / window.innerHeight);
 composer.addPass(fxaaPass);
 
-// Lights
-scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-const dirLight = new THREE.DirectionalLight(0xfff4e0, 2.5);
+// Track current theme for per-frame adjustments
+let currentMode = 'light';
+
+// Lights — strong for specular highlights on the dark metallic torus
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+scene.add(ambientLight);
+const dirLight = new THREE.DirectionalLight(0xffffff, 3.0);
 dirLight.position.set(3, 4, 5);
 scene.add(dirLight);
-const fillLight = new THREE.DirectionalLight(0xff4d00, 1.0); // Orange highlight source
+const fillLight = new THREE.DirectionalLight(0xaabbff, 1.5); // Subtle blue fill for metallic shine
 fillLight.position.set(-4, -2, -3);
 scene.add(fillLight);
+const rimLight = new THREE.DirectionalLight(0xffffff, 2.0); // Rim light for edge highlighting
+rimLight.position.set(0, -3, -4);
+scene.add(rimLight);
 
-// Shared fragment material ref
+// Shared fragment material ref — jet black, polished metallic for light mode
 const fragmentsMaterial = new THREE.MeshStandardMaterial({
-  color: 0x1a1a2e, // Dark navy fragments visible on white background
-  roughness: 0.85,
-  metalness: 0.2,
+  color: 0x080810,       // Very dark, near-black
+  roughness: 0.15,       // Smooth/shiny
+  metalness: 0.95,       // Highly metallic for reflections
   side: THREE.DoubleSide,
+  envMapIntensity: 1.5,
 });
 
 // Wireframe inner torus material
 const wireMaterial = new THREE.ShaderMaterial({
   uniforms: {
-    color1: { value: new THREE.Color(0x0a0a0a) }, // Dark base between wires
-    color2: { value: new THREE.Color(0x1a1a2e) }  // Dark navy wireframe lines
+    color1: { value: new THREE.Color(0x050508) }, // Very dark base
+    color2: { value: new THREE.Color(0x2a2a4e) }  // Slightly brighter wireframe lines for contrast
   },
   vertexShader: /* glsl */ `
     attribute vec3 barycentric;
@@ -226,23 +235,45 @@ document.addEventListener('DOMContentLoaded', () => {
     document.documentElement.setAttribute('data-theme', newTheme);
     
     if (newTheme === 'dark') {
+      currentMode = 'dark';
       themeIcon.textContent = 'light_mode';
       scene.background.set(0x050505);
       logoImg.style.filter = 'brightness(0) invert(1) contrast(1.2)';
       
-      // Update WebGL colors to Dark Fracture (Black background, Orange wireframe)
+      // Dark mode: black bg, orange wireframe, subtle bloom glow
       wireMaterial.uniforms.color1.value.set(0x070100);
       wireMaterial.uniforms.color2.value.set(0xff4d00);
       fragmentsMaterial.color.set(0x111111);
+      fragmentsMaterial.roughness = 0.9;
+      fragmentsMaterial.metalness = 0.1;
+      bloomPass.strength = 0.6;
+      bloomPass.threshold = 0.7;
+      ambientLight.intensity = 0.6;
+      dirLight.color.set(0xfff4e0);
+      dirLight.intensity = 2.5;
+      fillLight.color.set(0xff4d00);
+      fillLight.intensity = 1.0;
+      rimLight.intensity = 0.5;
     } else {
+      currentMode = 'light';
       themeIcon.textContent = 'dark_mode';
       scene.background.set(0xffffff);
       logoImg.style.filter = 'none';
       
-      // Update WebGL colors to Light (White background, Dark navy torus)
-      wireMaterial.uniforms.color1.value.set(0x0a0a0a);
-      wireMaterial.uniforms.color2.value.set(0x1a1a2e);
-      fragmentsMaterial.color.set(0x1a1a2e);
+      // Light mode: white bg, dark shiny metallic torus, minimal bloom
+      wireMaterial.uniforms.color1.value.set(0x050508);
+      wireMaterial.uniforms.color2.value.set(0x2a2a4e);
+      fragmentsMaterial.color.set(0x080810);
+      fragmentsMaterial.roughness = 0.15;
+      fragmentsMaterial.metalness = 0.95;
+      bloomPass.strength = 0.15;
+      bloomPass.threshold = 0.85;
+      ambientLight.intensity = 0.8;
+      dirLight.color.set(0xffffff);
+      dirLight.intensity = 3.0;
+      fillLight.color.set(0xaabbff);
+      fillLight.intensity = 1.5;
+      rimLight.intensity = 2.0;
     }
   });
 
