@@ -50,50 +50,48 @@ const fillLight = new THREE.DirectionalLight(0xff4d00, 1.0); // Orange highlight
 fillLight.position.set(-4, -2, -3);
 scene.add(fillLight);
 
-// Theme Switcher Controller
-document.addEventListener('DOMContentLoaded', () => {
-  const themeToggleBtn = document.getElementById('themeToggleBtn');
-  const themeIcon = themeToggleBtn.querySelector('.material-symbols-outlined');
-  const logoImg = document.querySelector('.logo');
-  
-  // Default values
-  document.documentElement.setAttribute('data-theme', 'light');
-
-  themeToggleBtn.addEventListener('click', () => {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', newTheme);
-    
-    if (newTheme === 'dark') {
-      themeIcon.textContent = 'light_mode';
-      scene.background.set(0x050505);
-      logoImg.style.filter = 'brightness(0) invert(1) contrast(1.2)';
-    } else {
-      themeIcon.textContent = 'dark_mode';
-      scene.background.set(0xffffff);
-      logoImg.style.filter = 'none';
-    }
-  });
-
-  const revealElements = document.querySelectorAll('.scroll-reveal');
-
-  const checkReveal = () => {
-    const triggerBottom = window.innerHeight * 0.85;
-
-    revealElements.forEach(el => {
-      const elementTop = el.getBoundingClientRect().top;
-
-      if (elementTop < triggerBottom) {
-        el.classList.add('reveal-active');
-      }
-    });
-  };
-
-  checkReveal();
-  window.addEventListener('scroll', checkReveal);
+// Shared fragment material ref
+const fragmentsMaterial = new THREE.MeshStandardMaterial({
+  color: 0xe2e8f0, // Clean light slate default fragments
+  roughness: 0.9,
+  metalness: 0.1,
+  side: THREE.DoubleSide,
 });
 
-// Wireframe inner torus
+// Wireframe inner torus material
+const wireMaterial = new THREE.ShaderMaterial({
+  uniforms: {
+    color1: { value: new THREE.Color(0xdde5e9) }, // Default Light background color (very light grey/teal)
+    color2: { value: new THREE.Color(0x050505) }  // Default Light wireframe color (dark charcoal/black)
+  },
+  vertexShader: /* glsl */ `
+    attribute vec3 barycentric;
+    varying vec3 vBary;
+    void main() {
+      vBary = barycentric;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `,
+  fragmentShader: /* glsl */ `
+    uniform vec3 color1;
+    uniform vec3 color2;
+    varying vec3 vBary;
+    float wireMask(vec3 b, float t) {
+      vec3 d = fwidth(b);
+      vec3 a = smoothstep(vec3(0.0), d * t, b);
+      return 1.0 - min(a.x, min(a.y, a.z));
+    }
+    void main() {
+      float wf = wireMask(vBary, 1.6);
+      vec3 col = mix(color1, color2, wf);
+      gl_FragColor = vec4(col, 1.0);
+    }
+  `,
+  side: THREE.DoubleSide,
+  extensions: { derivatives: true },
+});
+
+// Helper for barycentric coordinates
 function addBarycentricCoords(geo) {
   const g = geo.toNonIndexed();
   const count = g.attributes.position.count;
@@ -107,38 +105,12 @@ function addBarycentricCoords(geo) {
   return g;
 }
 
-const wireMaterial = new THREE.ShaderMaterial({
-  vertexShader: /* glsl */ `
-    attribute vec3 barycentric;
-    varying vec3 vBary;
-    void main() {
-      vBary = barycentric;
-      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-    }
-  `,
-  fragmentShader: /* glsl */ `
-    varying vec3 vBary;
-    float wireMask(vec3 b, float t) {
-      vec3 d = fwidth(b);
-      vec3 a = smoothstep(vec3(0.0), d * t, b);
-      return 1.0 - min(a.x, min(a.y, a.z));
-    }
-    void main() {
-      float wf = wireMask(vBary, 1.6);
-      vec3 col = mix(vec3(0.07, 0.01, 0.0), vec3(1.0, 0.28, 0.04), wf); // Glowing orange wireframe
-      col = mix(col, vec3(1.0, 0.8, 0.3) * 2.2, wf * 0.55);
-      gl_FragColor = vec4(col, 1.0);
-    }
-  `,
-  side: THREE.DoubleSide,
-  extensions: { derivatives: true },
-});
 torusGroup.add(new THREE.Mesh(
   addBarycentricCoords(new THREE.TorusGeometry(2, 0.4, 80, 80)),
   wireMaterial,
 ));
 
-// Voronoi decomposition logic
+// Voronoi decomposition parameters
 const FRAG_SCALE = 50;
 const TORUS_R = 2, TORUS_r = 0.4;
 
@@ -182,14 +154,6 @@ const fragments = (() => {
     if (!cellMap.has(k)) cellMap.set(k, { s, t: [] });
     cellMap.get(k).t.push(t);
   }
-
-  // Dark stone fragments
-  const mat = new THREE.MeshStandardMaterial({
-    color: 0x111111,
-    roughness: 0.9,
-    metalness: 0.15,
-    side: THREE.DoubleSide,
-  });
 
   const list = [];
   const TWO_PI = Math.PI * 2;
@@ -236,7 +200,7 @@ const fragments = (() => {
     const aa = rnd[0] * TWO_PI;
     const rotAxis = tang.clone().multiplyScalar(Math.cos(aa)).addScaledVector(bitang, Math.sin(aa)).normalize();
 
-    const mesh = new THREE.Mesh(geo, mat);
+    const mesh = new THREE.Mesh(geo, fragmentsMaterial);
     mesh.position.copy(cellCenter).addScaledVector(cellNormal, 0.015);
     mesh.userData = { cellCenter, cellNormal, rotAxis, maxAngle: 0.7 + rnd[1] * 0.9, lift: 0 };
     torusGroup.add(mesh);
@@ -246,6 +210,59 @@ const fragments = (() => {
   nonIndexed.dispose();
   return list;
 })();
+
+// Theme Switcher Controller
+document.addEventListener('DOMContentLoaded', () => {
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  const themeIcon = themeToggleBtn.querySelector('.material-symbols-outlined');
+  const logoImg = document.querySelector('.logo');
+  
+  // Default values
+  document.documentElement.setAttribute('data-theme', 'light');
+
+  themeToggleBtn.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    
+    if (newTheme === 'dark') {
+      themeIcon.textContent = 'light_mode';
+      scene.background.set(0x050505);
+      logoImg.style.filter = 'brightness(0) invert(1) contrast(1.2)';
+      
+      // Update WebGL colors to Dark Fracture (Black background, Orange wireframe)
+      wireMaterial.uniforms.color1.value.set(0x070100);
+      wireMaterial.uniforms.color2.value.set(0xff4d00);
+      fragmentsMaterial.color.set(0x111111);
+    } else {
+      themeIcon.textContent = 'dark_mode';
+      scene.background.set(0xffffff);
+      logoImg.style.filter = 'none';
+      
+      // Update WebGL colors to Light (White background, Black wireframe)
+      wireMaterial.uniforms.color1.value.set(0xf1f5f9);
+      wireMaterial.uniforms.color2.value.set(0x050505);
+      fragmentsMaterial.color.set(0xe2e8f0);
+    }
+  });
+
+  const revealElements = document.querySelectorAll('.scroll-reveal');
+
+  const checkReveal = () => {
+    const triggerBottom = window.innerHeight * 0.85;
+
+    revealElements.forEach(el => {
+      const elementTop = el.getBoundingClientRect().top;
+
+      if (elementTop < triggerBottom) {
+        el.classList.add('reveal-active');
+      }
+    });
+  };
+
+  checkReveal();
+  window.addEventListener('scroll', checkReveal);
+});
 
 // Invisible raycaster mesh
 const rcMesh = new THREE.Mesh(
