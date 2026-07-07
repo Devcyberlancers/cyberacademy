@@ -60,7 +60,10 @@
       <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 3rem; align-items: center;">
         <div class="hero-content scroll-reveal">
           <div class="hero-tag">Official Training Range</div>
-          <h1>Cyber Academy</h1>
+          <h1 style="display: flex; align-items: center; gap: 1rem;">
+            <img src="assets/logo-shield.png" alt="Cyber Lancers Shield" style="height: 70px; width: auto;"/>
+            Cyber Academy
+          </h1>
           <p class="section-subtitle">
             Master high-fidelity system internals, defensive traffic analysis, and target network exploitation. Join Cyber Lancers Academy to transition your career.
           </p>
@@ -86,33 +89,32 @@
         </div>
         
         <div class="scroll-reveal delay-1" style="display: flex; justify-content: center; align-items: center; position: relative;">
-          <!-- Official Shield Logo Image Container -->
-          <div style="width: 100%; max-width: 320px; border: 2px solid var(--border); border-radius: 30px; padding: 3rem 2rem; background: var(--accent-light); box-shadow: 0 5px 0 0 var(--border); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem;">
-            <img src="assets/logo-shield.png" alt="Cyber Lancers Shield Logo" style="height: 140px; width: auto; display: block;"/>
-            <!-- Live Code Terminal Animation -->
-            <div id="codeTerminal" style="
-              width: 100%;
-              font-family: var(--font-mono);
-              font-size: 0.65rem;
-              line-height: 1.7;
-              color: #00ff41;
-              background: #0a0a0f;
-              border-radius: 10px;
-              padding: 0.8rem 1rem;
-              text-align: left;
-              overflow: hidden;
-              height: 90px;
-              position: relative;
-            ">
-              <div style="display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.5rem;">
-                <span style="width: 7px; height: 7px; border-radius: 50%; background: #ff5f57; display: inline-block;"></span>
-                <span style="width: 7px; height: 7px; border-radius: 50%; background: #febc2e; display: inline-block;"></span>
-                <span style="width: 7px; height: 7px; border-radius: 50%; background: #28c840; display: inline-block;"></span>
-                <span style="font-size: 0.55rem; color: #555; margin-left: 0.4rem;">cyber@lancers:~</span>
-              </div>
-              <div id="codeLines" style="overflow: hidden;"></div>
-              <span id="termCursor" style="display: inline-block; width: 6px; height: 12px; background: #00ff41; animation: blink-cursor 0.7s step-end infinite; vertical-align: middle;"></span>
+          <!-- Live Code Terminal Animation Card -->
+          <div id="codeTerminal" style="
+            width: 100%;
+            max-width: 420px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            line-height: 1.8;
+            color: #00ff41;
+            background: #0a0a0f;
+            border-radius: 18px;
+            padding: 1.5rem 1.8rem;
+            text-align: left;
+            overflow: hidden;
+            min-height: 220px;
+            position: relative;
+            border: 1px solid rgba(0,255,65,0.15);
+            box-shadow: 0 0 40px rgba(0,255,65,0.08), 0 8px 32px rgba(0,0,0,0.3);
+          ">
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.08);">
+              <span style="width: 10px; height: 10px; border-radius: 50%; background: #ff5f57; display: inline-block;"></span>
+              <span style="width: 10px; height: 10px; border-radius: 50%; background: #febc2e; display: inline-block;"></span>
+              <span style="width: 10px; height: 10px; border-radius: 50%; background: #28c840; display: inline-block;"></span>
+              <span style="font-size: 0.7rem; color: #666; margin-left: 0.6rem; letter-spacing: 0.05em;">cyber@lancers:~</span>
             </div>
+            <div id="codeLines" style="overflow: hidden;"></div>
+            <span id="termCursor" style="display: inline-block; width: 8px; height: 14px; background: #00ff41; animation: blink-cursor 0.7s step-end infinite; vertical-align: middle; margin-top: 2px;"></span>
           </div>
         </div>
       </div>
