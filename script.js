@@ -509,23 +509,22 @@ window.openVideo = function(videoSrc) {
   const video = document.getElementById('modalVideo');
   
   if (modal && video) {
-    // Clear and set direct src
+    // Set direct src and load
     video.src = videoSrc;
     video.load();
     
-    // Show modal first
+    // Show modal
     modal.classList.add('is-active');
     
-    // Play after a slight delay to allow the layout/opacity transition to begin,
-    // which prevents the browser's hardware video decoder from rendering a black screen.
+    // Play after a short tick to ensure DOM is ready
     setTimeout(() => {
       const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise.catch(error => {
-          console.log("Autoplay blocked or failed:", error);
+          console.log("Video play failed:", error);
         });
       }
-    }, 150);
+    }, 80);
   }
 }
 
@@ -537,10 +536,6 @@ window.closeVideo = function() {
     video.pause();
     modal.classList.remove('is-active');
     video.src = "";
-    const source = video.querySelector('source');
-    if (source) {
-      source.src = "";
-    }
     video.load();
   }
 }

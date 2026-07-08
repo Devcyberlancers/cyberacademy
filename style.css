@@ -678,12 +678,6 @@ footer {
   overflow: hidden;
   background: #000;
   box-shadow: 0 25px 60px rgba(0,0,0,0.85);
-  transform: scale(0.9);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.video-modal.is-active .video-modal-content {
-  transform: scale(1);
 }
 
 .video-modal-content video {
