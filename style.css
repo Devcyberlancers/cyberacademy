@@ -250,13 +250,18 @@ header {
   display: flex;
   align-items: center;
   margin-right: auto;
-  filter: brightness(0) invert(1) contrast(1.2); /* Invert logo to white for dark mode */
 }
 
 .logo img {
   height: 45px;
   width: auto;
   display: block;
+}
+
+/* Theme-specific Logo Inversion */
+[data-theme="dark"] .logo img,
+[data-theme="dark"] .footer-logo {
+  filter: brightness(0) invert(1) contrast(1.2);
 }
 
 .nav-links {

@@ -238,7 +238,6 @@ document.addEventListener('DOMContentLoaded', () => {
       currentMode = 'dark';
       themeIcon.textContent = 'light_mode';
       scene.background.set(0x050505);
-      logoImg.style.filter = 'brightness(0) invert(1) contrast(1.2)';
       
       // Dark mode: black bg, orange wireframe, subtle bloom glow
       wireMaterial.uniforms.color1.value.set(0x070100);
@@ -258,7 +257,6 @@ document.addEventListener('DOMContentLoaded', () => {
       currentMode = 'light';
       themeIcon.textContent = 'dark_mode';
       scene.background.set(0xffffff);
-      logoImg.style.filter = 'none';
       
       // Light mode: white bg, dark shiny metallic torus, minimal bloom
       wireMaterial.uniforms.color1.value.set(0x050508);
