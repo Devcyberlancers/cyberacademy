@@ -293,7 +293,7 @@ header {
 .nav-links a {
   text-decoration: none;
   color: var(--text-muted);
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-weight: 500;
   font-size: 0.8rem;
   letter-spacing: 0.15em;
@@ -317,7 +317,7 @@ header {
   border-radius: 4px;        /* Sharp Fracture Corners */
   transition: all 0.25s ease;
   cursor: pointer;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -366,7 +366,7 @@ section {
 }
 
 .section-badge {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.25em;
@@ -396,7 +396,7 @@ section {
 }
 
 .hero-tag {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 1.15rem;
   text-transform: uppercase;
   letter-spacing: 0.25em;
@@ -474,7 +474,7 @@ section {
   font-size: 0.95rem;
   color: var(--text-muted);
   margin-bottom: 2rem;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
@@ -557,7 +557,7 @@ section {
   text-transform: uppercase;
   letter-spacing: 0.15em;
   color: var(--text-muted);
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
 }
 
 .form-control {
