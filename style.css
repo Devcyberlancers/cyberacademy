@@ -397,11 +397,11 @@ section {
 
 .hero-tag {
   font-family: var(--font-sans);
-  font-size: 1.15rem;
+  font-size: 2.2rem;
   text-transform: uppercase;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.05em;
   color: var(--accent);
-  font-weight: 700;
+  font-weight: 800;
   margin-bottom: 2rem;
   display: inline-block;
 }
