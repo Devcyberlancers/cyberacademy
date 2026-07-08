@@ -294,9 +294,9 @@ header {
   text-decoration: none;
   color: var(--text-muted);
   font-family: var(--font-sans);
-  font-weight: 500;
-  font-size: 0.8rem;
-  letter-spacing: 0.15em;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   transition: color 0.2s ease;
 }
