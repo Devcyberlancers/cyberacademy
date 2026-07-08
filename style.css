@@ -261,7 +261,7 @@ header {
 /* Theme-specific Logo Inversion */
 [data-theme="dark"] .logo img,
 [data-theme="dark"] .footer-logo {
-  filter: brightness(0) invert(1) contrast(1.2);
+  filter: invert(1) hue-rotate(180deg);
 }
 
 .nav-links {
