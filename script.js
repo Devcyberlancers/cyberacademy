@@ -319,6 +319,27 @@ function smoothstep(min, max, v) {
   return t * t * (3 - 2 * t);
 }
 
+// ==============================================
+// INTRO ANIMATION STATE
+// ==============================================
+let introActive = true;
+let introProgress = 0; // 0 → 1
+const introOverlay = document.getElementById('introOverlay');
+const scrollHint = document.getElementById('scrollHint');
+const introTitle = document.getElementById('introTitle');
+
+// Body already has 'intro-active' class set in HTML
+
+// Force scroll to top on load so the intro always plays on refresh
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
+// Camera start & end positions for the zoom-through
+const CAM_START_Z = 7;
+const CAM_END_Z = -4;   // behind the torus (through the hole)
+
 // Tick Loop
 const tick = () => {
   const time = performance.now() * 0.001;
@@ -349,17 +370,124 @@ const tick = () => {
     frag.quaternion.setFromAxisAngle(rotAxis, lift * maxAngle);
   }
 
-  // Slow continuous rotation
-  torusGroup.rotation.y = time * 0.15;
-  torusGroup.rotation.x = Math.sin(time * 0.1) * 0.2;
+  if (introActive) {
+    // --- INTRO: scroll-driven camera animation ---
+    const p = introProgress;
+
+    // Phase 1 (0–0.4): Rotate torus to face camera head-on
+    // Phase 2 (0.4–1.0): Zoom camera through the hole
+    const rotateP = smoothstep(0, 0.4, p);
+    const zoomP = smoothstep(0.35, 1.0, p);
+
+    // Torus rotation: start angled, end face-on
+    torusGroup.rotation.y = (1 - rotateP) * 0.6 + time * 0.05 * (1 - rotateP);
+    torusGroup.rotation.x = (1 - rotateP) * 0.3;
+
+    // Camera Z: lerp from start to end (through the hole)
+    camera.position.z = THREE.MathUtils.lerp(CAM_START_Z, CAM_END_Z, zoomP);
+    camera.position.x = 0;
+    camera.position.y = 0;
+    camera.lookAt(0, 0, 0);
+
+    // Keep scrollGroup neutral during intro
+    scrollGroup.position.x = 0;
+    scrollGroup.rotation.y = 0;
+
+    // --- TITLE ANIMATION ---
+    // Timeline:
+    //   p 0.15–0.35: text rises from below to center (translateY: 100vh → 0)
+    //   p 0.35–0.55: text holds at center, fully visible
+    //   p 0.55–0.80: text zooms past the viewer (scale up + fade out)
+    if (introTitle) {
+      const riseP = smoothstep(0.15, 0.35, p);   // 0→1: rise into view
+      const holdEnd = 0.55;
+      const zoomOutP = smoothstep(holdEnd, 0.80, p); // 0→1: zoom away
+
+      // Y position: starts at +60vh, rises to center (-50%), then stays
+      const translateY = (1 - riseP) * 60; // vh units
+
+      // Scale: 1 during hold, ramps up to 8 during zoom-out
+      const scale = 1 + zoomOutP * 7;
+
+      // Opacity: fade in during rise, full during hold, fade out during zoom
+      let opacity;
+      if (p < 0.15) {
+        opacity = 0;
+      } else if (p < 0.35) {
+        opacity = riseP;
+      } else if (p < holdEnd) {
+        opacity = 1;
+      } else {
+        opacity = 1 - zoomOutP;
+      }
+
+      introTitle.style.transform = `translate(-50%, calc(-50% + ${translateY}vh)) scale(${scale})`;
+      introTitle.style.opacity = opacity;
+    }
+
+    // Show/hide scroll hint based on scroll position (reversible)
+    if (scrollHint) {
+      if (p > 0.05) {
+        scrollHint.classList.add('hidden');
+      } else {
+        scrollHint.classList.remove('hidden');
+      }
+    }
+
+  } else {
+    // Normal post-intro rotation
+    torusGroup.rotation.y = time * 0.15;
+    torusGroup.rotation.x = Math.sin(time * 0.1) * 0.2;
+  }
 
   composer.render();
   requestAnimationFrame(tick);
 };
 tick();
 
-// WebGL scroll sync
+// ==============================================
+// INTRO SCROLL HANDLER
+// ==============================================
+function handleIntroScroll() {
+  if (!introActive) return;
+
+  const introHeight = introOverlay.offsetHeight - window.innerHeight;
+  const scrollY = window.scrollY;
+  introProgress = Math.min(1, Math.max(0, scrollY / introHeight));
+
+  // Animation complete — only finish when fully scrolled past
+  if (introProgress >= 1) {
+    finishIntro();
+  }
+}
+
+function finishIntro() {
+  if (!introActive) return;
+  introActive = false;
+
+  // Reset camera to default position for normal page viewing
+  camera.position.set(0, 0, CAM_START_Z);
+  camera.lookAt(0, 0, 0);
+
+  // Collapse the intro overlay
+  introOverlay.classList.add('done');
+
+  // Show page content
+  document.body.classList.remove('intro-active');
+
+  // Hide the scroll hint
+  if (scrollHint) scrollHint.classList.add('hidden');
+  if (introTitle) introTitle.style.opacity = 0;
+
+  // Scroll to top of actual content
+  window.scrollTo(0, 0);
+}
+
+window.addEventListener('scroll', handleIntroScroll);
+
+// WebGL scroll sync (only when intro is done)
 window.addEventListener("scroll", () => {
+  if (introActive) return;
   const scrollRatio = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
   scrollGroup.position.x = -scrollRatio * 1.5;
   scrollGroup.rotation.y = scrollRatio * Math.PI * 0.5;
@@ -381,10 +509,23 @@ window.openVideo = function(videoSrc) {
   const video = document.getElementById('modalVideo');
   
   if (modal && video) {
+    // Clear and set direct src
     video.src = videoSrc;
     video.load();
+    
+    // Show modal first
     modal.classList.add('is-active');
-    video.play();
+    
+    // Play after a slight delay to allow the layout/opacity transition to begin,
+    // which prevents the browser's hardware video decoder from rendering a black screen.
+    setTimeout(() => {
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.log("Autoplay blocked or failed:", error);
+        });
+      }
+    }, 150);
   }
 }
 
@@ -396,5 +537,11 @@ window.closeVideo = function() {
     video.pause();
     modal.classList.remove('is-active');
     video.src = "";
+    const source = video.querySelector('source');
+    if (source) {
+      source.src = "";
+    }
+    video.load();
   }
 }
+

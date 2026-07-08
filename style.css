@@ -79,6 +79,136 @@ body {
   pointer-events: none;
 }
 
+/* =============================================
+   INTRO OVERLAY — Scroll-driven zoom animation
+   ============================================= */
+.intro-overlay {
+  position: relative;
+  z-index: 15; /* above page content z-index of 10 */
+  height: 300vh; /* scroll distance for the animation */
+}
+
+.intro-overlay.done {
+  display: none;
+}
+
+.intro-spacer {
+  height: 100%; /* fills the overlay */
+}
+
+/* Animated title inside the torus hole */
+.intro-title {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 18;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  transform: translate(-50%, 100vh); /* starts below the screen */
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+  transition: none; /* controlled by JS */
+}
+
+.intro-logo {
+  height: 80px;
+  width: auto;
+  filter: drop-shadow(0 4px 20px rgba(0,0,0,0.15));
+}
+
+.intro-text-main {
+  font-family: var(--font-sans);
+  font-size: 4.5rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text);
+  text-align: center;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.intro-text-sub {
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* Scroll hint at the bottom of the first viewport */
+.scroll-hint {
+  position: fixed;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+.scroll-hint.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.scroll-chevrons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0.25rem;
+}
+
+.chevron {
+  font-size: 1.6rem;
+  line-height: 0.7;
+  opacity: 0;
+  animation: chevron-pulse 2s infinite;
+}
+
+.chevron.c1 { animation-delay: 0s; }
+.chevron.c2 { animation-delay: 0.25s; }
+.chevron.c3 { animation-delay: 0.5s; }
+
+@keyframes chevron-pulse {
+  0%   { opacity: 0; transform: translateY(-4px); }
+  40%  { opacity: 1; transform: translateY(0); }
+  80%, 100% { opacity: 0; transform: translateY(6px); }
+}
+
+/* Hide page content during intro — also disable pointer events */
+body.intro-active header,
+body.intro-active section,
+body.intro-active footer,
+body.intro-active .hiring-bar {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+body:not(.intro-active) header,
+body:not(.intro-active) section,
+body:not(.intro-active) footer,
+body:not(.intro-active) .hiring-bar {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.6s ease;
+}
+
 /* Page content elements overlaying WebGL */
 header, section, footer, .hiring-bar {
   position: relative;
@@ -90,7 +220,17 @@ header, section, footer, .hiring-bar {
   width: 100%;
   max-width: 1600px;
   margin: 0 auto;
-  padding: 0 4rem;
+  padding: 2.5rem 4rem;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+[data-theme="dark"] .container {
+  background: rgba(10, 10, 14, 0.88);
 }
 
 /* Header */
@@ -232,7 +372,7 @@ section {
 
 .hero-tag {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 1.15rem;
   text-transform: uppercase;
   letter-spacing: 0.25em;
   color: var(--accent);
@@ -420,11 +560,16 @@ section {
   height: 1.2rem;
 }
 
-/* FAQs */
 .faq-item {
-  margin-bottom: 3rem;
-  border-bottom: 1px solid var(--card-border);
-  padding-bottom: 2.5rem;
+  margin-bottom: 2rem;
+  border-bottom: none;
+  padding: 2rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  position: relative;
+  z-index: 2;
 }
 
 .faq-item h4 {

@@ -22,10 +22,29 @@
     }
   </script>
 </head>
-<body>
+<body class="intro-active">
   <!-- WebGL Background Canvas -->
   <canvas class="webgl"></canvas>
   <div class="scanlines"></div>
+
+  <!-- Intro Overlay — scroll-driven zoom through the torus -->
+  <div class="intro-overlay" id="introOverlay">
+    <div class="intro-spacer"></div>
+    <!-- Animated title inside the torus hole -->
+    <div class="intro-title" id="introTitle">
+      <img src="assets/logo-shield.png" alt="Shield" class="intro-logo"/>
+      <span class="intro-text-main">CYBER ACADEMY</span>
+      <span class="intro-text-sub">The Frontline of Digital Security</span>
+    </div>
+    <div class="scroll-hint" id="scrollHint">
+      <span>Scroll to Explore</span>
+      <div class="scroll-chevrons">
+        <span class="material-symbols-outlined chevron c1">expand_more</span>
+        <span class="material-symbols-outlined chevron c2">expand_more</span>
+        <span class="material-symbols-outlined chevron c3">expand_more</span>
+      </div>
+    </div>
+  </div>
 
   <!-- ==========================================
        HEADER
@@ -126,7 +145,7 @@
       <div class="hero-tag scroll-reveal" style="margin-bottom: 2.5rem;">OUR ALUMNI IN TOP COMPANIES</div>
       <div class="company-logos scroll-reveal delay-1" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; width: 100%;">
           <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 1.5rem 2rem; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
-            <img src="assets/logo-amazon.png" alt="Amazon" style="height: 55px; width: auto; max-width: 100%;"/>
+            <img src="assets/logo-amazon.png" alt="Amazon" style="height: 120px; width: auto; max-width: 100%;"/>
           </div>
           <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 1.5rem 2rem; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
             <img src="assets/logo-ibm.png" alt="IBM" style="height: 60px; width: auto; max-width: 100%;"/>
@@ -135,7 +154,7 @@
             <img src="assets/logo-accenture.png" alt="Accenture" style="height: 55px; width: auto; max-width: 100%;"/>
           </div>
           <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 1.5rem 2rem; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
-            <img src="assets/logo-wipro.png" alt="Wipro" style="height: 60px; width: auto; max-width: 100%;"/>
+            <img src="assets/logo-wipro.png" alt="Wipro" style="height: 120px; width: auto; max-width: 100%;"/>
           </div>
           <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 1.5rem 2rem; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.04); grid-column: 2;">
             <img src="assets/logo-tcs.png" alt="TCS" style="height: 55px; width: auto; max-width: 100%;"/>
@@ -379,7 +398,7 @@
       <span class="material-symbols-outlined" style="font-size: 1.5rem; color: var(--text);">close</span>
     </div>
     <div class="video-modal-content">
-      <video id="modalVideo" controls autoplay loop playsinline>
+      <video id="modalVideo" controls loop playsinline>
         <source src="" type="video/mp4"/>
         Your browser does not support the video tag.
       </video>
@@ -717,6 +736,8 @@
     setTimeout(runNextCommand, 800);
   })();
   </script>
+
+
 
 </body>
 </html>
