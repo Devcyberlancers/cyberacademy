@@ -83,6 +83,17 @@
     }
   }
 
+  // Helper to escape HTML characters
+  function escapeHtml(str) {
+    if (!str) return "";
+    return str
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
   // ==========================================
   // DYNAMIC CONTENT APPLICATION
   // ==========================================
@@ -92,12 +103,22 @@
       const modulesStr = localStorage.getItem("cyberacademy_modules");
       const modules = modulesStr ? JSON.parse(modulesStr) : defaultModules;
       
-      modules.forEach((mod, idx) => {
-        const titleEl = document.getElementById(`module-${idx + 1}-title`);
-        const descEl = document.getElementById(`module-${idx + 1}-desc`);
-        if (titleEl) titleEl.textContent = mod.title;
-        if (descEl) descEl.textContent = mod.desc;
-      });
+      const container = document.getElementById("modulesContainer");
+      if (container) {
+        container.innerHTML = "";
+        modules.forEach((mod, idx) => {
+          const card = document.createElement("div");
+          card.className = `card white-card scroll-reveal delay-${(idx % 3) + 1}`;
+          
+          const modNum = String(idx + 1).padStart(2, '0');
+          card.innerHTML = `
+            <div class="hero-tag" style="margin-bottom: 1rem;">Module ${modNum}</div>
+            <h3 style="margin-bottom: 1rem; font-size: 1.4rem;">${escapeHtml(mod.title)}</h3>
+            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.6;">${escapeHtml(mod.desc)}</p>
+          `;
+          container.appendChild(card);
+        });
+      }
 
       // 2. Certificate
       const certStr = localStorage.getItem("cyberacademy_certificate");

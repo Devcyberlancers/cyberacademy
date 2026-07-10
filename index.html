@@ -4,6 +4,7 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <title>Cyber Lancers Academy | Official Portal</title>
+  <link rel="icon" type="image/png" href="assets/logo-favicon.png" />
   
   <!-- Fonts (Roboto & JetBrains Mono) -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=JetBrains+Mono&display=swap" rel="stylesheet"/>
@@ -223,30 +224,8 @@
         <p>A deep, practical progression built around hands-on target exercises.</p>
       </div>
 
-      <div class="grid-3">
-        <div class="card white-card scroll-reveal delay-1">
-          <div class="hero-tag" style="margin-bottom: 1rem;">Module 01</div>
-          <h3 id="module-1-title" style="margin-bottom: 1rem; font-size: 1.4rem;">System Internals & Assembly</h3>
-          <p id="module-1-desc" style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.6;">
-            Understand Operating System architecture, Windows/Linux process layouts, PE/ELF file structures, memory space configuration, registers, and basic x86/x64 assembly instructions.
-          </p>
-        </div>
-
-        <div class="card white-card scroll-reveal delay-2">
-          <div class="hero-tag" style="margin-bottom: 1rem;">Module 02</div>
-          <h3 id="module-2-title" style="margin-bottom: 1rem; font-size: 1.4rem;">Offensive Vectors</h3>
-          <p id="module-2-desc" style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.6;">
-            Exploit vulnerabilities step-by-step. Understand heap management anomalies, format string manipulations, payload customization, payload execution, and Active Directory exploitation.
-          </p>
-        </div>
-
-        <div class="card white-card scroll-reveal delay-3">
-          <div class="hero-tag" style="margin-bottom: 1rem;">Module 03</div>
-          <h3 id="module-3-title" style="margin-bottom: 1rem; font-size: 1.4rem;">Defense & Analysis</h3>
-          <p id="module-3-desc" style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.6;">
-            Build defensive frameworks. Write custom detection rules for network logs, analyze packet streams, configure threat-hunting setups, and run proctored tactical simulator tasks.
-          </p>
-        </div>
+      <div class="modules-container" id="modulesContainer">
+        <!-- Rendered dynamically by tracker.js -->
       </div>
     </div>
   </section>
@@ -297,7 +276,7 @@
         <!-- Tier 3 -->
         <div class="card white-card price-card scroll-reveal delay-3">
           <div>
-            <div class="hero-tag">Complete Track</div>
+            <div class="hero-tag">Job Track</div>
             <h3 style="font-size: 1.6rem;">Training + Placement</h3>
             <p style="margin-top: 1rem; font-size: 0.95rem; color: var(--text-muted);">
               others = training + internship + placement assist
@@ -675,7 +654,7 @@
       { cmd: '$ python3 exploit.py --target 10.0.0.5', out: '<span style="color:#28c840">[+] Shell obtained ✓</span>' },
       { cmd: '$ hashcat -m 0 hash.txt rockyou.txt', out: '<span style="color:#ff79c6">Cracking... 12,400 H/s</span>' },
       { cmd: '$ aircrack-ng capture.cap -w wordlist', out: '<span style="color:#bd93f9">KEY FOUND! [e4:f2:a8]</span>' },
-      { cmd: '$ msfconsole -q -x "use exploit/multi"', out: '<span style="color:#ff4d00">msf6 > session opened</span>' },
+      { cmd: '$ msfconsole -q -x "use exploit/multi"', out: '<span style="color:#3b82f6">msf6 > session opened</span>' },
       { cmd: '$ john --wordlist=pass.txt shadow.db', out: '<span style="color:#50fa7b">3 passwords cracked</span>' },
       { cmd: '$ gobuster dir -u http://target -w list', out: '<span style="color:#8be9fd">/admin (Status: 200)</span>' },
     ];

@@ -239,9 +239,9 @@ document.addEventListener('DOMContentLoaded', () => {
       themeIcon.textContent = 'light_mode';
       scene.background.set(0x050505);
       
-      // Dark mode: black bg, orange wireframe, subtle bloom glow
-      wireMaterial.uniforms.color1.value.set(0x070100);
-      wireMaterial.uniforms.color2.value.set(0xff4d00);
+      // Dark mode: black bg, blue wireframe, subtle bloom glow
+      wireMaterial.uniforms.color1.value.set(0x00081d);
+      wireMaterial.uniforms.color2.value.set(0x1d4ed8);
       fragmentsMaterial.color.set(0x111111);
       fragmentsMaterial.roughness = 0.9;
       fragmentsMaterial.metalness = 0.1;
@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ambientLight.intensity = 0.6;
       dirLight.color.set(0xfff4e0);
       dirLight.intensity = 2.5;
-      fillLight.color.set(0xff4d00);
+      fillLight.color.set(0x1d4ed8);
       fillLight.intensity = 1.0;
       rimLight.intensity = 0.5;
     } else {

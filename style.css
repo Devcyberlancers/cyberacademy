@@ -5,9 +5,9 @@
   --text: #0b0f19;
   --text-muted: #4b5563;
   --border: #e2e8f0;
-  --accent: #ff4d00;
-  --accent-light: #fff5f0;
-  --accent-dim: rgba(255, 77, 0, 0.15);
+  --accent: #1d4ed8;
+  --accent-light: #eff6ff;
+  --accent-dim: rgba(29, 78, 216, 0.15);
   --card-bg: #ffffff;
   --card-border: #e2e8f0;
   --input-bg: #f8fafc;
@@ -22,8 +22,8 @@
   --bg-subtle: #0c0c0e;
   --text: #eee8de;
   --text-muted: rgba(238, 232, 222, 0.45);
-  --border: rgba(255, 77, 0, 0.2);
-  --accent-light: rgba(255, 77, 0, 0.05);
+  --border: rgba(29, 78, 216, 0.2);
+  --accent-light: rgba(29, 78, 216, 0.05);
   --card-bg: rgba(12, 12, 14, 0.7);
   --card-border: rgba(255, 255, 255, 0.08);
   --input-bg: #0a0a0c;
@@ -309,7 +309,7 @@ header {
 .btn {
   display: inline-block;
   background: var(--accent);
-  color: #050505;
+  color: #ffffff;
   padding: 0.9rem 2.2rem;
   font-weight: 700;
   text-decoration: none;
@@ -327,7 +327,7 @@ header {
 .btn:hover {
   background: transparent;
   color: var(--accent);
-  box-shadow: 0 0 15px rgba(255, 77, 0, 0.4);
+  box-shadow: 0 0 15px rgba(29, 78, 216, 0.4);
 }
 
 .btn-secondary {
@@ -448,7 +448,7 @@ section {
 
 .card:hover {
   border-color: var(--accent);
-  box-shadow: 0 10px 30px rgba(255, 77, 0, 0.06);
+  box-shadow: 0 10px 30px rgba(29, 78, 216, 0.06);
   transform: translateY(-4px);
 }
 
@@ -459,7 +459,7 @@ section {
 }
 
 .price-card.featured {
-  background: rgba(255, 77, 0, 0.02);
+  background: rgba(29, 78, 216, 0.02);
   border-color: var(--accent);
 }
 
@@ -575,7 +575,7 @@ section {
 .form-control:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 15px rgba(255, 77, 0, 0.15);
+  box-shadow: 0 0 15px rgba(29, 78, 216, 0.15);
 }
 
 .form-row {
@@ -659,7 +659,7 @@ footer {
 .video-card:hover {
   transform: scale(1.03) translateY(-4px);
   border-color: var(--accent);
-  box-shadow: 0 20px 40px rgba(255,77,0,0.15);
+  box-shadow: 0 20px 40px rgba(29, 78, 216, 0.15);
 }
 
 .video-card video {
@@ -965,7 +965,7 @@ footer {
 }
 
 .admin-logout:hover {
-  background: rgba(255, 77, 0, 0.1);
+  background: rgba(29, 78, 216, 0.1);
   border-color: var(--accent);
   color: var(--accent);
 }
@@ -1087,7 +1087,7 @@ footer {
 }
 
 .admin-table tr:hover td {
-  background: rgba(255, 77, 0, 0.02);
+  background: rgba(29, 78, 216, 0.02);
   color: var(--text);
 }
 
@@ -1131,5 +1131,53 @@ footer {
 .save-indicator.is-active {
   transform: translateY(0);
   opacity: 1;
+}
+
+/* Modules Scroll Slider Container */
+.modules-container {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  padding: 1.5rem 0.5rem 2.5rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
+  margin-top: 1rem;
+}
+
+.modules-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.modules-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modules-container::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 10px;
+}
+
+.modules-container::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+.modules-container .card {
+  flex: 0 0 calc(33.333% - 1.35rem);
+  min-width: 330px;
+  scroll-snap-align: start;
+  margin-bottom: 0 !important;
+}
+
+@media (max-width: 1024px) {
+  .modules-container .card {
+    flex: 0 0 calc(50% - 1rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .modules-container .card {
+    flex: 0 0 100%;
+  }
 }
 
