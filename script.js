@@ -502,39 +502,26 @@ window.addEventListener("resize", () => {
 });
 
 // Fullscreen Video Modal Controllers
-window.openVideo = function(videoSrc) {
+window.openVideo = function(youtubeId) {
   const modal = document.getElementById('videoModal');
-  const video = document.getElementById('modalVideo');
+  const iframe = document.getElementById('modalIframe');
   
-  if (modal && video) {
-    // Set direct src and load
-    video.src = videoSrc;
-    video.load();
+  if (modal && iframe) {
+    // Set YouTube Embed Src with Autoplay
+    iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1`;
     
     // Show modal
     modal.classList.add('is-active');
-    
-    // Play after a short tick to ensure DOM is ready
-    setTimeout(() => {
-      const playPromise = video.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(error => {
-          console.log("Video play failed:", error);
-        });
-      }
-    }, 80);
   }
 }
 
 window.closeVideo = function() {
   const modal = document.getElementById('videoModal');
-  const video = document.getElementById('modalVideo');
+  const iframe = document.getElementById('modalIframe');
   
-  if (modal && video) {
-    video.pause();
+  if (modal && iframe) {
     modal.classList.remove('is-active');
-    video.src = "";
-    video.load();
+    iframe.src = ""; // Clear src to stop video audio
   }
 }
 

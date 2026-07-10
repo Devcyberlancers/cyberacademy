@@ -102,7 +102,7 @@
           </div>
           <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
             <a href="#registration" class="btn">Register for Exam</a>
-            <a href="assets/brochure.pdf" download class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+            <a href="javascript:void(0)" onclick="openBrochureModal()" class="btn btn-secondary brochure-download-btn" style="display: inline-flex; align-items: center; gap: 0.5rem;">
               <span class="material-symbols-outlined">download</span> Brochure PDF
             </a>
             <a href="https://wa.me/918277650135" target="_blank" class="btn btn-whatsapp" style="display: inline-flex; align-items: center; gap: 0.5rem;">
@@ -186,34 +186,26 @@
           <p style="font-size: 1rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 2rem;">
             Real network equipment, wireless testing decks, and physical host environments mapped to operational consoles.
           </p>
-          <div style="display: flex; gap: 1rem;">
-            <div style="flex: 1; border: 2px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: 0 4px 0 0 var(--border);">
-              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6oVaD4mPOTNkHzmVFfmdVM8KNi3SqzqeWT_w2QTyj6snWSXQOkivbKNuwwBRwuUBy9l5vmAqNyUf5VcQCMCnuHFyo73emb979k6Nmt9uMjiGUwDqGSrdzLXki7a4cyKYtfTgfNDfHpEPlHmyaueYwELowdZJuw7YW2TMhIpTst_3dhSvdWDpyx7X6xNpiKWMwm2fAQBsQWWlUjmnKq1TaIVJCHsDP34EQKkBNecqR9vQj2A-xQb8o" alt="Phygital Lab Setup 1" style="width: 100%; height: 140px; object-fit: cover; display: block;"/>
-            </div>
-            <div style="flex: 1; border: 2px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: 0 4px 0 0 var(--border);">
-              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdJRMSdn1vXkwsLxR_CPscHNzMYCfiBOeC3-rN6EXLiUURgJ4_wTaImezVNQhRJLQ7WBQj8BOQc07xnhcP0neqoPLKJJbXPx9Pz96hj6bbhJWlrHpaL1WvUW0QFjPA2l_YYE0hhRXZREiI2btPl1Au3Lui1y_ENWYJS05MSWO6d0SrYPhbrCLTck6g-aBbuSokNZQAOVZEc7bls1Jippl9yNRanF2iUJJTLq2ye9aJEYOofkYLhovJ" alt="Phygital Lab Setup 2" style="width: 100%; height: 140px; object-fit: cover; display: block;"/>
-            </div>
+          <div style="border: 2px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: 0 4px 0 0 var(--border); aspect-ratio: 16/9; background: #000;">
+            <iframe src="https://www.youtube.com/embed/tWaARtZc7Tg?rel=0" style="width: 100%; height: 100%; border: none; display: block;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
         </div>
         
         <!-- Eligibility -->
         <div id="eligibility" class="card dark-card scroll-reveal">
           <h3 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem;">Who Can Apply</h3>
-          <p style="font-size: 1rem; color: #cbd5e1; line-height: 1.6; margin-bottom: 1.5rem;">
+          <p style="font-size: 1.05rem; color: var(--text); line-height: 1.6; margin-bottom: 1.5rem; font-weight: 500;">
             Our programs welcome students, engineers, and professionals ready to explore system architecture.
           </p>
-          <ul class="feature-list" style="margin: 0;">
-            <li class="scroll-reveal delay-1" style="margin-bottom: 1rem;">
-              <span class="material-symbols-outlined" style="color: #ffffff;">school</span>
-              <span>Graduates in Computer Science, Electronics, Information Security, or related IT fields.</span>
+          <ul style="margin: 0; padding-left: 1.5rem; list-style-type: disc; color: var(--text);">
+            <li class="scroll-reveal delay-1" style="margin-bottom: 1rem; line-height: 1.6;">
+              Graduates in Computer Science, Electronics, Information Security, or related IT fields.
             </li>
-            <li class="scroll-reveal delay-2" style="margin-bottom: 1rem;">
-              <span class="material-symbols-outlined" style="color: #ffffff;">settings_suggest</span>
-              <span>Students comfortable working with Windows and Linux Operating Systems.</span>
+            <li class="scroll-reveal delay-2" style="margin-bottom: 1rem; line-height: 1.6;">
+              Students comfortable working with Windows and Linux Operating Systems.
             </li>
-            <li class="scroll-reveal delay-3" style="margin-bottom: 1rem;">
-              <span class="material-symbols-outlined" style="color: #ffffff;">explore</span>
-              <span>Students/professionals looking to explore career options in areas of Cybersecurity.</span>
+            <li class="scroll-reveal delay-3" style="margin-bottom: 1rem; line-height: 1.6;">
+              Students/professionals looking to explore career options in areas of Cybersecurity.
             </li>
           </ul>
         </div>
@@ -234,24 +226,24 @@
       <div class="grid-3">
         <div class="card white-card scroll-reveal delay-1">
           <div class="hero-tag" style="margin-bottom: 1rem;">Module 01</div>
-          <h3 style="margin-bottom: 1rem; font-size: 1.4rem;">System Internals & Assembly</h3>
-          <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.6;">
+          <h3 id="module-1-title" style="margin-bottom: 1rem; font-size: 1.4rem;">System Internals & Assembly</h3>
+          <p id="module-1-desc" style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.6;">
             Understand Operating System architecture, Windows/Linux process layouts, PE/ELF file structures, memory space configuration, registers, and basic x86/x64 assembly instructions.
           </p>
         </div>
 
         <div class="card white-card scroll-reveal delay-2">
           <div class="hero-tag" style="margin-bottom: 1rem;">Module 02</div>
-          <h3 style="margin-bottom: 1rem; font-size: 1.4rem;">Offensive Vectors</h3>
-          <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.6;">
+          <h3 id="module-2-title" style="margin-bottom: 1rem; font-size: 1.4rem;">Offensive Vectors</h3>
+          <p id="module-2-desc" style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.6;">
             Exploit vulnerabilities step-by-step. Understand heap management anomalies, format string manipulations, payload customization, payload execution, and Active Directory exploitation.
           </p>
         </div>
 
         <div class="card white-card scroll-reveal delay-3">
           <div class="hero-tag" style="margin-bottom: 1rem;">Module 03</div>
-          <h3 style="margin-bottom: 1rem; font-size: 1.4rem;">Defense & Analysis</h3>
-          <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.6;">
+          <h3 id="module-3-title" style="margin-bottom: 1rem; font-size: 1.4rem;">Defense & Analysis</h3>
+          <p id="module-3-desc" style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.6;">
             Build defensive frameworks. Write custom detection rules for network logs, analyze packet streams, configure threat-hunting setups, and run proctored tactical simulator tasks.
           </p>
         </div>
@@ -333,8 +325,8 @@
             <div class="hero-tag" style="margin-bottom: 1.5rem;">Verified Certificate Sample</div>
             <div style="border: 2px solid #111111; padding: 1.5rem; background: #ffffff; position: relative; border-radius: 10px;">
               <div style="font-size: 0.7-rem; letter-spacing: 0.15em; font-weight: 800; color: #999;">CYBER LANCERS CERTIFICATE</div>
-              <div style="font-size: 1rem; font-weight: 700; margin: 0.5rem 0;">John Doe</div>
-              <div style="font-size: 0.6rem; color: var(--text-muted);">Has successfully completed the 3-Month Trainee Track. Verified ID: CL-294-82X.</div>
+              <div id="cert-name" style="font-size: 1rem; font-weight: 700; margin: 0.5rem 0;">John Doe</div>
+              <div id="cert-text" style="font-size: 0.6rem; color: var(--text-muted);">Has successfully completed the 3-Month Trainee Track. Verified ID: CL-294-82X.</div>
             </div>
           </div>
         </div>
@@ -354,40 +346,32 @@
       
       <div class="video-grid">
         <!-- Video 1 -->
-        <div class="video-card scroll-reveal delay-1" onclick="openVideo('assets/VID-20260528-WA0000.mp4')">
-          <video muted playsinline preload="metadata" loop>
-            <source src="assets/VID-20260528-WA0000.mp4" type="video/mp4"/>
-          </video>
+        <div class="video-card scroll-reveal delay-1" onclick="openVideo('uRcqRrRbYyI')">
+          <img src="https://img.youtube.com/vi/uRcqRrRbYyI/hqdefault.jpg" alt="Testimonial 1" style="width: 100%; height: 100%; object-fit: cover;" />
           <div class="video-play-btn">
             <span class="material-symbols-outlined" style="font-size: 2.2rem; color: var(--text);">play_arrow</span>
           </div>
         </div>
 
         <!-- Video 2 -->
-        <div class="video-card scroll-reveal delay-2" onclick="openVideo('assets/VID-20260528-WA0001.mp4')">
-          <video muted playsinline preload="metadata" loop>
-            <source src="assets/VID-20260528-WA0001.mp4" type="video/mp4"/>
-          </video>
+        <div class="video-card scroll-reveal delay-2" onclick="openVideo('apXzylYPFEc')">
+          <img src="https://img.youtube.com/vi/apXzylYPFEc/hqdefault.jpg" alt="Testimonial 2" style="width: 100%; height: 100%; object-fit: cover;" />
           <div class="video-play-btn">
             <span class="material-symbols-outlined" style="font-size: 2.2rem; color: var(--text);">play_arrow</span>
           </div>
         </div>
 
         <!-- Video 3 -->
-        <div class="video-card scroll-reveal delay-3" onclick="openVideo('assets/VID-20260528-WA0002.mp4')">
-          <video muted playsinline preload="metadata" loop>
-            <source src="assets/VID-20260528-WA0002.mp4" type="video/mp4"/>
-          </video>
+        <div class="video-card scroll-reveal delay-3" onclick="openVideo('sbhzAC6P3Sc')">
+          <img src="https://img.youtube.com/vi/sbhzAC6P3Sc/hqdefault.jpg" alt="Testimonial 3" style="width: 100%; height: 100%; object-fit: cover;" />
           <div class="video-play-btn">
             <span class="material-symbols-outlined" style="font-size: 2.2rem; color: var(--text);">play_arrow</span>
           </div>
         </div>
 
         <!-- Video 4 -->
-        <div class="video-card scroll-reveal delay-3" onclick="openVideo('assets/VID-20260528-WA0003.mp4')">
-          <video muted playsinline preload="metadata" loop>
-            <source src="assets/VID-20260528-WA0003.mp4" type="video/mp4"/>
-          </video>
+        <div class="video-card scroll-reveal delay-3" onclick="openVideo('sHeFw1BmbfY')">
+          <img src="https://img.youtube.com/vi/sHeFw1BmbfY/hqdefault.jpg" alt="Testimonial 4" style="width: 100%; height: 100%; object-fit: cover;" />
           <div class="video-play-btn">
             <span class="material-symbols-outlined" style="font-size: 2.2rem; color: var(--text);">play_arrow</span>
           </div>
@@ -402,9 +386,7 @@
       <span class="material-symbols-outlined" style="font-size: 1.5rem; color: var(--text);">close</span>
     </div>
     <div class="video-modal-content">
-      <video id="modalVideo" controls loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 16px;">
-        Your browser does not support the video tag.
-      </video>
+      <iframe id="modalIframe" style="width: 100%; height: 100%; border: none; display: block; border-radius: 16px;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
   </div>
 
@@ -673,6 +655,9 @@
     </div>
   </footer>
 
+  <!-- Tracker & Lead Capture Script -->
+  <script src="tracker.js"></script>
+
   <!-- Main Animation Script -->
   <script type="module" src="script.js"></script>
 
@@ -747,6 +732,38 @@
   </script>
 
 
+
+  <!-- Brochure Lead Capture Modal -->
+  <div id="brochureModal" class="brochure-modal">
+    <div class="brochure-modal-card">
+      <div class="brochure-modal-header">
+        <h3>Download Brochure</h3>
+        <button class="brochure-modal-close-btn">
+          <span class="material-symbols-outlined" style="font-size: 1.25rem;">close</span>
+        </button>
+      </div>
+      <div class="brochure-modal-body">
+        <p>Please enter your contact information to instantly download the latest Cyber Academy curriculum and brochure PDF.</p>
+        <form id="brochureForm">
+          <div class="form-group">
+            <label for="leadName">Full Name</label>
+            <input type="text" id="leadName" required placeholder="John Doe" autocomplete="name" />
+          </div>
+          <div class="form-group">
+            <label for="leadEmail">Email Address</label>
+            <input type="email" id="leadEmail" required placeholder="john@example.com" autocomplete="email" />
+          </div>
+          <div class="form-group">
+            <label for="leadPhone">Contact Number</label>
+            <input type="tel" id="leadPhone" required placeholder="+91 98765 43210" autocomplete="tel" />
+          </div>
+          <button type="submit" class="btn" style="width: 100%; margin-top: 1.5rem; justify-content: center;">
+            Download Brochure PDF
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>
