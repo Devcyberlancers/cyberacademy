@@ -6,16 +6,35 @@
   // Default values
   const defaultModules = [
     {
-      title: "System Internals & Assembly",
-      desc: "Understand Operating System architecture, Windows/Linux process layouts, PE/ELF file structures, memory space configuration, registers, and basic x86/x64 assembly instructions."
+      title: "Cybersecurity & Linux Foundations",
+      desc: "Cybersecurity Fundamentals, Threats & Awareness | Network Layers, Firewalls, IDS & IPS | Configuring Network components according to topologies | Intro to Linux & its architecture, Linux Commands & Server Guidance."
     },
     {
-      title: "Offensive Vectors",
-      desc: "Exploit vulnerabilities step-by-step. Understand heap management anomalies, format string manipulations, payload customization, payload execution, and Active Directory exploitation."
+      title: "Vulnerability Scanning & Pen Testing",
+      desc: "Vulnerability Concepts, Types & Scanning | Network Penetration Testing | Web Application Penetration Testing | IT & OT Security."
     },
     {
-      title: "Defense & Analysis",
-      desc: "Build defensive frameworks. Write custom detection rules for network logs, analyze packet streams, configure threat-hunting setups, and run proctored tactical simulator tasks."
+      title: "SOC Operations & Incident Response",
+      desc: "Intro to SOC, SIEM Environment, RBAC, Agent Setup | Log Parsing, Rules, Custom Detection | Threat Intel Tools, Compliance, FIM | Attack Simulation, Log Correlation, IR."
+    },
+    {
+      title: "Malware Analysis & Forensics",
+      desc: "Malware Analysis Lab, Static & Dynamic Analysis | Forensics (Memory, Disk, Network), SOC Workflow | SOC Automation, Playbook Design & Execution | Capstone Project, Evaluation & Placement."
+    }
+  ];
+
+  const defaultSpeakers = [
+    {
+      name: "Dr. Alex Carter",
+      title: "Principal Security Architect",
+      bio: "Former Threat Intel Lead with 12+ years in offensive systems analysis, kernel-level exploit mitigation, and advanced network security topologies.",
+      avatar: "assets/speaker-alex.jpg"
+    },
+    {
+      name: "Sarah Vance",
+      title: "Lead Incident Responder",
+      bio: "Veteran SOC operations manager specializing in SOAR playbooks, live-fire incident threat containment, and intrusion analytics.",
+      avatar: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%231d4ed8'/><circle cx='50' cy='35' r='18' fill='%23ffffff'/><path d='M25,80 C25,60 35,55 50,55 C65,55 75,60 75,80' fill='%23ffffff'/></svg>"
     }
   ];
 
@@ -120,7 +139,37 @@
         });
       }
 
-      // 2. Certificate
+      // 2. Speakers / Instructors
+      const speakersStr = localStorage.getItem("cyberacademy_speakers");
+      const speakers = speakersStr ? JSON.parse(speakersStr) : defaultSpeakers;
+      
+      const speakersContainer = document.getElementById("speakersContainer");
+      if (speakersContainer) {
+        speakersContainer.innerHTML = "";
+        speakers.forEach((spk, idx) => {
+          const card = document.createElement("div");
+          card.className = `card white-card scroll-reveal delay-${(idx % 2) + 1}`;
+          card.style.display = "flex";
+          card.style.gap = "2rem";
+          card.style.alignItems = "center";
+          card.style.flexWrap = "wrap";
+          card.style.marginBottom = "1.5rem";
+          
+          card.innerHTML = `
+            <div style="width: 100px; height: 100px; border-radius: 50%; overflow: hidden; border: 2px solid var(--accent); flex-shrink: 0; background: var(--bg-subtle);">
+              <img src="${escapeHtml(spk.avatar)}" alt="${escapeHtml(spk.name)}" style="width: 100%; height: 100%; object-fit: cover;" />
+            </div>
+            <div style="flex: 1; min-width: 250px;">
+              <h3 style="font-size: 1.4rem; margin-bottom: 0.3rem;">${escapeHtml(spk.name)}</h3>
+              <div style="color: var(--accent); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.8rem;">${escapeHtml(spk.title)}</div>
+              <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.5; margin: 0;">${escapeHtml(spk.bio)}</p>
+            </div>
+          `;
+          speakersContainer.appendChild(card);
+        });
+      }
+
+      // 3. Certificate
       const certStr = localStorage.getItem("cyberacademy_certificate");
       const cert = certStr ? JSON.parse(certStr) : defaultCertificate;
 
@@ -129,7 +178,7 @@
       if (certNameEl) certNameEl.textContent = cert.name;
       if (certTextEl) certTextEl.textContent = cert.text;
 
-      // 3. Brochure Link
+      // 4. Brochure Link
       const brochureUrl = localStorage.getItem("cyberacademy_brochure_url") || defaultBrochure.url;
       const downloadButtons = document.querySelectorAll(".brochure-download-btn");
       downloadButtons.forEach(btn => {
