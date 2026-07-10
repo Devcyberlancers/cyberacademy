@@ -48,26 +48,6 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Theme Toggle Button */
-.theme-toggle {
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--text);
-  width: 2.8rem;
-  height: 2.8rem;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-.theme-toggle:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
 /* Custom WebGL fixed background canvas */
 .webgl {
   position: fixed;
@@ -213,30 +193,35 @@ body:not(.intro-active) .hiring-bar {
 header, section, footer, .hiring-bar {
   position: relative;
   z-index: 10;
-  background: transparent !important;
+  background: var(--bg);
 }
 
 .container {
   width: 100%;
-  max-width: 1600px;
+  max-width: none;
   margin: 0 auto;
   padding: 2.5rem 4rem;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-radius: 20px;
+  background: var(--bg);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-radius: 0;
   position: relative;
   z-index: 2;
 }
 
 [data-theme="dark"] .container {
-  background: rgba(10, 10, 14, 0.88);
+  background: var(--bg);
 }
 
 /* Header */
 header {
   border-bottom: 1px solid var(--card-border);
-  padding: 1.8rem 0;
+  padding: 0;
+}
+
+header .container {
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
 }
 
 .nav-container {
@@ -251,6 +236,13 @@ header {
   align-items: center;
   gap: 0.75rem;
   margin-right: auto;
+}
+
+.logo-full-img {
+  width: 300px;
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 .logo-shield-img {
@@ -356,8 +348,36 @@ header {
 
 /* Sections */
 section {
-  padding: 10rem 0;
+  padding: 2rem 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+section .container {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+#brochure {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+#curriculum {
+  padding-top: 0;
+  padding-bottom: 1rem;
+}
+
+#curriculum .container {
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+}
+
+#catalog {
+  padding-top: 0;
+}
+
+#catalog .container {
+  padding-top: 2rem;
 }
 
 .section-title-wrap {
@@ -392,7 +412,7 @@ section {
 
 /* Hero */
 .hero {
-  padding: 14rem 0 12rem;
+  padding: 4rem 0 8rem;
 }
 
 .hero-tag {
@@ -407,12 +427,19 @@ section {
 }
 
 .hero h1 {
-  font-size: 5.6rem;
+  font-size: clamp(3.5rem, 4.2vw, 5rem);
   font-weight: 800;
   line-height: 1.05;
   letter-spacing: -0.02em;
   margin-bottom: 2.5rem;
   text-transform: uppercase;
+  white-space: nowrap;
+  flex-wrap: nowrap;
+}
+
+.hero h1 img {
+  height: clamp(64px, 5.4vw, 96px) !important;
+  flex-shrink: 0;
 }
 
 .hero .section-subtitle {
@@ -499,13 +526,26 @@ section {
 
 /* Hiring Partners */
 .hiring-bar {
-  padding: 5rem 0;
+  padding: 1.5rem 0 0;
   background: var(--section-bar-bg);
   border-top: 1px solid var(--card-border);
   border-bottom: 1px solid var(--card-border);
 }
 
+.hiring-bar .container {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.company-logos {
+  row-gap: 1rem !important;
+}
+
 .company-logos img {
+  width: 230px;
+  height: 90px;
+  max-width: 100%;
+  object-fit: contain;
   filter: none;
   opacity: 0.85;
   transition: all 0.3s ease;
@@ -516,11 +556,35 @@ section {
   transform: scale(1.08);
 }
 
+.company-logos img.logo-scale-up {
+  transform: scale(1.45);
+}
+
+.company-logos img.logo-scale-up:hover {
+  transform: scale(1.55);
+}
+
+.company-logos img.logo-scale-wipro {
+  transform: scale(1.9);
+}
+
+.company-logos img.logo-scale-wipro:hover {
+  transform: scale(2);
+}
+
+.company-logos img.logo-scale-ibm {
+  transform: scale(1.75);
+}
+
+.company-logos img.logo-scale-ibm:hover {
+  transform: scale(1.85);
+}
+
 .company-logo-card {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 14px;
-  padding: 1.5rem 2rem;
+  padding: 1.25rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -802,6 +866,20 @@ footer {
   }
   .grid-2 {
     gap: 2.5rem;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1400px) {
+  .hero h1 {
+    font-size: clamp(3.2rem, 3.8vw, 4.3rem);
+  }
+
+  .hero h1 img {
+    height: clamp(58px, 5vw, 78px) !important;
+  }
+
+  .hero .section-subtitle {
+    max-width: 760px;
   }
 }
 
@@ -1133,51 +1211,101 @@ footer {
   opacity: 1;
 }
 
-/* Modules Scroll Slider Container */
+/* Modules Roadmap */
 .modules-container {
-  display: flex;
-  gap: 2rem;
-  overflow-x: auto;
-  padding: 1.5rem 0.5rem 2.5rem;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: thin;
-  scroll-behavior: smooth;
+  display: grid;
+  gap: 1rem;
+  overflow: visible;
+  padding: 1rem 0 0;
   margin-top: 1rem;
 }
 
-.modules-container::-webkit-scrollbar {
-  height: 8px;
+.roadmap-step {
+  width: min(980px, 100%);
+  min-height: 120px;
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  align-items: stretch;
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+  overflow: hidden;
 }
 
-.modules-container::-webkit-scrollbar-track {
-  background: transparent;
+.roadmap-step:nth-child(1) {
+  margin-left: 0;
 }
 
-.modules-container::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 10px;
+.roadmap-step:nth-child(2) {
+  margin-left: 8%;
 }
 
-.modules-container::-webkit-scrollbar-thumb:hover {
+.roadmap-step:nth-child(3) {
+  margin-left: 16%;
+}
+
+.roadmap-step:nth-child(4) {
+  margin-left: 24%;
+}
+
+.roadmap-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: var(--accent);
+  color: #ffffff;
+  font-size: 2.8rem;
+  font-weight: 900;
+  line-height: 1;
 }
 
-.modules-container .card {
-  flex: 0 0 calc(33.333% - 1.35rem);
-  min-width: 330px;
-  scroll-snap-align: start;
-  margin-bottom: 0 !important;
+.roadmap-body {
+  padding: 1.35rem 1.75rem;
+  background: linear-gradient(90deg, #eff6ff 0%, #ffffff 100%);
+}
+
+.roadmap-kicker {
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.roadmap-body h3 {
+  font-size: 1.45rem;
+  line-height: 1.2;
+  margin-bottom: 0.55rem;
+  color: var(--text);
+}
+
+.roadmap-body p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  margin: 0;
 }
 
 @media (max-width: 1024px) {
-  .modules-container .card {
-    flex: 0 0 calc(50% - 1rem);
+  .roadmap-step,
+  .roadmap-step:nth-child(n) {
+    width: 100%;
+    margin-left: 0;
   }
 }
 
 @media (max-width: 768px) {
-  .modules-container .card {
-    flex: 0 0 100%;
+  .roadmap-step {
+    grid-template-columns: 72px 1fr;
+  }
+
+  .roadmap-number {
+    font-size: 2rem;
+  }
+
+  .roadmap-body {
+    padding: 1rem;
   }
 }
-

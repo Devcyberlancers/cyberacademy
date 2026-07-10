@@ -42,9 +42,6 @@ const fxaaPass = new ShaderPass(FXAAShader);
 fxaaPass.uniforms["resolution"].value.set(1 / window.innerWidth, 1 / window.innerHeight);
 composer.addPass(fxaaPass);
 
-// Track current theme for per-frame adjustments
-let currentMode = 'light';
-
 // Lights — strong for specular highlights on the dark metallic torus
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
 scene.add(ambientLight);
@@ -220,60 +217,8 @@ const fragments = (() => {
   return list;
 })();
 
-// Theme Switcher Controller
 document.addEventListener('DOMContentLoaded', () => {
-  const themeToggleBtn = document.getElementById('themeToggleBtn');
-  const themeIcon = themeToggleBtn.querySelector('.material-symbols-outlined');
-  const logoImg = document.querySelector('.logo');
-  
-  // Default values
   document.documentElement.setAttribute('data-theme', 'light');
-
-  themeToggleBtn.addEventListener('click', () => {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', newTheme);
-    
-    if (newTheme === 'dark') {
-      currentMode = 'dark';
-      themeIcon.textContent = 'light_mode';
-      scene.background.set(0x050505);
-      
-      // Dark mode: black bg, blue wireframe, subtle bloom glow
-      wireMaterial.uniforms.color1.value.set(0x00081d);
-      wireMaterial.uniforms.color2.value.set(0x1d4ed8);
-      fragmentsMaterial.color.set(0x111111);
-      fragmentsMaterial.roughness = 0.9;
-      fragmentsMaterial.metalness = 0.1;
-      bloomPass.strength = 0.6;
-      bloomPass.threshold = 0.7;
-      ambientLight.intensity = 0.6;
-      dirLight.color.set(0xfff4e0);
-      dirLight.intensity = 2.5;
-      fillLight.color.set(0x1d4ed8);
-      fillLight.intensity = 1.0;
-      rimLight.intensity = 0.5;
-    } else {
-      currentMode = 'light';
-      themeIcon.textContent = 'dark_mode';
-      scene.background.set(0xffffff);
-      
-      // Light mode: white bg, dark shiny metallic torus, minimal bloom
-      wireMaterial.uniforms.color1.value.set(0x050508);
-      wireMaterial.uniforms.color2.value.set(0x2a2a4e);
-      fragmentsMaterial.color.set(0x080810);
-      fragmentsMaterial.roughness = 0.15;
-      fragmentsMaterial.metalness = 0.95;
-      bloomPass.strength = 0.15;
-      bloomPass.threshold = 0.85;
-      ambientLight.intensity = 0.8;
-      dirLight.color.set(0xffffff);
-      dirLight.intensity = 3.0;
-      fillLight.color.set(0xaabbff);
-      fillLight.intensity = 1.5;
-      rimLight.intensity = 2.0;
-    }
-  });
 
   const revealElements = document.querySelectorAll('.scroll-reveal');
 
@@ -328,11 +273,12 @@ const introTitle = document.getElementById('introTitle');
 
 // Body already has 'intro-active' class set in HTML
 
-// Force scroll to top on load so the intro always plays on refresh
-if ('scrollRestoration' in history) {
-  history.scrollRestoration = 'manual';
+// The page resets scroll in the document head before module imports load.
+// On a hard refresh those imports can be slow; avoid pulling users back to
+// the top if they already started the intro scroll while this module loaded.
+if (window.scrollY <= 4) {
+  window.scrollTo(0, 0);
 }
-window.scrollTo(0, 0);
 
 // Camera start & end positions for the zoom-through
 const CAM_START_Z = 7;
@@ -449,7 +395,7 @@ tick();
 function handleIntroScroll() {
   if (!introActive) return;
 
-  const introHeight = introOverlay.offsetHeight - window.innerHeight;
+  const introHeight = Math.max(1, introOverlay.offsetHeight - window.innerHeight);
   const scrollY = window.scrollY;
   introProgress = Math.min(1, Math.max(0, scrollY / introHeight));
 
@@ -482,6 +428,7 @@ function finishIntro() {
 }
 
 window.addEventListener('scroll', handleIntroScroll);
+handleIntroScroll();
 
 // WebGL scroll sync (only when intro is done)
 window.addEventListener("scroll", () => {
@@ -524,4 +471,3 @@ window.closeVideo = function() {
     iframe.src = ""; // Clear src to stop video audio
   }
 }
-

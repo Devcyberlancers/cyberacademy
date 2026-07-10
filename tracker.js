@@ -6,42 +6,37 @@
   // Default values
   const defaultModules = [
     {
-      title: "Cybersecurity & Linux Foundations",
-      desc: "Cybersecurity Fundamentals, Threats & Awareness | Network Layers, Firewalls, IDS & IPS | Configuring Network components according to topologies | Intro to Linux & its architecture, Linux Commands & Server Guidance."
+      title: "Cybersecurity & Network Foundations",
+      desc: "Cybersecurity Fundamentals, Threats & Awareness | Network Layers, Firewalls, IDS & IPS Overview | Configuring Network components according to topologies | Intro to Linux, architecture, commands, and server guidance."
     },
     {
-      title: "Vulnerability Scanning & Pen Testing",
+      title: "Vulnerability Assessment & Penetration Testing",
       desc: "Vulnerability Concepts, Types & Scanning | Network Penetration Testing | Web Application Penetration Testing | IT & OT Security."
     },
     {
-      title: "SOC Operations & Incident Response",
-      desc: "Intro to SOC, SIEM Environment, RBAC, Agent Setup | Log Parsing, Rules, Custom Detection | Threat Intel Tools, Compliance, FIM | Attack Simulation, Log Correlation, IR."
+      title: "Security Operations Center & Threat Intelligence",
+      desc: "Intro to SOC, SIEM Environment, RBAC, Agent Setup | Log Parsing, Rules, Custom Detection | Threat Intel Tools, Compliance, FIM | Attack Simulation, Log Correlation, Incident Response."
     },
     {
-      title: "Malware Analysis & Forensics",
-      desc: "Malware Analysis Lab, Static & Dynamic Analysis | Forensics (Memory, Disk, Network), SOC Workflow | SOC Automation, Playbook Design & Execution | Capstone Project, Evaluation & Placement."
+      title: "Advanced SOC Operations & Career Readiness",
+      desc: "Malware Analysis Lab, Static & Dynamic Analysis | Forensics for Memory, Disk, and Network | SOC Workflow | SOC Automation, Playbook Design & Execution | Capstone Project, Evaluation & Placement."
     }
   ];
 
   const defaultSpeakers = [
     {
-      name: "Dr. Alex Carter",
-      title: "Principal Security Architect",
-      bio: "Former Threat Intel Lead with 12+ years in offensive systems analysis, kernel-level exploit mitigation, and advanced network security topologies.",
-      avatar: "assets/speaker-alex.jpg"
+      name: "Hari Prasad",
+      title: "Cybersecurity Instructor",
+      bio: "Cybersecurity trainer focused on practical labs, Linux foundations, networking, SOC workflows, and hands-on defensive security learning.",
+      avatar: "assets/speaker-shreyas-pai-g.png"
     },
     {
-      name: "Sarah Vance",
-      title: "Lead Incident Responder",
-      bio: "Veteran SOC operations manager specializing in SOAR playbooks, live-fire incident threat containment, and intrusion analytics.",
-      avatar: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%231d4ed8'/><circle cx='50' cy='35' r='18' fill='%23ffffff'/><path d='M25,80 C25,60 35,55 50,55 C65,55 75,60 75,80' fill='%23ffffff'/></svg>"
+      name: "Shreyas Pai G",
+      title: "Cybersecurity Instructor",
+      bio: "Cybersecurity trainer focused on vulnerability assessment, penetration testing concepts, incident response, and career-ready security skills.",
+      avatar: "assets/speaker-hari-prasad.png"
     }
   ];
-
-  const defaultCertificate = {
-    name: "John Doe",
-    text: "Has successfully completed the 3-Month Trainee Track. Verified ID: CL-294-82X."
-  };
 
   const defaultBrochure = {
     url: "assets/brochure.pdf",
@@ -127,13 +122,16 @@
         container.innerHTML = "";
         modules.forEach((mod, idx) => {
           const card = document.createElement("div");
-          card.className = `card white-card scroll-reveal delay-${(idx % 3) + 1}`;
+          card.className = `roadmap-step scroll-reveal delay-${(idx % 3) + 1}`;
           
           const modNum = String(idx + 1).padStart(2, '0');
           card.innerHTML = `
-            <div class="hero-tag" style="margin-bottom: 1rem;">Module ${modNum}</div>
-            <h3 style="margin-bottom: 1rem; font-size: 1.4rem;">${escapeHtml(mod.title)}</h3>
-            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.6;">${escapeHtml(mod.desc)}</p>
+            <div class="roadmap-number">${modNum}</div>
+            <div class="roadmap-body">
+              <div class="roadmap-kicker">Module ${modNum}</div>
+              <h3>${escapeHtml(mod.title)}</h3>
+              <p>${escapeHtml(mod.desc)}</p>
+            </div>
           `;
           container.appendChild(card);
         });
@@ -141,7 +139,11 @@
 
       // 2. Speakers / Instructors
       const speakersStr = localStorage.getItem("cyberacademy_speakers");
-      const speakers = speakersStr ? JSON.parse(speakersStr) : defaultSpeakers;
+      let speakers = speakersStr ? JSON.parse(speakersStr) : defaultSpeakers;
+      if (speakers.some(spk => spk.name === "Dr. Alex Carter" || spk.name === "Sarah Vance")) {
+        speakers = defaultSpeakers;
+        localStorage.setItem("cyberacademy_speakers", JSON.stringify(defaultSpeakers));
+      }
       
       const speakersContainer = document.getElementById("speakersContainer");
       if (speakersContainer) {
@@ -169,16 +171,7 @@
         });
       }
 
-      // 3. Certificate
-      const certStr = localStorage.getItem("cyberacademy_certificate");
-      const cert = certStr ? JSON.parse(certStr) : defaultCertificate;
-
-      const certNameEl = document.getElementById("cert-name");
-      const certTextEl = document.getElementById("cert-text");
-      if (certNameEl) certNameEl.textContent = cert.name;
-      if (certTextEl) certTextEl.textContent = cert.text;
-
-      // 4. Brochure Link
+      // 3. Brochure Link
       const brochureUrl = localStorage.getItem("cyberacademy_brochure_url") || defaultBrochure.url;
       const downloadButtons = document.querySelectorAll(".brochure-download-btn");
       downloadButtons.forEach(btn => {

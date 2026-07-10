@@ -9,6 +9,12 @@
   <!-- Fonts (Roboto & JetBrains Mono) -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=JetBrains+Mono&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <script>
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  </script>
   
   <!-- Main Stylesheet -->
   <link href="style.css" rel="stylesheet" type="text/css"/>
@@ -54,23 +60,15 @@
     <div class="container">
       <div class="nav-container">
         <a href="index.html" class="logo">
-          <img src="assets/logo-shield.png" alt="Shield" class="logo-shield-img"/>
-          <div class="logo-text-wrap">
-            <span class="logo-title">CYBER LANCERS</span>
-            <span class="logo-subtitle">The Frontline of Digital Security</span>
-          </div>
+          <img src="assets/logo-header-full.png" alt="Cyber Lancers - The Frontline of Digital Security" class="logo-full-img"/>
         </a>
         <nav class="nav-links">
-          <a href="#brochure">Brochure</a>
           <a href="#curriculum">Syllabus</a>
           <a href="#catalog">Fee & Programs</a>
           <a href="#eligibility">Eligibility</a>
           <a href="#speakers">Instructors</a>
           <a href="#testimonials">Testimonials</a>
           <a href="#faq">FAQs</a>
-          <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle Theme">
-            <span class="material-symbols-outlined" style="font-size: 1.3rem;">dark_mode</span>
-          </button>
           <a href="#registration" class="btn btn-secondary" style="padding: 0.5rem 1.25rem;">Register Now</a>
         </nav>
       </div>
@@ -84,13 +82,13 @@
     <div class="container">
       <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 3rem; align-items: center;">
         <div class="hero-content scroll-reveal">
-          <div class="hero-tag">Official Training Range</div>
+          <div class="hero-tag">About Us</div>
           <h1 style="display: flex; align-items: center; gap: 1rem;">
-            <img src="assets/logo-shield.png" alt="Cyber Lancers Shield" style="height: 110px; width: auto;"/>
+            <img src="assets/logo-cyber-academy-rocket.png" alt="Cyber Academy" style="height: 110px; width: auto;"/>
             Cyber Academy
           </h1>
           <p class="section-subtitle">
-            Master high-fidelity system internals, defensive traffic analysis, and target network exploitation. Join Cyber Lancers Academy to transition your career.
+            <strong>Cyber Academy</strong> is a training program that teaches you cybersecurity by <em>doing it</em>. Instead of just reading, you'll practice in real labs--learning Linux, networking, and how security teams stop attacks.
           </p>
           <div style="margin-bottom: 2.5rem; font-size: 0.95rem; color: var(--text-muted);">
             <span style="display: inline-flex; align-items: center; gap: 0.5rem; margin-right: 2rem;">
@@ -151,22 +149,22 @@
       <div class="hero-tag scroll-reveal" style="margin-bottom: 2.5rem;">OUR ALUMNI IN TOP COMPANIES</div>
       <div class="company-logos scroll-reveal delay-1" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; width: 100%;">
           <div class="company-logo-card">
-            <img src="assets/logo-jigyanlabs.png" alt="Jigyanlabs" style="height: 65px; width: auto; max-width: 100%;"/>
+            <img src="assets/logo-techmahindra.png" alt="Tech Mahindra"/>
           </div>
           <div class="company-logo-card">
-            <img src="assets/logo-ibm.png" alt="IBM" style="height: 60px; width: auto; max-width: 100%;"/>
+            <img src="assets/logo-ibm.png" alt="IBM" class="logo-scale-up logo-scale-ibm"/>
           </div>
           <div class="company-logo-card">
-            <img src="assets/logo-accenture.png" alt="Accenture" style="height: 55px; width: auto; max-width: 100%;"/>
+            <img src="assets/logo-accenture.png" alt="Accenture"/>
           </div>
           <div class="company-logo-card">
-            <img src="assets/logo-wipro.png" alt="Wipro" style="height: 120px; width: auto; max-width: 100%;"/>
+            <img src="assets/logo-wipro.png" alt="Wipro" class="logo-scale-up logo-scale-wipro"/>
           </div>
           <div class="company-logo-card" style="grid-column: 2;">
-            <img src="assets/logo-tcs.png" alt="TCS" style="height: 55px; width: auto; max-width: 100%;"/>
+            <img src="assets/logo-tcs.png" alt="TCS"/>
           </div>
           <div class="company-logo-card" style="grid-column: 3;">
-            <img src="assets/logo-techmahindra.png" alt="Tech Mahindra" style="height: 55px; width: auto; max-width: 100%;"/>
+            <img src="assets/logo-jigyanlabs.png" alt="Jigyanlabs" class="logo-scale-up"/>
           </div>
         </div>
     </div>
@@ -201,7 +199,7 @@
           </p>
           <ul style="margin: 0; padding-left: 1.5rem; list-style-type: disc; color: var(--text);">
             <li class="scroll-reveal delay-1" style="margin-bottom: 1rem; line-height: 1.6;">
-              Graduates in Computer Science, Electronics, Information Security, or related IT fields.
+              Graduates from any 3-year or 4-year degree program can apply.
             </li>
             <li class="scroll-reveal delay-2" style="margin-bottom: 1rem; line-height: 1.6;">
               Students comfortable working with Windows and Linux Operating Systems.
@@ -246,10 +244,7 @@
         <div class="card white-card price-card scroll-reveal delay-1">
           <div>
             <div class="hero-tag">Standard Track</div>
-            <h3 style="font-size: 1.6rem;">Trainee Course</h3>
-            <p style="margin-top: 1rem; font-size: 0.95rem; color: var(--text-muted);">
-              trainee 3 months with certification
-            </p>
+            <h3 style="font-size: 1.6rem;">Training</h3>
           </div>
           <div>
             <div style="font-size: 0.75rem; font-weight: 700; color: #10b981; background: rgba(16, 185, 129, 0.1); padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; border: 1px solid rgba(16, 185, 129, 0.2);">LIMITED TIME ₹20,000 OFF</div>
@@ -257,7 +252,7 @@
               <span style="text-decoration: line-through; font-size: 1.25rem; color: var(--text-muted); font-weight: 400; margin-right: 0.5rem;">₹79,000</span>₹59,000
             </div>
             <div class="price-desc">Excluding GST // 3 Months Training + Official Certification</div>
-            <a href="#registration" class="btn btn-secondary" style="width: 100%;">Select Program</a>
+            <a href="#registration" class="btn" style="width: 100%;">Select Program</a>
           </div>
         </div>
 
@@ -266,16 +261,13 @@
           <div>
             <div class="hero-tag">Professional Track</div>
             <h3 style="font-size: 1.6rem;">Training + Internship</h3>
-            <p style="margin-top: 1rem; font-size: 0.95rem; color: var(--text-muted);">
-              others = training + internship
-            </p>
           </div>
           <div>
             <div style="font-size: 0.75rem; font-weight: 700; color: #10b981; background: rgba(16, 185, 129, 0.1); padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; border: 1px solid rgba(16, 185, 129, 0.2);">LIMITED TIME ₹20,000 OFF</div>
-            <div class="price" style="color: #ffffff;">
-              <span style="text-decoration: line-through; font-size: 1.25rem; color: rgba(255,255,255,0.6); font-weight: 400; margin-right: 0.5rem;">₹139,000</span>₹119,000
+            <div class="price">
+              <span style="text-decoration: line-through; font-size: 1.25rem; color: var(--text-muted); font-weight: 400; margin-right: 0.5rem;">₹139,000</span>₹119,000
             </div>
-            <div class="price-desc" style="color: rgba(255,255,255,0.8);">Excluding GST // Guaranteed Work Internship Certificate</div>
+            <div class="price-desc">Excluding GST // Guaranteed Work Internship Certificate</div>
             <a href="#registration" class="btn" style="width: 100%;">Select Program</a>
           </div>
         </div>
@@ -285,9 +277,6 @@
           <div>
             <div class="hero-tag">Job Track</div>
             <h3 style="font-size: 1.6rem;">Training + Placement</h3>
-            <p style="margin-top: 1rem; font-size: 0.95rem; color: var(--text-muted);">
-              others = training + internship + placement assist
-            </p>
           </div>
           <div>
             <div style="font-size: 0.75rem; font-weight: 700; color: #10b981; background: rgba(16, 185, 129, 0.1); padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block; margin-bottom: 0.5rem; border: 1px solid rgba(16, 185, 129, 0.2);">LIMITED TIME ₹20,000 OFF</div>
@@ -295,7 +284,7 @@
               <span style="text-decoration: line-through; font-size: 1.25rem; color: var(--text-muted); font-weight: 400; margin-right: 0.5rem;">₹220,000</span>₹200,000
             </div>
             <div class="price-desc">Excluding GST // Full Training + Placement Support</div>
-            <a href="#registration" class="btn btn-secondary" style="width: 100%;">Select Program</a>
+            <a href="#registration" class="btn" style="width: 100%;">Select Program</a>
           </div>
         </div>
       </div>
@@ -307,7 +296,7 @@
             <span class="material-symbols-outlined" style="font-size: 2.5rem; color: #ffffff;">school</span>
           </div>
           <div style="flex: 1; min-width: 280px;">
-            <div class="hero-tag" style="background: var(--accent); color: #ffffff; margin-bottom: 0.5rem;">Scholarship Program</div>
+            <div class="hero-tag" style="margin-bottom: 0.5rem;">Scholarship Program</div>
             <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
               <span>Up to 90% Scholarship for Toppers</span>
             </h3>
@@ -331,13 +320,9 @@
               Our placement support team provides resume review, dedicated mock technical interviews, profile profiling, and direct referrals to hiring partners. Students in the placement track receive unlimited support for up to 12 months post-program completion.
             </p>
           </div>
-          <div style="border: 2px solid var(--border); border-radius: 20px; padding: 2.5rem; background: var(--bg-subtle); text-align: center; box-shadow: 0 4px 0 0 var(--border);">
+          <div style="border: 2px solid var(--border); border-radius: 20px; padding: 1.5rem; background: var(--bg-subtle); text-align: center; box-shadow: 0 4px 0 0 var(--border);">
             <div class="hero-tag" style="margin-bottom: 1.5rem;">Verified Certificate Sample</div>
-            <div style="border: 2px solid #111111; padding: 1.5rem; background: #ffffff; position: relative; border-radius: 10px;">
-              <div style="font-size: 0.7-rem; letter-spacing: 0.15em; font-weight: 800; color: #999;">CYBER LANCERS CERTIFICATE</div>
-              <div id="cert-name" style="font-size: 1rem; font-weight: 700; margin: 0.5rem 0;">John Doe</div>
-              <div id="cert-text" style="font-size: 0.6rem; color: var(--text-muted);">Has successfully completed the 3-Month Trainee Track. Verified ID: CL-294-82X.</div>
-            </div>
+            <img src="assets/certificate-sample.png" alt="Cyber Lancers certificate sample" style="width: min(100%, 520px); height: auto; display: block; margin: 0 auto; border-radius: 10px; border: 1px solid var(--border); background: #ffffff;" />
           </div>
         </div>
       </div>
