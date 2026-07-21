@@ -48,6 +48,7 @@
     initVisitorTracker();
     applyDynamicContent();
     setupBrochureModal();
+    setupRegistrationTracker();
   });
 
   // ==========================================
@@ -282,6 +283,46 @@
     // 4. Close Modal & Reset Form
     closeBrochureModal();
     document.getElementById("brochureForm").reset();
+  }
+
+  // ==========================================
+  // REGISTRATION TRACKING LOGIC
+  // ==========================================
+  function setupRegistrationTracker() {
+    const regForm = document.getElementById("registrationForm");
+    if (!regForm) return;
+
+    regForm.addEventListener("submit", () => {
+      try {
+        const nameVal = document.getElementById("name")?.value || "";
+        const emailVal = document.getElementById("email")?.value || "";
+        const phoneVal = document.getElementById("phone")?.value || "";
+        const qualificationVal = document.getElementById("degree")?.value || "";
+        const trackVal = document.getElementById("program-select")?.value || "";
+        const examSlotVal = document.querySelector('input[name="Exam Slot"]:checked')?.value || "Morning Slot";
+        const transactionIdVal = document.getElementById("transactionId")?.value || "";
+        const timestampVal = new Date().toISOString();
+
+        if (!nameVal || !emailVal || !phoneVal) return;
+
+        const registration = {
+          name: nameVal,
+          email: emailVal,
+          phone: phoneVal,
+          qualification: qualificationVal,
+          track: trackVal,
+          examSlot: examSlotVal,
+          transactionId: transactionIdVal,
+          timestamp: timestampVal
+        };
+
+        let registrations = JSON.parse(localStorage.getItem("cyberacademy_registrations") || "[]");
+        registrations.unshift(registration);
+        localStorage.setItem("cyberacademy_registrations", JSON.stringify(registrations));
+      } catch (err) {
+        console.error("Failed to save registration locally:", err);
+      }
+    });
   }
 
 })();

@@ -183,11 +183,22 @@
             <div class="admin-stat-label">Leads Capture</div>
           </div>
         </div>
+
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon">
+            <span class="material-symbols-outlined">how_to_reg</span>
+          </div>
+          <div>
+            <div id="statRegistrations" class="admin-stat-value">0</div>
+            <div class="admin-stat-label">Registrations</div>
+          </div>
+        </div>
       </div>
 
       <!-- Navigation Tabs -->
       <div class="admin-tabs">
         <div id="tabLeads" class="admin-tab is-active" onclick="switchTab('leads')">Brochure Leads</div>
+        <div id="tabRegistrations" class="admin-tab" onclick="switchTab('registrations')">Exam Registrations</div>
         <div id="tabConfig" class="admin-tab" onclick="switchTab('config')">Edit Site Content</div>
         <div id="tabVisits" class="admin-tab" onclick="switchTab('visits')">Traffic Logs</div>
       </div>
@@ -217,6 +228,38 @@
               </tr>
             </thead>
             <tbody id="leadsTableBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB PANEL: REGISTRATIONS -->
+      <div id="panelRegistrations" class="admin-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+          <h3 style="font-size: 1.4rem; font-weight: 800;">Entrance Exam Registration List</h3>
+          <div style="display: flex; gap: 0.75rem;">
+            <button onclick="exportRegistrationsToCSV()" class="btn" style="font-size: 0.9rem; padding: 0.6rem 1.2rem; display: inline-flex; align-items: center; gap: 0.3rem;">
+              <span class="material-symbols-outlined" style="font-size: 1.15rem;">file_download</span> Export CSV
+            </button>
+            <button onclick="clearRegistrations()" class="btn-danger" style="display: inline-flex; align-items: center; gap: 0.3rem;">
+              <span class="material-symbols-outlined" style="font-size: 1.15rem;">delete</span> Clear List
+            </button>
+          </div>
+        </div>
+
+        <div class="admin-table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Candidate Details</th>
+                <th>Program Track</th>
+                <th>Exam Slot</th>
+                <th>Transaction ID</th>
+                <th>Time Registered</th>
+              </tr>
+            </thead>
+            <tbody id="registrationsTableBody">
               <!-- Dynamically populated -->
             </tbody>
           </table>
@@ -386,6 +429,7 @@
       // Load tables, statistics and inputs
       loadStatistics();
       loadLeadsTable();
+      loadRegistrationsTable();
       loadVisitsTable();
       loadFormInputs();
     }
@@ -398,10 +442,12 @@
       const unique = localStorage.getItem("cyberacademy_unique_visitors") || "0";
       
       const leads = JSON.parse(localStorage.getItem("cyberacademy_leads") || "[]");
+      const registrations = JSON.parse(localStorage.getItem("cyberacademy_registrations") || "[]");
       
       document.getElementById("statTotalViews").textContent = Number(views).toLocaleString();
       document.getElementById("statUniqueVisitors").textContent = Number(unique).toLocaleString();
       document.getElementById("statDownloads").textContent = leads.length.toLocaleString();
+      document.getElementById("statRegistrations").textContent = registrations.length.toLocaleString();
     }
 
     function loadLeadsTable() {
@@ -422,6 +468,38 @@
           <td style="font-weight: 700; color: var(--text);">${escapeHtml(lead.name)}</td>
           <td><a href="mailto:${lead.email}" style="color: var(--accent); text-decoration: none;">${escapeHtml(lead.email)}</a></td>
           <td>${escapeHtml(lead.phone)}</td>
+          <td>${formattedDate}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function loadRegistrationsTable() {
+      const registrations = JSON.parse(localStorage.getItem("cyberacademy_registrations") || "[]");
+      const tbody = document.getElementById("registrationsTableBody");
+      if (!tbody) return;
+      tbody.innerHTML = "";
+
+      if (registrations.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted);">No registrations captured yet.</td></tr>`;
+        return;
+      }
+
+      registrations.forEach(reg => {
+        const row = document.createElement("tr");
+        const formattedDate = new Date(reg.timestamp).toLocaleString();
+        
+        row.innerHTML = `
+          <td>
+            <div style="font-weight: 700; color: var(--text);">${escapeHtml(reg.name)}</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.1rem;">
+              <a href="mailto:${reg.email}" style="color: var(--accent); text-decoration: none;">${escapeHtml(reg.email)}</a> | ${escapeHtml(reg.phone)}
+            </div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.1rem;">Qual: ${escapeHtml(reg.qualification)}</div>
+          </td>
+          <td><span style="font-weight: 600; color: var(--text);">${escapeHtml(reg.track)}</span></td>
+          <td><span class="badge" style="background: var(--accent-light); color: var(--accent); font-weight: 600; font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 4px;">${escapeHtml(reg.examSlot)}</span></td>
+          <td><code style="font-size: 0.8rem; background: var(--bg-subtle); padding: 0.2rem 0.4rem; border-radius: 4px;">${escapeHtml(reg.transactionId)}</code></td>
           <td>${formattedDate}</td>
         `;
         tbody.appendChild(row);
@@ -734,6 +812,10 @@
         document.getElementById("tabLeads").classList.add("is-active");
         document.getElementById("panelLeads").classList.add("is-active");
         loadLeadsTable();
+      } else if (tabName === "registrations") {
+        document.getElementById("tabRegistrations").classList.add("is-active");
+        document.getElementById("panelRegistrations").classList.add("is-active");
+        loadRegistrationsTable();
       } else if (tabName === "config") {
         document.getElementById("tabConfig").classList.add("is-active");
         document.getElementById("panelConfig").classList.add("is-active");
@@ -787,6 +869,50 @@
       
       const fileDate = new Date().toISOString().split('T')[0];
       downloadLink.setAttribute("download", `cyber_academy_leads_${fileDate}.csv`);
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+      showToast("CSV Download started!");
+    }
+
+    function clearRegistrations() {
+      if (confirm("⚠️ WARNING: This will permanently delete ALL entrance exam registrations from this dashboard. Make sure you have exported them to CSV first. Do you want to proceed?")) {
+        localStorage.setItem("cyberacademy_registrations", "[]");
+        loadRegistrationsTable();
+        loadStatistics();
+        showToast("Registration sheet cleared!");
+      }
+    }
+
+    function exportRegistrationsToCSV() {
+      const registrations = JSON.parse(localStorage.getItem("cyberacademy_registrations") || "[]");
+      if (registrations.length === 0) {
+        alert("There are no registrations to export!");
+        return;
+      }
+
+      let csvContent = "data:text/csv;charset=utf-8,";
+      csvContent += "Candidate Name,Email Address,Phone Number,Qualification,Program Track,Exam Slot,Transaction ID,Timestamp\n";
+
+      registrations.forEach(reg => {
+        const name = `"${reg.name.replace(/"/g, '""')}"`;
+        const email = `"${reg.email.replace(/"/g, '""')}"`;
+        const phone = `"${reg.phone.replace(/"/g, '""')}"`;
+        const qualification = `"${reg.qualification.replace(/"/g, '""')}"`;
+        const track = `"${reg.track.replace(/"/g, '""')}"`;
+        const examSlot = `"${reg.examSlot.replace(/"/g, '""')}"`;
+        const transactionId = `"${reg.transactionId.replace(/"/g, '""')}"`;
+        const date = `"${new Date(reg.timestamp).toLocaleString().replace(/"/g, '""')}"`;
+        
+        csvContent += `${name},${email},${phone},${qualification},${track},${examSlot},${transactionId},${date}\n`;
+      });
+
+      const encodedUri = encodeURI(csvContent);
+      const downloadLink = document.createElement("a");
+      downloadLink.setAttribute("href", encodedUri);
+      
+      const fileDate = new Date().toISOString().split('T')[0];
+      downloadLink.setAttribute("download", `cyber_academy_registrations_${fileDate}.csv`);
       document.body.appendChild(downloadLink);
       downloadLink.click();
       document.body.removeChild(downloadLink);

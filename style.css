@@ -48,6 +48,11 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+em {
+  font-family: inherit;
+  font-style: italic;
+}
+
 /* Custom WebGL fixed background canvas */
 .webgl {
   position: fixed;
