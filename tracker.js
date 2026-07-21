@@ -284,6 +284,9 @@
 
   // ==========================================
   // REGISTRATION TRACKING LOGIC
+  // (Registration now handled via Microsoft Forms iframe — this tracker
+  //  is preserved for backward compatibility and will gracefully exit
+  //  if #registrationForm is not found on the page.)
   // ==========================================
   function setupRegistrationTracker() {
     const regForm = document.getElementById("registrationForm");

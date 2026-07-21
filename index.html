@@ -562,103 +562,19 @@
         </div>
 
         <div class="registration-box scroll-reveal delay-1">
-          <!-- Formspree Endpoint -->
-          <form id="registrationForm" action="https://formspree.io/f/mzdlwoad" method="POST" enctype="multipart/form-data">
-            <div class="form-step is-active" data-form-step="details">
-              <div class="form-group">
-                <label for="name">Full Name</label>
-                <input type="text" id="name" name="Name" class="form-control" placeholder="John Doe" required/>
-              </div>
-
-              <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="Email" class="form-control" placeholder="john@example.com" required/>
-              </div>
-
-              <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="Phone" class="form-control" placeholder="9876543210" required/>
-              </div>
-
-              <div class="form-group">
-                <label for="degree">Current Qualification</label>
-                <input type="text" id="degree" name="Qualification" class="form-control" placeholder="B.Tech CS / Enthusiast" required/>
-              </div>
-
-              <div class="form-group">
-                <label for="program-select">Select Program Track</label>
-                <select id="program-select" name="Program Track" class="form-control" required>
-                  <option value="Training (59000 RS)">Training (3 Months - 59,000 RS + GST)</option>
-                  <option value="Training + Internship (119000 RS)">Training + Internship (119,000 RS + GST)</option>
-                  <option value="Training + Internship + Placement (200000 RS)">Training + Internship + Placement Assist (200,000 RS + GST)</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label>Select Examination Slot</label>
-                <div class="radio-group">
-                  <label class="radio-option">
-                    <input type="radio" name="Exam Slot" value="Morning Slot" checked required/>
-                    <span>Morning Session (9:30 AM)</span>
-                  </label>
-                  <label class="radio-option">
-                    <input type="radio" name="Exam Slot" value="Afternoon Slot" required/>
-                    <span>Afternoon Session (2:00 PM)</span>
-                  </label>
-                </div>
-              </div>
-
-              <button type="button" class="btn" id="goToPaymentBtn" style="width: 100%; margin-top: 1rem;">Next: Payment Details</button>
-            </div>
-
-            <div class="form-step" data-form-step="payment">
-              <div class="payment-proof-box">
-              <div class="payment-proof-header">
-                <span class="material-symbols-outlined">payments</span>
-                <div>
-                  <h3>Application Fee Payment</h3>
-                  <p>Pay the 500 RS application fee, then upload the payment screenshot and enter the transaction ID.</p>
-                </div>
-              </div>
-
-              <div class="payment-methods">
-                <div class="qr-placeholder">
-                  <span class="material-symbols-outlined">qr_code_2</span>
-                  <strong>QR Code</strong>
-                  <small>Official payment QR will appear here</small>
-                </div>
-
-                <div class="payment-details">
-                  <div>
-                    <span>UPI ID</span>
-                    <strong>cyberacademy@upi</strong>
-                  </div>
-                  <div>
-                    <span>Bank Details</span>
-                    <strong>Cyber Lancers Academy</strong>
-                    <small>Account number, IFSC, and bank name can be added here.</small>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="transactionId">Transaction ID / UTR Number</label>
-                <input type="text" id="transactionId" name="Transaction ID" class="form-control" placeholder="Enter UPI transaction ID or bank UTR number" required/>
-              </div>
-
-              <div class="form-group">
-                <label for="paymentScreenshot">Payment Screenshot</label>
-                <input type="file" id="paymentScreenshot" name="Payment Screenshot" class="form-control" accept="image/*,.pdf" required/>
-              </div>
-
-                <div class="form-actions">
-                  <button type="button" class="btn btn-secondary" id="backToDetailsBtn">Back</button>
-                  <button type="submit" class="btn">Submit Registration & Payment Proof</button>
-                </div>
-              </div>
-            </div>
-
-          </form>
+          <div style="width: 100%; border-radius: 16px; overflow: hidden; background: var(--bg-card); border: 1px solid var(--border);">
+            <iframe
+              src="https://forms.office.com/Pages/ResponsePage.aspx?id=FcrdMeKZ-Eigvu0aDGuIBg42Vog3IfdHlPHQgZAHnrdUQzczVVBUT043RElGUjJYV1g1OEdZNE5TTy4u"
+              width="100%"
+              height="700"
+              frameborder="0"
+              marginheight="0"
+              marginwidth="0"
+              style="border: none; border-radius: 16px; min-height: 600px;"
+              title="Entrance Exam Registration Form"
+              loading="lazy"
+            >Loading registration form…</iframe>
+          </div>
         </div>
       </div>
     </div>
@@ -784,40 +700,6 @@
 
     // Start after small delay
     setTimeout(runNextCommand, 800);
-  })();
-  </script>
-
-  <!-- Registration Step Controller -->
-  <script>
-  (function() {
-    const detailsStep = document.querySelector('[data-form-step="details"]');
-    const paymentStep = document.querySelector('[data-form-step="payment"]');
-    const goToPaymentBtn = document.getElementById('goToPaymentBtn');
-    const backToDetailsBtn = document.getElementById('backToDetailsBtn');
-
-    if (!detailsStep || !paymentStep || !goToPaymentBtn || !backToDetailsBtn) return;
-
-    const detailFields = detailsStep.querySelectorAll('input, select, textarea');
-
-    function showStep(step) {
-      detailsStep.classList.toggle('is-active', step === 'details');
-      paymentStep.classList.toggle('is-active', step === 'payment');
-      document.getElementById('registration')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    goToPaymentBtn.addEventListener('click', () => {
-      for (const field of detailFields) {
-        if (!field.checkValidity()) {
-          field.reportValidity();
-          return;
-        }
-      }
-      showStep('payment');
-    });
-
-    backToDetailsBtn.addEventListener('click', () => {
-      showStep('details');
-    });
   })();
   </script>
 
