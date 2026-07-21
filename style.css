@@ -1129,25 +1129,25 @@ footer .container {
   .hero-grid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
-    text-align: center;
+    text-align: left;
   }
   .hero h1 {
     font-size: 3.2rem;
     white-space: normal;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
   }
   .hero .section-subtitle {
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 0;
+    margin-right: 0;
   }
   .hero-details {
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 1rem;
   }
   .hero-buttons {
-    justify-content: center;
+    justify-content: flex-start;
   }
   .grid-2 {
     gap: 2.5rem;
