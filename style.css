@@ -503,6 +503,13 @@ section .container {
   gap: 4rem;
 }
 
+.process-timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
 .card {
   border: 1px solid var(--card-border);
   border-radius: 8px;
@@ -1093,6 +1100,10 @@ footer .container {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
+  .process-timeline-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1129,6 +1140,10 @@ footer .container {
 @media (max-width: 500px) {
   .video-grid {
     grid-template-columns: 1fr;
+  }
+  .process-timeline-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 }
 
