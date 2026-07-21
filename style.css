@@ -1113,6 +1113,9 @@ footer .container {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.25rem;
   }
+  .section-title-wrap h2, .section-title {
+    font-size: 2.8rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1129,6 +1132,9 @@ footer .container {
     white-space: normal;
     flex-wrap: wrap;
     justify-content: center;
+  }
+  .section-title-wrap h2, .section-title {
+    font-size: 2.0rem;
   }
 }
 
