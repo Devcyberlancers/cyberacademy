@@ -698,7 +698,8 @@ section .container {
   background: #ffffff;
 }
 
-.registration-form-mobile-fallback {
+.registration-form-mobile-fallback,
+.registration-form-mobile-fallback[hidden] {
   display: none;
 }
 
@@ -1627,7 +1628,8 @@ footer .container {
     background: transparent;
   }
 
-  .registration-form-mobile-fallback {
+  .registration-form-mobile-fallback,
+  .registration-form-mobile-fallback[hidden] {
     display: block;
     padding: 1.5rem;
     background: var(--bg-subtle);
