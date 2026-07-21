@@ -28,13 +28,13 @@
       name: "Hari Prasad",
       title: "Cybersecurity Instructor",
       bio: "Cybersecurity trainer focused on practical labs, Linux foundations, networking, SOC workflows, and hands-on defensive security learning.",
-      avatar: "assets/speaker-shreyas-pai-g.png"
+      avatar: "assets/speaker-hari-prasad.png"
     },
     {
       name: "Shreyas Pai G",
       title: "Cybersecurity Instructor",
       bio: "Cybersecurity trainer focused on vulnerability assessment, penetration testing concepts, incident response, and career-ready security skills.",
-      avatar: "assets/speaker-hari-prasad.png"
+      avatar: "assets/speaker-shreyas-pai-g.png"
     }
   ];
 
@@ -141,10 +141,7 @@
       // 2. Speakers / Instructors
       const speakersStr = localStorage.getItem("cyberacademy_speakers");
       let speakers = speakersStr ? JSON.parse(speakersStr) : defaultSpeakers;
-      if (speakers.some(spk => spk.name === "Dr. Alex Carter" || spk.name === "Sarah Vance")) {
-        speakers = defaultSpeakers;
-        localStorage.setItem("cyberacademy_speakers", JSON.stringify(defaultSpeakers));
-      }
+      // Load dynamic speakers list
       
       const speakersContainer = document.getElementById("speakersContainer");
       if (speakersContainer) {

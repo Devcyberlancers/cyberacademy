@@ -556,16 +556,16 @@
 
     const defaultSpeakers = [
       {
-        name: "Dr. Alex Carter",
-        title: "Principal Security Architect",
-        bio: "Former Threat Intel Lead with 12+ years in offensive systems analysis, kernel-level exploit mitigation, and advanced network security topologies.",
-        avatar: "assets/speaker-alex.jpg"
+        name: "Hari Prasad",
+        title: "Cybersecurity Instructor",
+        bio: "Cybersecurity trainer focused on practical labs, Linux foundations, networking, SOC workflows, and hands-on defensive security learning.",
+        avatar: "assets/speaker-hari-prasad.png"
       },
       {
-        name: "Sarah Vance",
-        title: "Lead Incident Responder",
-        bio: "Veteran SOC operations manager specializing in SOAR playbooks, live-fire incident threat containment, and intrusion analytics.",
-        avatar: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%231d4ed8'/><circle cx='50' cy='35' r='18' fill='%23ffffff'/><path d='M25,80 C25,60 35,55 50,55 C65,55 75,60 75,80' fill='%23ffffff'/></svg>"
+        name: "Shreyas Pai G",
+        title: "Cybersecurity Instructor",
+        bio: "Cybersecurity trainer focused on vulnerability assessment, penetration testing concepts, incident response, and career-ready security skills.",
+        avatar: "assets/speaker-shreyas-pai-g.png"
       }
     ];
 
@@ -727,6 +727,10 @@
       // Load speakers settings
       const speakersStr = localStorage.getItem("cyberacademy_speakers");
       adminSpeakersList = speakersStr ? JSON.parse(speakersStr) : JSON.parse(JSON.stringify(defaultSpeakers));
+      if (adminSpeakersList.some(spk => spk.name === "Dr. Alex Carter" || spk.name === "Sarah Vance")) {
+        adminSpeakersList = JSON.parse(JSON.stringify(defaultSpeakers));
+        localStorage.setItem("cyberacademy_speakers", JSON.stringify(defaultSpeakers));
+      }
       renderAdminSpeakers();
 
       // Load certificate settings
