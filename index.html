@@ -7,7 +7,7 @@
   <link rel="icon" type="image/png" href="assets/logo-favicon.png" />
   
   <!-- Fonts (Roboto & JetBrains Mono) -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=JetBrains+Mono&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&family=JetBrains+Mono&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
   <script>
     if ('scrollRestoration' in history) {
@@ -91,7 +91,7 @@
             Cyber Academy
           </h1>
           <p class="section-subtitle">
-            <strong>Cyber Academy</strong> is a training program that teaches you cybersecurity by <em>doing it</em>. Instead of just reading, you'll practice in real labs--learning Linux, networking, and how security teams stop attacks.
+            <strong>Cyber Academy</strong> is a training program that teaches you cybersecurity by doing it. Instead of just reading, you'll practice in real labs--learning Linux, networking, and how security teams stop attacks.
           </p>
           <div class="hero-details">
             <span style="display: inline-flex; align-items: center; gap: 0.5rem;">
@@ -561,16 +561,24 @@
           </div>
         </div>
 
-        <div class="registration-box scroll-reveal delay-1">
-          <div style="width: 100%; border-radius: 16px; overflow: hidden; background: var(--bg-card); border: 1px solid var(--border);">
+        <div class="registration-box registration-form-box scroll-reveal delay-1">
+          <div class="registration-form-mobile-fallback">
+            <h3>Registration Form</h3>
+            <p>Microsoft requires this form to open in a browser tab on mobile.</p>
+            <a
+              href="https://forms.office.com/Pages/ResponsePage.aspx?id=FcrdMeKZ-Eigvu0aDGuIBg42Vog3IfdHlPHQgZAHnrdUQzczVVBUT043RElGUjJYV1g1OEdZNE5TTy4u"
+              target="_blank"
+              rel="noopener"
+              class="btn"
+            >Open Registration Form</a>
+          </div>
+          <div class="registration-form-frame">
             <iframe
+              class="registration-form-iframe"
               src="https://forms.office.com/Pages/ResponsePage.aspx?id=FcrdMeKZ-Eigvu0aDGuIBg42Vog3IfdHlPHQgZAHnrdUQzczVVBUT043RElGUjJYV1g1OEdZNE5TTy4u"
-              width="100%"
-              height="700"
               frameborder="0"
               marginheight="0"
               marginwidth="0"
-              style="border: none; border-radius: 16px; min-height: 600px;"
               title="Entrance Exam Registration Form"
               loading="lazy"
             >Loading registration form…</iframe>

@@ -677,6 +677,31 @@ section .container {
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
+.registration-form-box {
+  padding: 1rem;
+}
+
+.registration-form-frame {
+  width: 100%;
+  height: min(760px, 82vh);
+  overflow: hidden;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.registration-form-iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  background: #ffffff;
+}
+
+.registration-form-mobile-fallback {
+  display: none;
+}
+
 .form-group {
   margin-bottom: 2.2rem;
 }
@@ -1042,8 +1067,24 @@ footer .container {
 
 @media (max-width: 1024px) {
   .webgl,
-  .scanlines {
+  .scanlines,
+  .intro-overlay,
+  .intro-title {
     display: none !important;
+  }
+
+  /* Override intro-active: show content immediately on mobile */
+  body.intro-active header,
+  body.intro-active section,
+  body.intro-active footer,
+  body.intro-active .hiring-bar {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  .scroll-reveal {
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   .menu-toggle-btn {
@@ -1577,6 +1618,38 @@ footer .container {
 @media (max-width: 768px) {
   .roadmap-step {
     grid-template-columns: 72px 1fr;
+  }
+
+  .registration-form-box {
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  .registration-form-mobile-fallback {
+    display: block;
+    padding: 1.5rem;
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .registration-form-mobile-fallback h3 {
+    font-size: 1.35rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .registration-form-mobile-fallback p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+  }
+
+  .registration-form-frame {
+    display: none;
   }
 
   .roadmap-number {
