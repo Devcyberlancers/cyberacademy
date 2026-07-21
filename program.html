@@ -433,7 +433,77 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="tracker.js"></script>
-  <script src="script.js"></script>
+
+  <!-- Interactive Handlers for Course Catalog -->
+  <script>
+  (function() {
+    // 1. Menu toggle logic
+    const navBtn = document.querySelector('.c-nav-btn');
+    const menuOverlay = document.querySelector('.c-menu');
+    
+    if (navBtn && menuOverlay) {
+      navBtn.addEventListener('click', () => {
+        navBtn.classList.toggle('is-active');
+        menuOverlay.classList.toggle('is-active');
+      });
+      
+      // Close menu when clicking links
+      menuOverlay.querySelectorAll('.c-menu-link').forEach(link => {
+        link.addEventListener('click', () => {
+          navBtn.classList.remove('is-active');
+          menuOverlay.classList.remove('is-active');
+        });
+      });
+    }
+
+    // 2. Course filtering logic
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const courseCards = document.querySelectorAll('.course-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Remove active class from all buttons
+        filterBtns.forEach(b => b.classList.remove('active'));
+        // Add active class to clicked button
+        btn.classList.add('active');
+
+        const filterValue = btn.getAttribute('data-filter');
+
+        courseCards.forEach(card => {
+          if (filterValue === 'all') {
+            card.style.display = 'flex';
+          } else {
+            const category = card.getAttribute('data-category');
+            if (category === filterValue) {
+              card.style.display = 'flex';
+            } else {
+              card.style.display = 'none';
+            }
+          }
+        });
+      });
+    });
+
+    // 3. Audio widget toggle simulation
+    const playSong = document.getElementById('playSong');
+    if (playSong) {
+      let isPlaying = false;
+      const musicText = playSong.querySelector('[music-text]');
+      const soundBars = playSong.querySelectorAll('.c-sound-bar');
+      
+      // Initially stop the sound bar animation
+      soundBars.forEach(bar => bar.style.animationPlayState = 'paused');
+
+      playSong.addEventListener('click', () => {
+        isPlaying = !isPlaying;
+        musicText.textContent = isPlaying ? 'SOUND ON' : 'SOUND OFF';
+        soundBars.forEach(bar => {
+          bar.style.animationPlayState = isPlaying ? 'running' : 'paused';
+        });
+      });
+    }
+  })();
+  </script>
 
 </body>
 </html>

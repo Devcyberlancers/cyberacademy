@@ -62,7 +62,10 @@
         <a href="index.html" class="logo">
           <img src="assets/logo-header-full.png" alt="Cyber Lancers - The Frontline of Digital Security" class="logo-full-img"/>
         </a>
-        <nav class="nav-links">
+        <button class="menu-toggle-btn" id="menuToggleBtn" aria-label="Toggle Menu">
+          <span class="material-symbols-outlined" style="font-size: 2rem;">menu</span>
+        </button>
+        <nav class="nav-links" id="navLinks">
           <a href="#curriculum">Syllabus</a>
           <a href="#catalog">Fee & Programs</a>
           <a href="#eligibility">Eligibility</a>
@@ -848,9 +851,40 @@
             Download Brochure PDF
           </button>
         </form>
-      </div>
     </div>
   </div>
+  <!-- Mobile Menu Toggle Script -->
+  <script>
+  (function() {
+    const menuToggleBtn = document.getElementById('menuToggleBtn');
+    const navLinks = document.getElementById('navLinks');
+    
+    if (menuToggleBtn && navLinks) {
+      menuToggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navLinks.classList.toggle('is-active');
+        const isExpanded = navLinks.classList.contains('is-active');
+        menuToggleBtn.querySelector('span').textContent = isExpanded ? 'close' : 'menu';
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!navLinks.contains(e.target) && !menuToggleBtn.contains(e.target)) {
+          navLinks.classList.remove('is-active');
+          menuToggleBtn.querySelector('span').textContent = 'menu';
+        }
+      });
+
+      // Close menu when clicking any nav link
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('is-active');
+          menuToggleBtn.querySelector('span').textContent = 'menu';
+        });
+      });
+    }
+  })();
+  </script>
 
 </body>
 </html>
