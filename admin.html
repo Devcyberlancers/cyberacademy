@@ -278,7 +278,7 @@
               <label for="brochureUrl">Brochure File URL / Path</label>
               <input type="text" id="brochureUrl" required />
               <small style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.3rem; display: block;">
-                Default is <code>assets/brochure.pdf</code>.
+                Default is Google Drive direct download URL.
               </small>
             </div>
 
@@ -497,7 +497,7 @@
     };
 
     const defaultBrochure = {
-      url: "assets/brochure.pdf",
+      url: "https://drive.google.com/uc?export=download&id=1aezd7SHvCBdRJWFEOwxo56yOk76hi2qX",
       formspreeUrl: ""
     };
 
@@ -659,7 +659,10 @@
       document.getElementById("certText").value = cert.text;
 
       // Load brochure settings
-      const brochureUrl = localStorage.getItem("cyberacademy_brochure_url") || defaultBrochure.url;
+      let brochureUrl = localStorage.getItem("cyberacademy_brochure_url");
+      if (!brochureUrl || brochureUrl === "assets/brochure.pdf") {
+        brochureUrl = defaultBrochure.url;
+      }
       const formspreeUrl = localStorage.getItem("cyberacademy_formspree_url") || defaultBrochure.formspreeUrl;
       
       document.getElementById("brochureUrl").value = brochureUrl;

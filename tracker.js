@@ -39,7 +39,7 @@
   ];
 
   const defaultBrochure = {
-    url: "assets/brochure.pdf",
+    url: "https://drive.google.com/uc?export=download&id=1aezd7SHvCBdRJWFEOwxo56yOk76hi2qX",
     formspreeUrl: ""
   };
 
@@ -268,7 +268,10 @@
     }
 
     // 3. Trigger Download
-    const brochureUrl = localStorage.getItem("cyberacademy_brochure_url") || defaultBrochure.url;
+    let brochureUrl = localStorage.getItem("cyberacademy_brochure_url");
+    if (!brochureUrl || brochureUrl === "assets/brochure.pdf") {
+      brochureUrl = defaultBrochure.url;
+    }
     const downloadAnchor = document.createElement("a");
     downloadAnchor.href = brochureUrl;
     downloadAnchor.download = brochureUrl.split("/").pop();
