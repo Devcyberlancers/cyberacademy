@@ -1020,6 +1020,11 @@ footer .container {
 .delay-3 { transition-delay: 0.3s; }
 
 @media (max-width: 1024px) {
+  .webgl,
+  .scanlines {
+    display: none !important;
+  }
+
   .menu-toggle-btn {
     display: flex;
   }

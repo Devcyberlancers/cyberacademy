@@ -271,6 +271,15 @@ const introOverlay = document.getElementById('introOverlay');
 const scrollHint = document.getElementById('scrollHint');
 const introTitle = document.getElementById('introTitle');
 
+const isMobileDevice = window.innerWidth < 1024;
+if (isMobileDevice) {
+  introActive = false;
+  document.body.classList.remove('intro-active');
+  if (introOverlay) introOverlay.classList.add('done');
+  if (scrollHint) scrollHint.classList.add('hidden');
+  if (introTitle) introTitle.style.opacity = 0;
+}
+
 // Body already has 'intro-active' class set in HTML
 
 // The page resets scroll in the document head before module imports load.
@@ -286,6 +295,12 @@ const CAM_END_Z = -4;   // behind the torus (through the hole)
 
 // Tick Loop
 const tick = () => {
+  if (isMobileDevice) {
+    // Hide the canvas and return to disable WebGL render loop on mobile
+    const canvas = document.querySelector(".webgl");
+    if (canvas) canvas.style.display = 'none';
+    return;
+  }
   const time = performance.now() * 0.001;
   const delta = time - lastTime;
   lastTime = time;
