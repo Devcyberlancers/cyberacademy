@@ -254,6 +254,7 @@ window.addEventListener("mousemove", (e) => {
 
 const fragParams = { hoverRadius: 0.75, liftDist: 0.28, liftSpeedUp: 0.15, liftSpeedDown: 0.06 };
 let lastTime = 0;
+let accumulatedIdleY = 0;
 const hover = { point: new THREE.Vector3(), active: 0 };
 const _localHover = new THREE.Vector3();
 
@@ -338,8 +339,14 @@ const tick = () => {
     const rotateP = smoothstep(0, 0.4, p);
     const zoomP = smoothstep(0.35, 1.0, p);
 
-    // Torus rotation: start angled, end face-on
-    torusGroup.rotation.y = (1 - rotateP) * 0.6 + time * 0.05 * (1 - rotateP);
+    // Accumulate ambient spin only while standing idle at the top (p === 0)
+    if (p === 0) {
+      accumulatedIdleY += delta * 0.05;
+    }
+
+    // Torus rotation: start angled + frozen idle offset (normalized to [-PI, PI]), smoothly reverse to 0 as user scrolls
+    const idleYNorm = Math.atan2(Math.sin(accumulatedIdleY), Math.cos(accumulatedIdleY));
+    torusGroup.rotation.y = (1 - rotateP) * (0.6 + idleYNorm);
     torusGroup.rotation.x = (1 - rotateP) * 0.3;
 
     // Camera Z: lerp from start to end (through the hole)

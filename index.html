@@ -7,6 +7,8 @@
   <link rel="icon" type="image/png" href="assets/logo-favicon.png" />
   
   <!-- Fonts (Roboto & JetBrains Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&family=JetBrains+Mono&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
   <script>
@@ -17,7 +19,7 @@
   </script>
   
   <!-- Main Stylesheet -->
-  <link href="style.css?v=6" rel="stylesheet" type="text/css"/>
+  <link href="style.css?v=7" rel="stylesheet" type="text/css"/>
 
   <!-- Three.js Importmap Setup -->
   <script type="importmap">
@@ -190,7 +192,7 @@
             Real network equipment, wireless testing decks, and physical host environments mapped to operational consoles.
           </p>
           <div style="border: 2px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: 0 4px 0 0 var(--border); aspect-ratio: 16/9; background: #000;">
-            <iframe src="https://www.youtube.com/embed/tWaARtZc7Tg?rel=0" style="width: 100%; height: 100%; border: none; display: block;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/tWaARtZc7Tg?rel=0" style="width: 100%; height: 100%; border: none; display: block;" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
         </div>
         
@@ -419,7 +421,7 @@
       <div class="process-timeline-grid scroll-reveal delay-1">
 
         <!-- Step 1 -->
-        <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 2rem 1.5rem; text-align: center; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+        <div class="process-step" onclick="showProcessDetail(1)" id="processStep1" style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 2rem 1.5rem; text-align: center; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.04); cursor: pointer; transition: all 0.3s ease;">
           <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.1rem; margin: 0 auto 1rem;">1</div>
           <span class="material-symbols-outlined" style="font-size: 2rem; color: var(--accent); margin-bottom: 0.5rem; display: block;">app_registration</span>
           <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem;">Apply Online</h4>
@@ -427,7 +429,7 @@
         </div>
 
         <!-- Step 2 -->
-        <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 2rem 1.5rem; text-align: center; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+        <div class="process-step" onclick="showProcessDetail(2)" id="processStep2" style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 2rem 1.5rem; text-align: center; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.04); cursor: pointer; transition: all 0.3s ease;">
           <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.1rem; margin: 0 auto 1rem;">2</div>
           <span class="material-symbols-outlined" style="font-size: 2rem; color: var(--accent); margin-bottom: 0.5rem; display: block;">fact_check</span>
           <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem;">Admin Review</h4>
@@ -435,7 +437,7 @@
         </div>
 
         <!-- Step 3 -->
-        <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 2rem 1.5rem; text-align: center; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+        <div class="process-step" onclick="showProcessDetail(3)" id="processStep3" style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 2rem 1.5rem; text-align: center; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.04); cursor: pointer; transition: all 0.3s ease;">
           <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.1rem; margin: 0 auto 1rem;">3</div>
           <span class="material-symbols-outlined" style="font-size: 2rem; color: var(--accent); margin-bottom: 0.5rem; display: block;">edit_note</span>
           <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem;">Entrance Test</h4>
@@ -443,7 +445,7 @@
         </div>
 
         <!-- Step 4 -->
-        <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 2rem 1.5rem; text-align: center; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+        <div class="process-step" onclick="showProcessDetail(4)" id="processStep4" style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 2rem 1.5rem; text-align: center; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.04); cursor: pointer; transition: all 0.3s ease;">
           <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.1rem; margin: 0 auto 1rem;">4</div>
           <span class="material-symbols-outlined" style="font-size: 2rem; color: var(--accent); margin-bottom: 0.5rem; display: block;">groups</span>
           <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem;">Interview</h4>
@@ -451,7 +453,7 @@
         </div>
 
         <!-- Step 5 -->
-        <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 2rem 1.5rem; text-align: center; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+        <div class="process-step" onclick="showProcessDetail(5)" id="processStep5" style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 2rem 1.5rem; text-align: center; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.04); cursor: pointer; transition: all 0.3s ease;">
           <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.1rem; margin: 0 auto 1rem;">5</div>
           <span class="material-symbols-outlined" style="font-size: 2rem; color: var(--accent); margin-bottom: 0.5rem; display: block;">mail</span>
           <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem;">Offer Letter</h4>
@@ -459,7 +461,7 @@
         </div>
 
         <!-- Step 6 -->
-        <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 2rem 1.5rem; text-align: center; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+        <div class="process-step" onclick="showProcessDetail(6)" id="processStep6" style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 2rem 1.5rem; text-align: center; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.04); cursor: pointer; transition: all 0.3s ease;">
           <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.1rem; margin: 0 auto 1rem;">6</div>
           <span class="material-symbols-outlined" style="font-size: 2rem; color: var(--accent); margin-bottom: 0.5rem; display: block;">payments</span>
           <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem;">Fee Payment</h4>
@@ -467,7 +469,7 @@
         </div>
 
         <!-- Step 7 -->
-        <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 2rem 1.5rem; text-align: center; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+        <div class="process-step" onclick="showProcessDetail(7)" id="processStep7" style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 2rem 1.5rem; text-align: center; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.04); cursor: pointer; transition: all 0.3s ease;">
           <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.1rem; margin: 0 auto 1rem;">7</div>
           <span class="material-symbols-outlined" style="font-size: 2rem; color: var(--accent); margin-bottom: 0.5rem; display: block;">school</span>
           <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem;">Training & Labs</h4>
@@ -475,13 +477,25 @@
         </div>
 
         <!-- Step 8 -->
-        <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 2rem 1.5rem; text-align: center; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+        <div class="process-step" onclick="showProcessDetail(8)" id="processStep8" style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 2rem 1.5rem; text-align: center; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.04); cursor: pointer; transition: all 0.3s ease;">
           <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.1rem; margin: 0 auto 1rem;">8</div>
           <span class="material-symbols-outlined" style="font-size: 2rem; color: var(--accent); margin-bottom: 0.5rem; display: block;">workspace_premium</span>
           <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem;">Certificate & Placement</h4>
           <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">Complete assessment & project. Certificate issued + placement support.</p>
         </div>
 
+      </div>
+
+      <!-- Expandable Detail Panel -->
+      <div id="processDetailPanel" style="display: none; margin-top: 2rem; background: var(--card-bg); border: 2px solid var(--accent); border-radius: 16px; padding: 2.5rem; box-shadow: 0 8px 32px rgba(29, 78, 216, 0.12); transition: all 0.3s ease; position: relative;">
+        <button onclick="closeProcessDetail()" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 1.5rem; line-height: 1; padding: 0.25rem;" aria-label="Close">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem;">
+          <div id="processDetailBadge" style="width: 40px; height: 40px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem; flex-shrink: 0;"></div>
+          <h3 id="processDetailTitle" style="font-size: 1.3rem; font-weight: 800; margin: 0;"></h3>
+        </div>
+        <p id="processDetailText" style="font-size: 1rem; color: var(--text-muted); line-height: 1.8; margin: 0;"></p>
       </div>
     </div>
   </section>
@@ -507,7 +521,7 @@
           <div class="faq-item">
             <h4>What is the refund policy?</h4>
             <p>
-              The 500 RS entrance test fee is non-refundable. For course fees, full refunds (excluding GST) are available if requested within 7 days of the batch start date.
+              The ₹500 entrance test fee is non-refundable. For course fees, full refunds (excluding GST) are available if requested within 7 days of the batch start date.
             </p>
           </div>
         </div>
@@ -547,7 +561,7 @@
             <ul class="feature-list" style="margin: 0;">
               <li style="margin-bottom: 0.8rem;">
                 <span class="material-symbols-outlined" style="font-size: 1.25rem;">payments</span>
-                <span><strong>Application Fee:</strong> 500 RS (Entrance Test Processing)</span>
+                <span><strong>Application Fee:</strong> ₹500 (Entrance Test Processing)</span>
               </li>
               <li style="margin-bottom: 0.8rem;">
                 <span class="material-symbols-outlined" style="font-size: 1.25rem;">assignment</span>
@@ -642,7 +656,7 @@
   <script src="tracker.js"></script>
 
   <!-- Main Animation Script -->
-  <script type="module" src="script.js"></script>
+  <script type="module" src="script.js?v=2"></script>
 
   <!-- Terminal Code Animation -->
   <script>
@@ -776,6 +790,104 @@
         });
       });
     }
+  })();
+  </script>
+
+
+  <!-- Admission Process Step Detail Script -->
+  <script>
+  (function() {
+    const processDetails = {
+      1: {
+        title: 'Apply Online',
+        text: 'Visit our website and fill out the online registration form with your personal details, educational background, and area of interest in cybersecurity. Pay the ₹500 non-refundable application fee to complete your registration. You will receive a confirmation email with your application ID and next steps.'
+      },
+      2: {
+        title: 'Admin Review',
+        text: 'Our admissions team carefully reviews your application to assess your eligibility and background. Once approved, you will receive an email notification with your scheduled entrance test date, time, and venue details. This process typically takes 2–3 business days.'
+      },
+      3: {
+        title: 'Entrance Test',
+        text: 'Attend the entrance test at the designated offline center. The test covers basic computer fundamentals, logical reasoning, and aptitude. You need to score a minimum of 60% to qualify for the next round. Results are typically shared within 48 hours via email.'
+      },
+      4: {
+        title: 'Interview',
+        text: 'Candidates who clear the entrance test are invited for a technical interview round. This interview evaluates your motivation, problem-solving ability, and passion for cybersecurity. It\'s a one-on-one discussion with our senior instructors — no coding required at this stage.'
+      },
+      5: {
+        title: 'Offer Letter',
+        text: 'Congratulations! If you pass the interview, you will receive an official offer letter via email. The offer letter contains your batch details, course start date, fee structure, and terms & conditions. You must accept the offer within the specified deadline to secure your seat.'
+      },
+      6: {
+        title: 'Fee Payment',
+        text: 'Complete the course fee payment through our secure payment portal. We offer flexible payment options including full payment, EMI plans, and scholarship discounts for eligible candidates. Once payment is confirmed, your admission is officially locked in.'
+      },
+      7: {
+        title: 'Training & Labs',
+        text: 'Your student login is created and you get access to our learning management system. Begin your hands-on cybersecurity training with real lab environments, live projects, attendance tracking, and mentorship from industry experts. Training includes networking, ethical hacking, SOC operations, and more.'
+      },
+      8: {
+        title: 'Certificate & Placement',
+        text: 'After completing all modules, assessments, and your capstone project, you receive an industry-recognized certificate. Our placement cell provides resume building, mock interviews, and direct connections with hiring partners. We support you until you land your first cybersecurity role.'
+      }
+    };
+
+    let activeStep = null;
+
+    window.showProcessDetail = function(step) {
+      const panel = document.getElementById('processDetailPanel');
+      const badge = document.getElementById('processDetailBadge');
+      const title = document.getElementById('processDetailTitle');
+      const text = document.getElementById('processDetailText');
+
+      // Remove active state from all steps
+      document.querySelectorAll('.process-step').forEach(el => {
+        el.style.border = '1px solid var(--card-border)';
+        el.style.boxShadow = '0 2px 8px rgba(0,0,0,0.04)';
+        el.style.transform = '';
+      });
+
+      // If clicking the same step, toggle off
+      if (activeStep === step) {
+        panel.style.display = 'none';
+        activeStep = null;
+        return;
+      }
+
+      // Highlight active step
+      const activeCard = document.getElementById('processStep' + step);
+      activeCard.style.border = '2px solid var(--accent)';
+      activeCard.style.boxShadow = '0 8px 24px rgba(29, 78, 216, 0.18)';
+      activeCard.style.transform = 'translateY(-4px)';
+
+      // Fill detail panel
+      const detail = processDetails[step];
+      badge.textContent = step;
+      title.textContent = detail.title;
+      text.textContent = detail.text;
+
+      // Show panel
+      panel.style.display = 'block';
+      activeStep = step;
+
+      // Smooth scroll to panel
+      setTimeout(() => {
+        panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 100);
+    };
+
+    window.closeProcessDetail = function() {
+      const panel = document.getElementById('processDetailPanel');
+      panel.style.display = 'none';
+      activeStep = null;
+
+      // Remove active state from all steps
+      document.querySelectorAll('.process-step').forEach(el => {
+        el.style.border = '1px solid var(--card-border)';
+        el.style.boxShadow = '0 2px 8px rgba(0,0,0,0.04)';
+        el.style.transform = '';
+      });
+    };
   })();
   </script>
 
