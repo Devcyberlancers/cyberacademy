@@ -19,7 +19,11 @@
   </script>
   
   <!-- Main Stylesheet -->
-  <link href="style.css?v=7" rel="stylesheet" type="text/css"/>
+  <link href="style.css?v=8" rel="stylesheet" type="text/css"/>
+
+  <!-- Module Preloads for Instant Script Execution -->
+  <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js" />
+  <link rel="modulepreload" href="script.js?v=3" />
 
   <!-- Three.js Importmap Setup -->
   <script type="importmap">
@@ -32,6 +36,17 @@
   </script>
 </head>
 <body class="intro-active">
+  <!-- Instant Cyber Preloader -->
+  <div id="preloader">
+    <div class="preloader-logo-wrap">
+      <img src="assets/logo-shield.png" alt="Cyber Academy" class="preloader-logo"/>
+      <span class="preloader-title">CYBER ACADEMY</span>
+    </div>
+    <div class="preloader-progress-track">
+      <div class="preloader-progress-bar" id="preloaderBar"></div>
+    </div>
+  </div>
+
   <!-- WebGL Background Canvas -->
   <canvas class="webgl"></canvas>
   <div class="scanlines"></div>
@@ -87,7 +102,6 @@
     <div class="container">
       <div class="hero-grid">
         <div class="hero-content scroll-reveal">
-          <div class="hero-tag">About Us</div>
           <h1 style="display: flex; align-items: center; gap: 1rem;">
             <img src="assets/logo-cyber-academy-rocket.png" alt="Cyber Academy" style="height: 110px; width: auto;"/>
             Cyber Academy
@@ -361,37 +375,71 @@
         <p>Hear from operators who completed training modules at Cyber Lancers.</p>
       </div>
       
-      <div class="video-grid">
-        <!-- Video 1 -->
-        <div class="video-card scroll-reveal delay-1" onclick="openVideo('uRcqRrRbYyI')">
-          <img src="https://img.youtube.com/vi/uRcqRrRbYyI/hqdefault.jpg" alt="Testimonial 1" style="width: 100%; height: 100%; object-fit: cover;" />
-          <div class="video-play-btn">
-            <span class="material-symbols-outlined" style="font-size: 2.2rem; color: var(--text);">play_arrow</span>
-          </div>
-        </div>
+      <div class="testimonial-wrapper scroll-reveal">
+        <div class="testimonial-container">
+          <!-- Card 1 -->
+          <input type="radio" name="testimonial-slide" id="t1" class="testimonial-input" checked>
+          <label for="t1" class="testimonial-card" style="background-image: url('https://img.youtube.com/vi/uRcqRrRbYyI/hqdefault.jpg');">
+            <div class="testimonial-overlay"></div>
+            <div class="row">
+              <div class="icon" onclick="event.stopPropagation(); openVideo('uRcqRrRbYyI');" title="Watch Video">
+                <span class="material-symbols-outlined" style="font-size: 2rem;">play_arrow</span>
+              </div>
+              <div class="description">
+                <div class="student-tag">SOC Analyst Graduate</div>
+                <h4>Sathvik</h4>
+                <p>"Hands-on lab training helped me land my first cybersecurity job in 3 months."</p>
+              </div>
+            </div>
+          </label>
 
-        <!-- Video 2 -->
-        <div class="video-card scroll-reveal delay-2" onclick="openVideo('apXzylYPFEc')">
-          <img src="https://img.youtube.com/vi/apXzylYPFEc/hqdefault.jpg" alt="Testimonial 2" style="width: 100%; height: 100%; object-fit: cover;" />
-          <div class="video-play-btn">
-            <span class="material-symbols-outlined" style="font-size: 2.2rem; color: var(--text);">play_arrow</span>
-          </div>
-        </div>
+          <!-- Card 2 -->
+          <input type="radio" name="testimonial-slide" id="t2" class="testimonial-input">
+          <label for="t2" class="testimonial-card" style="background-image: url('https://img.youtube.com/vi/apXzylYPFEc/hqdefault.jpg');">
+            <div class="testimonial-overlay"></div>
+            <div class="row">
+              <div class="icon" onclick="event.stopPropagation(); openVideo('apXzylYPFEc');" title="Watch Video">
+                <span class="material-symbols-outlined" style="font-size: 2rem;">play_arrow</span>
+              </div>
+              <div class="description">
+                <div class="student-tag">Ethical Hacking Alumnus</div>
+                <h4>Vikas</h4>
+                <p>"Real-world penetration testing scenarios gave me ultimate confidence in interviews."</p>
+              </div>
+            </div>
+          </label>
 
-        <!-- Video 3 -->
-        <div class="video-card scroll-reveal delay-3" onclick="openVideo('sbhzAC6P3Sc')">
-          <img src="https://img.youtube.com/vi/sbhzAC6P3Sc/hqdefault.jpg" alt="Testimonial 3" style="width: 100%; height: 100%; object-fit: cover;" />
-          <div class="video-play-btn">
-            <span class="material-symbols-outlined" style="font-size: 2.2rem; color: var(--text);">play_arrow</span>
-          </div>
-        </div>
+          <!-- Card 3 -->
+          <input type="radio" name="testimonial-slide" id="t3" class="testimonial-input">
+          <label for="t3" class="testimonial-card" style="background-image: url('https://img.youtube.com/vi/sbhzAC6P3Sc/hqdefault.jpg');">
+            <div class="testimonial-overlay"></div>
+            <div class="row">
+              <div class="icon" onclick="event.stopPropagation(); openVideo('sbhzAC6P3Sc');" title="Watch Video">
+                <span class="material-symbols-outlined" style="font-size: 2rem;">play_arrow</span>
+              </div>
+              <div class="description">
+                <div class="student-tag">Network Security Trainee</div>
+                <h4>Divya</h4>
+                <p>"The instructors are industry experts who guide you step-by-step through labs."</p>
+              </div>
+            </div>
+          </label>
 
-        <!-- Video 4 -->
-        <div class="video-card scroll-reveal delay-3" onclick="openVideo('sHeFw1BmbfY')">
-          <img src="https://img.youtube.com/vi/sHeFw1BmbfY/hqdefault.jpg" alt="Testimonial 4" style="width: 100%; height: 100%; object-fit: cover;" />
-          <div class="video-play-btn">
-            <span class="material-symbols-outlined" style="font-size: 2.2rem; color: var(--text);">play_arrow</span>
-          </div>
+          <!-- Card 4 -->
+          <input type="radio" name="testimonial-slide" id="t4" class="testimonial-input">
+          <label for="t4" class="testimonial-card" style="background-image: url('https://img.youtube.com/vi/sHeFw1BmbfY/hqdefault.jpg');">
+            <div class="testimonial-overlay"></div>
+            <div class="row">
+              <div class="icon" onclick="event.stopPropagation(); openVideo('sHeFw1BmbfY');" title="Watch Video">
+                <span class="material-symbols-outlined" style="font-size: 2rem;">play_arrow</span>
+              </div>
+              <div class="description">
+                <div class="student-tag">Cyber Defense Specialist</div>
+                <h4>Nisha</h4>
+                <p>"From beginner to certified professional -- Cyber Academy made it possible."</p>
+              </div>
+            </div>
+          </label>
         </div>
       </div>
     </div>

@@ -6,6 +6,11 @@ import { UnrealBloomPass } from "jsm/postprocessing/UnrealBloomPass.js";
 import { ShaderPass } from "jsm/postprocessing/ShaderPass.js";
 import { FXAAShader } from "jsm/shaders/FXAAShader.js";
 
+// Preloader helper
+const preloaderBar = document.getElementById('preloaderBar');
+const preloaderEl = document.getElementById('preloader');
+if (preloaderBar) preloaderBar.style.width = '40%';
+
 // Scene
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xffffff); // Default Light mode (white)
@@ -23,7 +28,7 @@ camera.position.z = 7;
 // Renderer
 const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector(".webgl"), antialias: true, alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.2;
 
@@ -112,12 +117,12 @@ function addBarycentricCoords(geo) {
 }
 
 torusGroup.add(new THREE.Mesh(
-  addBarycentricCoords(new THREE.TorusGeometry(2, 0.4, 80, 80)),
+  addBarycentricCoords(new THREE.TorusGeometry(2, 0.4, 48, 48)),
   wireMaterial,
 ));
 
 // Voronoi decomposition parameters
-const FRAG_SCALE = 50;
+const FRAG_SCALE = 32;
 const TORUS_R = 2, TORUS_r = 0.4;
 
 function hash2(px, py) {
@@ -143,7 +148,8 @@ function cellSeed(u, v) {
 
 // Generate fragments
 const fragments = (() => {
-  const baseGeo = new THREE.TorusGeometry(TORUS_R, TORUS_r, 100, 100);
+  if (preloaderBar) preloaderBar.style.width = '70%';
+  const baseGeo = new THREE.TorusGeometry(TORUS_R, TORUS_r, 48, 48);
   const nonIndexed = baseGeo.toNonIndexed();
   baseGeo.dispose();
   const pos = nonIndexed.attributes.position.array;
@@ -240,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Invisible raycaster mesh
 const rcMesh = new THREE.Mesh(
-  new THREE.TorusGeometry(TORUS_R, TORUS_r, 80, 80),
+  new THREE.TorusGeometry(TORUS_R, TORUS_r, 32, 32),
   new THREE.MeshBasicMaterial({ visible: false }),
 );
 torusGroup.add(rcMesh);
@@ -295,11 +301,13 @@ const CAM_START_Z = 7;
 const CAM_END_Z = -4;   // behind the torus (through the hole)
 
 // Tick Loop
+let isFirstFrame = true;
 const tick = () => {
   if (isMobileDevice) {
     // Hide the canvas and return to disable WebGL render loop on mobile
     const canvas = document.querySelector(".webgl");
     if (canvas) canvas.style.display = 'none';
+    if (preloaderEl) preloaderEl.classList.add('fade-out');
     return;
   }
   const time = performance.now() * 0.001;
@@ -360,22 +368,14 @@ const tick = () => {
     scrollGroup.rotation.y = 0;
 
     // --- TITLE ANIMATION ---
-    // Timeline:
-    //   p 0.15–0.35: text rises from below to center (translateY: 100vh → 0)
-    //   p 0.35–0.55: text holds at center, fully visible
-    //   p 0.55–0.80: text zooms past the viewer (scale up + fade out)
     if (introTitle) {
       const riseP = smoothstep(0.15, 0.35, p);   // 0→1: rise into view
       const holdEnd = 0.55;
       const zoomOutP = smoothstep(holdEnd, 0.80, p); // 0→1: zoom away
 
-      // Y position: starts at +60vh, rises to center (-50%), then stays
       const translateY = (1 - riseP) * 60; // vh units
-
-      // Scale: 1 during hold, ramps up to 8 during zoom-out
       const scale = 1 + zoomOutP * 7;
 
-      // Opacity: fade in during rise, full during hold, fade out during zoom
       let opacity;
       if (p < 0.15) {
         opacity = 0;
@@ -407,6 +407,15 @@ const tick = () => {
   }
 
   composer.render();
+
+  if (isFirstFrame) {
+    isFirstFrame = false;
+    if (preloaderBar) preloaderBar.style.width = '100%';
+    setTimeout(() => {
+      if (preloaderEl) preloaderEl.classList.add('fade-out');
+    }, 200);
+  }
+
   requestAnimationFrame(tick);
 };
 tick();
@@ -449,7 +458,7 @@ function finishIntro() {
   window.scrollTo(0, 0);
 }
 
-window.addEventListener('scroll', handleIntroScroll);
+window.addEventListener('scroll', handleIntroScroll, { passive: true });
 handleIntroScroll();
 
 // WebGL scroll sync (only when intro is done)
@@ -458,14 +467,14 @@ window.addEventListener("scroll", () => {
   const scrollRatio = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
   scrollGroup.position.x = -scrollRatio * 1.5;
   scrollGroup.rotation.y = scrollRatio * Math.PI * 0.5;
-});
+}, { passive: true });
 
 // Resize
 window.addEventListener("resize", () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
   composer.setSize(window.innerWidth, window.innerHeight);
   fxaaPass.uniforms["resolution"].value.set(1 / window.innerWidth, 1 / window.innerHeight);
 });

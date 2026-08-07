@@ -28,13 +28,13 @@
       name: "Hari Prasad",
       title: "Cybersecurity Instructor",
       bio: "Cybersecurity trainer focused on practical labs, Linux foundations, networking, SOC workflows, and hands-on defensive security learning.",
-      avatar: "assets/speaker-hari-prasad.png"
+      avatar: "assets/speaker-shreyas-pai-g.png"
     },
     {
       name: "Shreyas Pai G",
       title: "Cybersecurity Instructor",
       bio: "Cybersecurity trainer focused on vulnerability assessment, penetration testing concepts, incident response, and career-ready security skills.",
-      avatar: "assets/speaker-shreyas-pai-g.png"
+      avatar: "assets/speaker-hari-prasad.png"
     }
   ];
 
