@@ -299,18 +299,6 @@
             </div>
           </div>
 
-          <!-- Sample Certificate Configuration -->
-          <div class="config-card">
-            <h4><span class="material-symbols-outlined">badge</span> Sample Certificate Details</h4>
-            <div class="form-group" style="max-width: 600px;">
-              <label for="certName">Sample Student Name</label>
-              <input type="text" id="certName" required />
-            </div>
-            <div class="form-group" style="max-width: 600px;">
-              <label for="certText">Description Details</label>
-              <textarea id="certText" class="form-control" required style="min-height: 80px;"></textarea>
-            </div>
-          </div>
 
           <!-- Speakers / Instructors Configuration -->
           <div class="config-card">
@@ -785,12 +773,6 @@
       }
       renderAdminSpeakers();
 
-      // Load certificate settings
-      const certStr = localStorage.getItem("cyberacademy_certificate");
-      const cert = certStr ? JSON.parse(certStr) : defaultCertificate;
-      
-      document.getElementById("certName").value = cert.name;
-      document.getElementById("certText").value = cert.text;
 
       // Load brochure settings
       let brochureUrl = localStorage.getItem("cyberacademy_brochure_url");
@@ -817,12 +799,6 @@
       syncAdminSpeakersFromDOM();
       localStorage.setItem("cyberacademy_speakers", JSON.stringify(adminSpeakersList));
 
-      // 3. Save Certificate
-      const cert = {
-        name: document.getElementById("certName").value.trim(),
-        text: document.getElementById("certText").value.trim()
-      };
-      localStorage.setItem("cyberacademy_certificate", JSON.stringify(cert));
 
       // 4. Save Brochure URL & Formspree Endpoint
       const brochureUrl = document.getElementById("brochureUrl").value.trim();
