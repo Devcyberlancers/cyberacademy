@@ -19,11 +19,10 @@
   </script>
   
   <!-- Main Stylesheet -->
-  <link href="style.css?v=8" rel="stylesheet" type="text/css"/>
+  <link href="style.css?v=9" rel="stylesheet" type="text/css"/>
 
-  <!-- Module Preloads for Instant Script Execution -->
-  <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js" />
-  <link rel="modulepreload" href="script.js?v=3" />
+  <!-- Module Preload for Site Script -->
+  <link rel="modulepreload" href="script.js?v=4" />
 
   <!-- Three.js Importmap Setup -->
   <script type="importmap">
@@ -46,6 +45,20 @@
       <div class="preloader-progress-bar" id="preloaderBar"></div>
     </div>
   </div>
+  <script>
+    window.__cyberPreloaderFallback = window.setTimeout(function () {
+      var preloader = document.getElementById('preloader');
+      var introOverlay = document.getElementById('introOverlay');
+      var canvas = document.querySelector('.webgl');
+      var scanlines = document.querySelector('.scanlines');
+
+      document.body.classList.remove('intro-active');
+      if (introOverlay) introOverlay.classList.add('done');
+      if (canvas) canvas.style.display = 'none';
+      if (scanlines) scanlines.style.display = 'none';
+      if (preloader) preloader.classList.add('fade-out');
+    }, 3500);
+  </script>
 
   <!-- WebGL Background Canvas -->
   <canvas class="webgl"></canvas>
@@ -704,7 +717,7 @@
   <script src="tracker.js"></script>
 
   <!-- Main Animation Script -->
-  <script type="module" src="script.js?v=3"></script>
+  <script type="module" src="script.js?v=4"></script>
 
   <!-- Terminal Code Animation -->
   <script>

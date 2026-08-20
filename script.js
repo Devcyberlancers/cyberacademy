@@ -410,6 +410,10 @@ const tick = () => {
 
   if (isFirstFrame) {
     isFirstFrame = false;
+    if (window.__cyberPreloaderFallback) {
+      clearTimeout(window.__cyberPreloaderFallback);
+      window.__cyberPreloaderFallback = null;
+    }
     if (preloaderBar) preloaderBar.style.width = '100%';
     setTimeout(() => {
       if (preloaderEl) preloaderEl.classList.add('fade-out');
