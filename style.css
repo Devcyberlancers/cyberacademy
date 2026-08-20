@@ -1254,14 +1254,15 @@ footer .container {
 /* ============================================
    SCROLL REVEAL STYLES (Smooth entry)
    ============================================ */
-.scroll-reveal {
+.animations-ready .scroll-reveal {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
               transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.scroll-reveal.reveal-active {
+.scroll-reveal,
+.animations-ready .scroll-reveal.reveal-active {
   opacity: 1;
   transform: translateY(0);
 }

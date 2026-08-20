@@ -9,6 +9,7 @@ import { FXAAShader } from "jsm/shaders/FXAAShader.js";
 // Preloader helper
 const preloaderBar = document.getElementById('preloaderBar');
 const preloaderEl = document.getElementById('preloader');
+document.body.classList.add('animations-ready');
 if (preloaderBar) preloaderBar.style.width = '40%';
 
 // Scene
