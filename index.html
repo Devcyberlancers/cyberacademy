@@ -19,10 +19,10 @@
   </script>
   
   <!-- Main Stylesheet -->
-  <link href="style.css?v=10" rel="stylesheet" type="text/css"/>
+  <link href="style.css?v=11" rel="stylesheet" type="text/css"/>
 
   <!-- Module Preload for Site Script -->
-  <link rel="modulepreload" href="script.js?v=5" />
+  <link rel="modulepreload" href="script.js?v=6" />
 
   <!-- Three.js Importmap Setup -->
   <script type="importmap">
@@ -392,10 +392,10 @@
         <div class="testimonial-container">
           <!-- Card 1 -->
           <input type="radio" name="testimonial-slide" id="t1" class="testimonial-input" checked>
-          <label for="t1" class="testimonial-card" style="background-image: url('https://img.youtube.com/vi/uRcqRrRbYyI/hqdefault.jpg');">
+          <label for="t1" class="testimonial-card" data-video-id="uRcqRrRbYyI" style="background-image: url('https://img.youtube.com/vi/uRcqRrRbYyI/hqdefault.jpg');">
             <div class="testimonial-overlay"></div>
             <div class="row">
-              <div class="icon" onclick="event.stopPropagation(); openVideo('uRcqRrRbYyI');" title="Watch Video">
+              <div class="icon" title="Watch Video">
                 <span class="material-symbols-outlined" style="font-size: 2rem;">play_arrow</span>
               </div>
               <div class="description">
@@ -408,10 +408,10 @@
 
           <!-- Card 2 -->
           <input type="radio" name="testimonial-slide" id="t2" class="testimonial-input">
-          <label for="t2" class="testimonial-card" style="background-image: url('https://img.youtube.com/vi/apXzylYPFEc/hqdefault.jpg');">
+          <label for="t2" class="testimonial-card" data-video-id="apXzylYPFEc" style="background-image: url('https://img.youtube.com/vi/apXzylYPFEc/hqdefault.jpg');">
             <div class="testimonial-overlay"></div>
             <div class="row">
-              <div class="icon" onclick="event.stopPropagation(); openVideo('apXzylYPFEc');" title="Watch Video">
+              <div class="icon" title="Watch Video">
                 <span class="material-symbols-outlined" style="font-size: 2rem;">play_arrow</span>
               </div>
               <div class="description">
@@ -424,10 +424,10 @@
 
           <!-- Card 3 -->
           <input type="radio" name="testimonial-slide" id="t3" class="testimonial-input">
-          <label for="t3" class="testimonial-card" style="background-image: url('https://img.youtube.com/vi/sbhzAC6P3Sc/hqdefault.jpg');">
+          <label for="t3" class="testimonial-card" data-video-id="sbhzAC6P3Sc" style="background-image: url('https://img.youtube.com/vi/sbhzAC6P3Sc/hqdefault.jpg');">
             <div class="testimonial-overlay"></div>
             <div class="row">
-              <div class="icon" onclick="event.stopPropagation(); openVideo('sbhzAC6P3Sc');" title="Watch Video">
+              <div class="icon" title="Watch Video">
                 <span class="material-symbols-outlined" style="font-size: 2rem;">play_arrow</span>
               </div>
               <div class="description">
@@ -440,10 +440,10 @@
 
           <!-- Card 4 -->
           <input type="radio" name="testimonial-slide" id="t4" class="testimonial-input">
-          <label for="t4" class="testimonial-card" style="background-image: url('https://img.youtube.com/vi/sHeFw1BmbfY/hqdefault.jpg');">
+          <label for="t4" class="testimonial-card" data-video-id="sHeFw1BmbfY" style="background-image: url('https://img.youtube.com/vi/sHeFw1BmbfY/hqdefault.jpg');">
             <div class="testimonial-overlay"></div>
             <div class="row">
-              <div class="icon" onclick="event.stopPropagation(); openVideo('sHeFw1BmbfY');" title="Watch Video">
+              <div class="icon" title="Watch Video">
                 <span class="material-symbols-outlined" style="font-size: 2rem;">play_arrow</span>
               </div>
               <div class="description">
@@ -467,6 +467,32 @@
       <iframe id="modalIframe" style="width: 100%; height: 100%; border: none; display: block; border-radius: 16px;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
   </div>
+  <script>
+    window.openVideo = function (youtubeId) {
+      var modal = document.getElementById('videoModal');
+      var iframe = document.getElementById('modalIframe');
+      if (!modal || !iframe) return;
+
+      iframe.src = 'https://www.youtube.com/embed/' + youtubeId + '?autoplay=1&rel=0&modestbranding=1';
+      modal.classList.add('is-active');
+    };
+
+    window.closeVideo = function () {
+      var modal = document.getElementById('videoModal');
+      var iframe = document.getElementById('modalIframe');
+      if (!modal || !iframe) return;
+
+      modal.classList.remove('is-active');
+      iframe.src = '';
+    };
+
+    document.querySelectorAll('.testimonial-card[data-video-id]').forEach(function (card) {
+      card.addEventListener('click', function (event) {
+        event.preventDefault();
+        window.openVideo(card.getAttribute('data-video-id'));
+      });
+    });
+  </script>
 
   <!-- ==========================================
        ADMISSION PROCESS
@@ -717,7 +743,7 @@
   <script src="tracker.js"></script>
 
   <!-- Main Animation Script -->
-  <script type="module" src="script.js?v=5"></script>
+  <script type="module" src="script.js?v=6"></script>
 
   <!-- Terminal Code Animation -->
   <script>
